@@ -7,37 +7,32 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f4f0;color:#1a1a18;-webkit-text-size-adjust:100%;}
-
-/* TOP BAR */
 .topbar{background:#2d6a3f;color:white;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
 .topbar-left{display:flex;align-items:center;gap:10px;}
 .egg-logo{width:34px;height:34px;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .egg-logo svg{width:20px;height:20px;fill:white;}
-.topbar h1{font-size:15px;font-weight:700;line-height:1.2;}
-.topbar p{font-size:11px;opacity:0.75;}
+.tbtitle{font-size:15px;font-weight:700;}
+.tbsub{font-size:11px;opacity:0.75;}
 .cart-btn{background:rgba(255,255,255,0.2);border:none;border-radius:10px;color:white;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;white-space:nowrap;font-family:inherit;}
 .cart-btn svg{width:18px;height:18px;stroke:white;fill:none;stroke-width:2;}
 .badge{background:white;color:#2d6a3f;border-radius:999px;font-size:11px;font-weight:700;padding:1px 7px;min-width:20px;text-align:center;}
-
-/* FILTER */
 .filter-wrap{background:white;border-bottom:1px solid #e8e6df;overflow-x:auto;-webkit-overflow-scrolling:touch;white-space:nowrap;padding:10px 12px;}
 .filter-btn{display:inline-block;background:transparent;border:1px solid #dddbd2;border-radius:999px;padding:6px 13px;font-size:12px;cursor:pointer;color:#6b6b66;margin-right:6px;font-family:inherit;white-space:nowrap;}
 .filter-btn.active{background:#2d6a3f;color:white;border-color:#2d6a3f;}
-
-/* LIST */
 .main{padding:12px 12px 120px;}
 .section{margin-bottom:14px;background:white;border-radius:12px;border:1px solid #e8e6df;overflow:hidden;}
 .section-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:#6b6b66;padding:10px 14px;background:#faf9f6;border-bottom:1px solid #e8e6df;}
-.item{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid #f0ede6;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background 0.1s;}
+.item{display:flex;align-items:center;gap:10px;padding:9px 14px;border-bottom:1px solid #f0ede6;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background 0.1s;}
 .item:last-child{border-bottom:none;}
 .item.selected{background:#f0f7f2;}
+.item-thumb{width:44px;height:44px;border-radius:8px;object-fit:cover;flex-shrink:0;background:#f5f4f0;}
 .item-check{width:22px;height:22px;border-radius:6px;border:1.5px solid #dddbd2;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.15s;}
 .item.selected .item-check{background:#2d6a3f;border-color:#2d6a3f;}
 .item-check svg{width:13px;height:13px;stroke:white;fill:none;stroke-width:3;display:none;}
 .item.selected .item-check svg{display:block;}
 .item-info{flex:1;min-width:0;}
-.item-name{font-size:13px;font-weight:500;color:#1a1a18;}
-.item-sub{font-size:11px;color:#9b9b96;margin-top:1px;}
+.item-name{font-size:13px;font-weight:500;color:#1a1a18;line-height:1.3;}
+.item-sub{font-size:11px;color:#9b9b96;margin-top:2px;}
 .item-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0;}
 .item-price{font-size:13px;font-weight:700;color:#1a1a18;white-space:nowrap;}
 .item-price.hl{color:#2d6a3f;}
@@ -45,8 +40,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .qty-btn{width:26px;height:26px;border-radius:6px;background:#f0ede6;border:none;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#1a1a18;font-family:inherit;line-height:1;}
 .qty-btn:active{background:#dddbd2;}
 .qty-num{font-size:13px;font-weight:600;min-width:18px;text-align:center;}
-
-/* CART DRAWER */
+.sz{display:inline-block;background:#f0ede6;border-radius:3px;padding:1px 5px;font-size:10px;color:#9b9b96;margin-right:3px;}
+/* DRAWER */
 .drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:200;display:none;opacity:0;transition:opacity 0.25s;}
 .drawer-overlay.open{display:block;opacity:1;}
 .drawer{position:fixed;bottom:0;left:0;right:0;background:white;border-radius:18px 18px 0 0;z-index:201;transform:translateY(100%);transition:transform 0.3s cubic-bezier(0.32,0.72,0,1);max-height:90vh;display:flex;flex-direction:column;}
@@ -58,23 +53,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .drawer-clear{font-size:13px;color:#cc3333;background:none;border:none;cursor:pointer;font-family:inherit;}
 .drawer-items{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;}
 .drawer-empty{padding:40px 20px;text-align:center;color:#b8b5ac;font-size:14px;line-height:1.7;}
-.ci{display:flex;align-items:flex-start;gap:10px;padding:12px 18px;border-bottom:1px solid #f5f4f0;}
+.ci{display:flex;align-items:center;gap:10px;padding:10px 18px;border-bottom:1px solid #f5f4f0;}
 .ci:last-child{border-bottom:none;}
+.ci-thumb{width:38px;height:38px;border-radius:6px;object-fit:cover;flex-shrink:0;background:#f5f4f0;}
 .ci-info{flex:1;min-width:0;}
-.ci-name{font-size:13px;font-weight:500;color:#1a1a18;}
+.ci-name{font-size:13px;font-weight:500;color:#1a1a18;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .ci-code{font-size:11px;color:#9b9b96;margin-top:2px;}
 .ci-right{text-align:right;flex-shrink:0;}
 .ci-price{font-size:13px;font-weight:700;color:#1a1a18;}
 .ci-qp{font-size:11px;color:#9b9b96;margin-top:2px;}
-.ci-rm{background:none;border:none;color:#dddbd2;font-size:20px;line-height:1;cursor:pointer;padding:0 2px;flex-shrink:0;margin-top:-2px;}
-.drawer-foot{padding:14px 18px;border-top:1px solid #e8e6df;}
+.ci-rm{background:none;border:none;color:#dddbd2;font-size:20px;line-height:1;cursor:pointer;padding:0 2px;flex-shrink:0;}
+.ci-rm:active{color:#cc3333;}
+.drawer-foot{border-top:1px solid #e8e6df;padding:14px 18px;}
 .total-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;}
 .total-label{font-size:15px;font-weight:600;}
 .total-val{font-size:22px;font-weight:700;color:#2d6a3f;}
 .btn-mail{width:100%;background:#2d6a3f;color:white;border:none;border-radius:12px;padding:15px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;}
 .btn-mail:disabled{background:#dddbd2;cursor:default;}
 .btn-mail svg{width:20px;height:20px;stroke:white;fill:none;stroke-width:2;}
-
 /* MAIL MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:300;display:none;align-items:flex-end;justify-content:center;}
 .modal-overlay.open{display:flex;}
@@ -88,21 +84,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .modal-btns{display:flex;gap:10px;margin-top:16px;}
 .btn-cancel{flex:1;background:#f0ede6;color:#1a1a18;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;}
 .btn-send{flex:2;background:#2d6a3f;color:white;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;}
-
-.hidden{display:none!important;}
 </style>
 </head>
 <body>
 
-<!-- TOP BAR -->
 <div class="topbar">
   <div class="topbar-left">
     <div class="egg-logo">
       <svg viewBox="0 0 24 24"><ellipse cx="12" cy="13" rx="7" ry="9"/><rect x="9" y="3" width="6" height="3" rx="1.5"/></svg>
     </div>
     <div>
-      <div class="topbar h1" style="font-size:15px;font-weight:700;">BGE Prijslijst 2026</div>
-      <div style="font-size:11px;opacity:0.75;">Tik op een product om te selecteren</div>
+      <div class="tbtitle">BGE Prijslijst 2026</div>
+      <div class="tbsub">Tik op een product om te selecteren</div>
     </div>
   </div>
   <button class="cart-btn" onclick="openDrawer()">
@@ -111,7 +104,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </button>
 </div>
 
-<!-- FILTER -->
 <div class="filter-wrap">
   <button class="filter-btn active" onclick="filter('all',this)">Alles</button>
   <button class="filter-btn" onclick="filter('modellen',this)">Modellen</button>
@@ -127,10 +119,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <button class="filter-btn" onclick="filter('boeken',this)">Boeken</button>
 </div>
 
-<!-- MAIN LIST -->
 <div class="main" id="sections-container"></div>
 
-<!-- CART DRAWER -->
 <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
 <div class="drawer" id="drawer">
   <div class="drawer-handle"></div>
@@ -154,7 +144,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
-<!-- MAIL MODAL -->
 <div class="modal-overlay" id="mail-modal">
   <div class="modal">
     <h3>Selectie mailen</h3>
@@ -169,220 +158,225 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </div>
 
 <script>
+const BASE="https://assets.foleon.com/eu-central-1/de-uploads-7e3kk3/103417/";
 const PRODUCTS=[
-["modellen","MiniMax + convEGGtor®","990100",1295.00,""],
-["modellen","Medium","117625",1495.00,""],
-["modellen","Large","117632",1995.00,""],
-["modellen","XLarge","117649",2995.00,""],
-["modellen","2XL","120939",4995.00,""],
-["pakketten","MiniMax Plus","990100",1295.00,""],
-["pakketten","Medium Start Collection","990200",1599.00,""],
-["pakketten","Medium Master Set","990201",1899.00,""],
-["pakketten","Medium Outdoor Kitchen","990202",3249.00,""],
-["pakketten","Large Start Collection","990300",2199.00,""],
-["pakketten","Large Master Set","990301",2599.00,""],
-["pakketten","Large Outdoor Kitchen","990302",3649.00,""],
-["pakketten","XLarge Start Collection","990400",3299.00,""],
-["pakketten","XLarge Master Set","990401",3699.00,""],
-["pakketten","XLarge Outdoor Kitchen","990402",4899.00,""],
-["nests","Portable Nest","120649",221.00,"MiniMax"],
-["nests","IntEGGrated Nest+Handler","122285",427.00,"Medium"],
-["nests","IntEGGrated Nest+Handler","120175",476.00,"Large"],
-["nests","IntEGGrated Nest+Handler","121158",497.00,"XLarge"],
-["nests","IntEGGrated Nest+Handler","121011",560.00,"2XL"],
-["nests","Nest","302007",261.00,"Medium"],
-["nests","Nest","301000",288.00,"Large"],
-["nests","Nest","301079",336.00,"XLarge"],
-["nests","Table Nest","113221",50.75,"Medium"],
-["nests","Table Nest","113214",58.25,"Large"],
-["nests","Table Nest","113238",84.75,"XLarge"],
-["nests","Table Nest","115638",140.00,"2XL"],
-["nests","Acacia Wood EGG Mates","121844",137.50,"MiniMax"],
-["nests","Acacia Wood EGG Mates","120670",260.00,"Medium"],
-["nests","Acacia Wood EGG Mates","121127",289.00,"Large"],
-["nests","Acacia Wood EGG Mates","121134",305.00,"XLarge"],
-["nests","Eucalyptus Wood Table 150x60x80cm","127624",1015.00,"Large"],
-["nests","Eucalyptus Wood Table 160x80x80cm","127631",1075.00,"XLarge"],
-["nests","Caster Kit (2 stuks)","120410",79.50,""],
-["workspace","EGG Frame","122193",617.50,"Medium"],
-["workspace","EGG Frame","120212",617.50,"Large"],
-["workspace","EGG Frame 76x88x77cm","120229",617.50,"XLarge"],
-["workspace","EGG Frame","121837",858.00,"2XL"],
-["workspace","Expansion Frame 76x76x77cm","120236",442.00,""],
-["workspace","Expansion Cabinet 76x76x77cm","122247",1409.00,""],
-["workspace","Corner EGG Frame","128775",699.00,"Large"],
-["workspace","Corner EGG Frame","128782",699.00,"XLarge"],
-["workspace","Stainless Steel Grid Insert","120243",198.00,""],
-["workspace","Acacia Wood Insert","120250",131.00,""],
-["workspace","Stainless Steel Insert","127365",424.00,""],
-["workspace","Distressed Acacia Wood Insert","120267",143.00,""],
-["workspace","3-Piece Accessory Pack","126948",199.75,""],
-["workspace","Caster Kit (2 stuks)","120410",79.50,""],
-["workspace","Tool Hooks 25cm","120281",38.00,""],
-["workspace","Modular EGG Workspace Mate","128799",282.00,""],
-["charcoal","SpeediLight Sticks (20 stuks)","136473",18.00,""],
-["charcoal","Charcoal Starters (24 stuks)","120922",18.00,""],
-["charcoal","Charcoal EGGniter","120915",126.50,""],
-["charcoal","Pure Charcoal 9kg","818924",37.50,""],
-["charcoal","100% Natural Charcoal 4,5kg","666373",18.50,""],
-["charcoal","100% Natural Charcoal 9kg","666281",30.95,""],
-["charcoal","Wood Chips Hickory 2,9L","113986",11.75,""],
-["charcoal","Wood Chips Pecan 2,9L","113993",11.75,""],
-["charcoal","Wood Chips Apple 2,9L","113962",12.00,""],
-["charcoal","Wood Chips Cherry 2,9L","113979",11.75,""],
-["charcoal","Wood Chips Oak 2,9L","127372",11.75,""],
-["charcoal","Wood Chunks Hickory 9L","114624",27.00,""],
-["charcoal","Wood Chunks Apple 9L","114617",35.00,""],
-["charcoal","Wood Chunks Oak 9L","127389",27.25,""],
-["charcoal","Wood Chunks Mesquite 9L","114631",28.50,""],
-["charcoal","Grilling Planks Ceder 28cm (2x)","116307",20.50,""],
-["charcoal","Grilling Planks Els 28cm (2x)","116291",18.50,""],
-["eggspander","5-Piece EGGspander Kit","120762",318.00,"Large"],
-["eggspander","5-Piece EGGspander Kit","121226",429.50,"XLarge"],
-["eggspander","1-Piece convEGGtor Basket","127242",100.50,"Medium"],
-["eggspander","1-Piece convEGGtor Basket","120724",123.50,"Large"],
-["eggspander","1-Piece convEGGtor Basket","121196",163.00,"XLarge"],
-["eggspander","1-Piece convEGGtor Basket","119735",161.00,"2XL"],
-["eggspander","2-Piece Multi Level Rack","120755",185.00,"Large"],
-["eggspander","2-Piece Multi Level Rack","121219",231.00,"XLarge"],
-["eggspander","Half Stainless Steel Grid","128065",36.95,"Medium"],
-["eggspander","Half Stainless Steel Grid","120731",39.95,"Large"],
-["eggspander","Half Stainless Steel Grid","121202",65.00,"XLarge"],
-["accessoires","convEGGtor","116604",110.00,"MiniMax"],
-["accessoires","convEGGtor","401038",142.00,"Medium"],
-["accessoires","convEGGtor","401021",145.50,"Large"],
-["accessoires","convEGGtor","401052",255.00,"XLarge"],
-["accessoires","Baking Stone","401007",94.50,"MiniMax/Medium"],
-["accessoires","Baking Stone","401014",116.00,"Large"],
-["accessoires","Baking Stone","131539",169.50,"XLarge"],
-["accessoires","Cast Iron Grid","122971",79.95,"MiniMax"],
-["accessoires","Cast Iron Grid","126405",88.00,"Medium"],
-["accessoires","Cast Iron Grid","122957",101.50,"Large"],
-["accessoires","Half Cast Iron Grid","128058",53.50,"Medium"],
-["accessoires","Half Cast Iron Grid","120786",54.95,"Large"],
-["accessoires","Half Cast Iron Grid","121233",79.95,"XLarge"],
-["accessoires","Half convEGGtor Stone","127273",55.75,"Medium"],
-["accessoires","Half convEGGtor Stone","121035",64.50,"Large"],
-["accessoires","Half convEGGtor Stone","121820",85.00,"XLarge"],
-["accessoires","Half convEGGtor Stone","120960",162.00,"2XL"],
-["accessoires","Half Cast Iron Plancha","122988",89.50,"Large"],
-["accessoires","Half Cast Iron Plancha","122995",136.95,"XLarge"],
-["accessoires","Half Perforated Grid","120717",44.00,"Large"],
-["accessoires","Half Perforated Grid","121240",49.50,"XLarge"],
-["accessoires","Cast Iron Skillet O27cm","127839",80.95,"MiniMax/Medium"],
-["accessoires","Cast Iron Skillet O36cm","127846",145.00,"Large/XL/2XL"],
-["accessoires","Cast Iron Grill Press","127648",51.00,""],
-["accessoires","Cast Iron Plancha O26cm","127853",119.00,"MiniMax/Medium"],
-["accessoires","Cast Iron Plancha O35cm","127860",128.00,"Large/XL/2XL"],
-["accessoires","Cast Iron Satay Grill","700485",195.00,"Large/XLarge"],
-["accessoires","Green Dutch Oven Rond 3,8L","117045",153.50,"Large/XL/2XL"],
-["accessoires","Green Dutch Oven Ovaal 4,2L","117670",238.50,"Large/XL/2XL"],
-["accessoires","Cast Iron Dutch Oven 5,2L","127877",143.00,"Medium-2XL"],
-["accessoires","Carbon Steel Grill Wok O40cm","120779",99.50,"Large/XLarge"],
-["accessoires","Rotisserie max 17kg","128546",349.00,"Large"],
-["accessoires","Rotisserie max 17kg","128553",425.00,"XLarge"],
-["tools","Cast Iron Grid Lifter","127341",38.00,""],
-["tools","Silicone Grilling Mitt","117083",28.50,"One size"],
-["tools","EGGmitt","117090",36.95,"One size"],
-["tools","Silicone Tipped Tongs 30cm","116857",27.50,""],
-["tools","Silicone Tipped Tongs 40cm","116864",36.00,""],
-["tools","Stainless Steel Tool Set","127655",107.95,""],
-["tools","Wide Spatula","127426",36.50,""],
-["tools","Spatula","127662",35.50,""],
-["tools","Brush","127679",27.95,""],
-["tools","Brisket Knife","128805",44.95,""],
-["tools","Measuring Cups (4x)","119551",42.75,""],
-["tools","Bamboo Skewers 25cm (25x)","117465",4.75,""],
-["tools","Kitchen Shears","120106",20.95,""],
-["tools","Cast Iron Sauce Pot + Brush O12cm","127822",64.00,""],
-["tools","Butcher Paper","127471",26.50,""],
-["tools","EGG Genius","121059",336.00,""],
-["tools","EGG Genius Extra meat probe","121363",46.95,""],
-["tools","EGG Genius Extra pit probe","121370",46.95,""],
-["tools","EGG Genius Extra Y-Cable","121387",20.75,""],
-["tools","Instant Read Thermometer","119575",185.00,""],
-["tools","Instant Read Thermometer + Bottle Opener","127150",57.95,""],
-["tools","Quick-Read Thermometer","120793",46.95,""],
-["tools","Grill Rings (3x)","002280",23.95,""],
-["tools","Meat Claws (set)","114099",33.00,""],
-["tools","Pigtail Meat Flipper 48cm","201515",12.95,""],
-["tools","Flexible Grill Light","122940",36.30,""],
-["tools","Chef's Flavor Injector","119537",53.75,""],
-["tools","Stainless Steel Pizza Peel","127761",64.00,""],
-["tools","Compact Pizza Cutter","118974",23.50,""],
-["tools","Disposable Drip Pans 5x","120878",14.50,"MiniMax/Medium"],
-["tools","Disposable Drip Pans 5x","120892",29.00,"XLarge"],
-["tools","Ceramic Poultry Roaster Kip","119766",28.95,""],
-["tools","Ceramic Poultry Roaster Kalkoen","119773",38.50,""],
-["tools","Vertical Poultry Roaster Kip","117458",27.50,""],
-["tools","Vertical Poultry Roaster Kalkoen","117441",37.95,""],
-["tools","Beer Can Chicken Roaster","127754",16.75,"Medium-2XL"],
-["tools","Ribs and Roasting Rack","117557",44.95,"Medium"],
-["tools","Ribs and Roasting Rack","117564",56.50,"Large/XL/2XL"],
-["onderhoud","Ash Tool","119513",20.50,"MiniMax"],
-["onderhoud","Ash Tool","119506",28.75,"Medium/Large"],
-["onderhoud","Ash Tool","119490",43.00,"XLarge/2XL"],
-["onderhoud","Ash Removal Pan","106049",46.00,"Medium-2XL"],
-["onderhoud","Fire Bowl","122650",108.00,"MiniMax"],
-["onderhoud","Fire Bowl","122667",136.00,"Medium"],
-["onderhoud","Fire Bowl","122674",154.00,"Large"],
-["onderhoud","Fire Bowl","122681",313.00,"XLarge"],
-["onderhoud","Fire Bowl","122698",391.00,"2XL"],
-["onderhoud","Charcoal Storage Bag","128201",113.50,""],
-["onderhoud","Nylon Bristle Grid Scrubber","127310",23.00,""],
-["onderhoud","SpeediClean Long Handle Scrubber","127129",33.50,""],
-["onderhoud","SpeediClean Replacement Pads (2x)","127143",18.15,""],
-["onderhoud","SpeediClean Dual Brush Scrubber","127136",30.25,""],
-["spareparts","Tel-Tru Temp. Gauge O5cm","117236",57.95,""],
-["spareparts","Tel-Tru Temp. Gauge O8cm","117250",103.50,""],
-["spareparts","Gasket Kit","113733",52.50,"MiniMax/Medium"],
-["spareparts","Gasket Kit","113726",54.95,"Large/XL/2XL"],
-["spareparts","Cast Iron Grate","103055",54.50,"MiniMax"],
-["spareparts","Cast Iron Grate","103062",38.75,"Medium"],
-["spareparts","Cast Iron Grate","103055",54.50,"Large"],
-["spareparts","Cast Iron Grate","112644",157.00,"XLarge"],
-["spareparts","Cast Iron Grate","114716",157.00,"2XL"],
-["spareparts","Dome","401144",283.00,"MiniMax"],
-["spareparts","Dome","401137",387.00,"Medium"],
-["spareparts","Dome","401120",441.00,"Large"],
-["spareparts","Dome","112668",920.00,"XLarge"],
-["spareparts","Dome","114433",1852.00,"2XL"],
-["spareparts","Fire Ring","115607",146.50,"MiniMax"],
-["spareparts","Fire Ring","401243",195.00,"Medium"],
-["spareparts","Fire Ring","401229",263.00,"Large"],
-["spareparts","Fire Ring","401212",448.00,"XLarge"],
-["spareparts","Fire Ring","120977",756.00,"2XL"],
-["spareparts","Fire Box","115591",121.00,"MiniMax"],
-["spareparts","Fire Box","401182",295.00,"Medium"],
-["spareparts","Fire Box","401175",425.00,"Large"],
-["spareparts","Fire Box","112637",611.50,"XLarge"],
-["spareparts","Fire Box","120984",1180.00,"2XL"],
-["spareparts","Base","115577",437.50,"MiniMax"],
-["spareparts","Base","401083",731.00,"Medium"],
-["spareparts","Base","401076",920.00,"Large"],
-["spareparts","Base","112620",1374.00,"XLarge"],
-["spareparts","Base","120946",2355.00,"2XL"],
-["spareparts","rEGGulator","117854",104.50,"MiniMax"],
-["spareparts","rEGGulator","117847",111.50,"Medium-2XL"],
-["spareparts","Rain Cap","121042",44.50,"MiniMax"],
-["spareparts","Rain Cap","120748",47.50,"Medium-2XL"],
-["spareparts","Band Assembly Kit","126870",211.00,"MiniMax"],
-["spareparts","Band Assembly Kit","120021",263.00,"Medium"],
-["spareparts","Band Assembly Kit","117984",282.50,"Large"],
-["spareparts","Band Assembly Kit","117908",344.00,"XLarge"],
-["spareparts","Band Assembly Kit","121271",429.00,"2XL"],
-["boeken","Big Green Egg Modus Operandi (904 pag.)","525957",195.00,""],
-["boeken","Evergreens from around Europe","367323",375.00,""],
-["boeken","Koken op de Big Green Egg","818054",29.95,""],
+["modellen","MiniMax + convEGGtor®","990100",1295.00,"","minimax_nl_1080x1080px_vrijstaand.1d0f30f55728.jpg"],
+["modellen","Medium","117625",1495.00,"","medium_1080x1080px.3cf9b93901ae.jpg"],
+["modellen","Large","117632",1995.00,"","large_1080x1080px.89119ec165c5.jpg"],
+["modellen","XLarge","117649",2995.00,"","xlarge_1080x1080px.a94878f85c6f.jpg"],
+["modellen","2XL","120939",4995.00,"","2xl_1080x1080px.e0f976681976.jpg"],
+["pakketten","MiniMax Plus","990100",1295.00,"","pakket_1_-_minimax_thumbnail.9eec5a826aec.png"],
+["pakketten","Medium Start Collection","990200",1599.00,"","990200_-_pakket_1_-_medium_thumbnail.410758815721.png"],
+["pakketten","Medium Master Set","990201",1899.00,"","990201_-_pakket_2_-_medium__integgrated_nest_thumbnail.327ff49496e7.png"],
+["pakketten","Medium Outdoor Kitchen","990202",3249.00,"","pakketten_nordics_productmagazine2026-v2_thumbnail_mediumoutdoor.7c774897dfa9.png"],
+["pakketten","Large Start Collection","990300",2199.00,"","990300_-_pakket_4_-_large_thumbnail.de4e022a7ba3.png"],
+["pakketten","Large Master Set","990301",2599.00,"","990301_-_pakket_5_-_large_integgrated_nest_thumbnail.d58dfbe098c1.png"],
+["pakketten","Large Outdoor Kitchen","990302",3649.00,"","pakketten_nordics_productmagazine2026-v2_thumbnail_largeoutdoork.89eef539a1b9.png"],
+["pakketten","XLarge Start Collection","990400",3299.00,"","990400_-_pakket_7_-_xlarge_thumbnail.57ea520c3b96.png"],
+["pakketten","XLarge Master Set","990401",3699.00,"","990401_-_pakket_8_-_xlarge_integgrated_nest_thumbnail.3aba1dedbcf7.png"],
+["pakketten","XLarge Outdoor Kitchen","990402",4899.00,"","990402_-_pakket_9_-_xlarge_modulairsysteem_thumbnail.d79b0616bc85.png"],
+["nests","Portable Nest","120649",221.00,"MiniMax","portablenest_1080x1080px.ff07ffcb1147.jpg"],
+["nests","IntEGGrated Nest+Handler","122285",427.00,"Medium","integgratednest_1080x1080px.34d26bbdc8cb.jpg"],
+["nests","IntEGGrated Nest+Handler","120175",476.00,"Large","integgratednest_1080x1080px.34d26bbdc8cb.jpg"],
+["nests","IntEGGrated Nest+Handler","121158",497.00,"XLarge","integgratednest_1080x1080px.34d26bbdc8cb.jpg"],
+["nests","IntEGGrated Nest+Handler","121011",560.00,"2XL","integgratednest_1080x1080px.34d26bbdc8cb.jpg"],
+["nests","Nest","302007",261.00,"Medium","nest_1080x1080px.52bda69dcb9f.jpg"],
+["nests","Nest","301000",288.00,"Large","nest_1080x1080px.52bda69dcb9f.jpg"],
+["nests","Nest","301079",336.00,"XLarge","nest_1080x1080px.52bda69dcb9f.jpg"],
+["nests","Table Nest","113221",50.75,"Medium","tablenest_1080x1080px.36551c9e0135.jpg"],
+["nests","Table Nest","113214",58.25,"Large","tablenest_1080x1080px.36551c9e0135.jpg"],
+["nests","Table Nest","113238",84.75,"XLarge","tablenest_1080x1080px.36551c9e0135.jpg"],
+["nests","Table Nest","115638",140.00,"2XL","tablenest_1080x1080px.36551c9e0135.jpg"],
+["nests","Acacia Wood EGG Mates","121844",137.50,"MiniMax","eggmates_1080x1080px.d8b5400a6f3c.jpg"],
+["nests","Acacia Wood EGG Mates","120670",260.00,"Medium","eggmates_1080x1080px.d8b5400a6f3c.jpg"],
+["nests","Acacia Wood EGG Mates","121127",289.00,"Large","eggmates_1080x1080px.d8b5400a6f3c.jpg"],
+["nests","Acacia Wood EGG Mates","121134",305.00,"XLarge","eggmates_1080x1080px.d8b5400a6f3c.jpg"],
+["nests","Eucalyptus Wood Table 150x60x80cm","127624",1015.00,"Large","eucalyptuswoodtable_1080x1080px.6ad2c1db81e3.jpg"],
+["nests","Eucalyptus Wood Table 160x80x80cm","127631",1075.00,"XLarge","eucalyptuswoodtable_1080x1080px.6ad2c1db81e3.jpg"],
+["nests","Caster Kit (2 stuks)","120410",79.50,"","casterkit_1080x1080px.efdb8e0517c9.jpg"],
+["workspace","EGG Frame","122193",617.50,"Medium","eggframelarge_1080x1080px.f8134b86a929.jpg"],
+["workspace","EGG Frame","120212",617.50,"Large","eggframelarge_1080x1080px.f8134b86a929.jpg"],
+["workspace","EGG Frame 76x88x77cm","120229",617.50,"XLarge","eggframelarge_1080x1080px.f8134b86a929.jpg"],
+["workspace","EGG Frame","121837",858.00,"2XL","eggframelarge_1080x1080px.f8134b86a929.jpg"],
+["workspace","Expansion Frame 76x76x77cm","120236",442.00,"","expansionframe_1080x1080px.7e42e95af935.jpg"],
+["workspace","Expansion Cabinet 76x76x77cm","122247",1409.00,"","expansioncabinet_1080x1080px.41685478fbaa.jpg"],
+["workspace","Corner EGG Frame","128775",699.00,"Large","cornereggframe_1080x1080px.96d2e7106129.jpg"],
+["workspace","Corner EGG Frame","128782",699.00,"XLarge","cornereggframe_1080x1080px.96d2e7106129.jpg"],
+["workspace","Stainless Steel Grid Insert","120243",198.00,"","stainlesssteelgridinsert_1080x1080px.98bd8cdd4abf.jpg"],
+["workspace","Acacia Wood Insert","120250",131.00,"","acaciawoodinsert_1080x1080px.21390c70d080.jpg"],
+["workspace","Stainless Steel Insert","127365",424.00,"","stainlesssteelinsert_1080x1080px.3180f6783263.jpg"],
+["workspace","Distressed Acacia Wood Insert","120267",143.00,"","distressedwoodinsert_1080x1080px.0eba4cccb826.jpg"],
+["workspace","3-Piece Accessory Pack","126948",199.75,"","3-pieceaccessorypack_1080x1080px.2937e9dc1da7.jpg"],
+["workspace","Caster Kit (2 stuks)","120410",79.50,"","casterkit_1080x1080px.efdb8e0517c9.jpg"],
+["workspace","Tool Hooks 25cm","120281",38.00,"","toolhooks_1080x1080px.5dc2b4eaac3b.jpg"],
+["workspace","Modular EGG Workspace Mate","128799",282.00,"","modulareggworkspacemate_1080x1080px.3e00efd2584b.jpg"],
+["charcoal","SpeediLight Sticks (20 stuks)","136473",18.00,"","speedilightsticks_1080x1080px.c43c598841e7.jpg"],
+["charcoal","Charcoal Starters (24 stuks)","120922",18.00,"","charcoalstarters_1080x1080px.6b31118bfb4b.jpg"],
+["charcoal","Charcoal EGGniter","120915",126.50,"","charcoaleggniter_1080x1080px.adc8e5c763ed.jpg"],
+["charcoal","Pure Charcoal 9kg","818924",37.50,"","purecharcoal_1080x1080px.b22e9790b9c7.jpg"],
+["charcoal","100% Natural Charcoal 4,5kg","666373",18.50,"","accessoires_1080x1080px_naturalcharcoal_nl.3b348ac62131.png"],
+["charcoal","100% Natural Charcoal 9kg","666281",30.95,"","accessoires_1080x1080px_naturalcharcoal_nl.3b348ac62131.png"],
+["charcoal","Wood Chips Hickory 2,9L","113986",11.75,"","woodchips_1080x1080px.74783a3c9ce1.jpg"],
+["charcoal","Wood Chips Pecan 2,9L","113993",11.75,"","woodchips_1080x1080px.74783a3c9ce1.jpg"],
+["charcoal","Wood Chips Apple 2,9L","113962",12.00,"","woodchips_1080x1080px.74783a3c9ce1.jpg"],
+["charcoal","Wood Chips Cherry 2,9L","113979",11.75,"","woodchips_1080x1080px.74783a3c9ce1.jpg"],
+["charcoal","Wood Chips Oak 2,9L","127372",11.75,"","woodchips_1080x1080px.74783a3c9ce1.jpg"],
+["charcoal","Wood Chunks Hickory 9L","114624",27.00,"","woodchunks_1080x1080px.922637bb5855.jpg"],
+["charcoal","Wood Chunks Apple 9L","114617",35.00,"","woodchunks_1080x1080px.922637bb5855.jpg"],
+["charcoal","Wood Chunks Oak 9L","127389",27.25,"","woodchunks_1080x1080px.922637bb5855.jpg"],
+["charcoal","Wood Chunks Mesquite 9L","114631",28.50,"","woodchunks_1080x1080px.922637bb5855.jpg"],
+["charcoal","Grilling Planks Ceder 28cm (2x)","116307",20.50,"","woodengrillingplanls_1080x1080px.c4c5fb9ef73b.jpg"],
+["charcoal","Grilling Planks Els 28cm (2x)","116291",18.50,"","woodengrillingplanls_1080x1080px.c4c5fb9ef73b.jpg"],
+["eggspander","5-Piece EGGspander Kit","120762",318.00,"Large","5-pieceeggspanderkit_1080x1080px.a065e58fd8d2.jpg"],
+["eggspander","5-Piece EGGspander Kit","121226",429.50,"XLarge","5-pieceeggspanderkit_1080x1080px.a065e58fd8d2.jpg"],
+["eggspander","1-Piece convEGGtor Basket","127242",100.50,"Medium","1-piececonveggtorbasket_1080x1080px.43dba712dc67.jpg"],
+["eggspander","1-Piece convEGGtor Basket","120724",123.50,"Large","1-piececonveggtorbasket_1080x1080px.43dba712dc67.jpg"],
+["eggspander","1-Piece convEGGtor Basket","121196",163.00,"XLarge","1-piececonveggtorbasket_1080x1080px.43dba712dc67.jpg"],
+["eggspander","1-Piece convEGGtor Basket","119735",161.00,"2XL","1-piececonveggtorbasket_1080x1080px.43dba712dc67.jpg"],
+["eggspander","2-Piece Multi Level Rack","120755",185.00,"Large","2-piecemultilevelrack_1080x1080px.a3308f13a7e7.jpg"],
+["eggspander","2-Piece Multi Level Rack","121219",231.00,"XLarge","2-piecemultilevelrack_1080x1080px.a3308f13a7e7.jpg"],
+["eggspander","Half Stainless Steel Grid","128065",36.95,"Medium","halfstainlesssteelgrid_1080x1080px.d71af8c4edbb.jpg"],
+["eggspander","Half Stainless Steel Grid","120731",39.95,"Large","halfstainlesssteelgrid_1080x1080px.d71af8c4edbb.jpg"],
+["eggspander","Half Stainless Steel Grid","121202",65.00,"XLarge","halfstainlesssteelgrid_1080x1080px.d71af8c4edbb.jpg"],
+["accessoires","convEGGtor","116604",110.00,"MiniMax","conveggtor_1080x1080px.d47cd0552639.jpg"],
+["accessoires","convEGGtor","401038",142.00,"Medium","conveggtor_1080x1080px.d47cd0552639.jpg"],
+["accessoires","convEGGtor","401021",145.50,"Large","conveggtor_1080x1080px.d47cd0552639.jpg"],
+["accessoires","convEGGtor","401052",255.00,"XLarge","conveggtor_1080x1080px.d47cd0552639.jpg"],
+["accessoires","Baking Stone","401007",94.50,"MiniMax/Medium","bakingstone_1080x1080px.cf6d62004c89.jpg"],
+["accessoires","Baking Stone","401014",116.00,"Large","bakingstone_1080x1080px.cf6d62004c89.jpg"],
+["accessoires","Baking Stone","131539",169.50,"XLarge","bakingstone_1080x1080px.cf6d62004c89.jpg"],
+["accessoires","Cast Iron Grid","122971",79.95,"MiniMax","castirongrid_1080x1080px.717905c9dc76.jpg"],
+["accessoires","Cast Iron Grid","126405",88.00,"Medium","castirongrid_1080x1080px.717905c9dc76.jpg"],
+["accessoires","Cast Iron Grid","122957",101.50,"Large","castirongrid_1080x1080px.717905c9dc76.jpg"],
+["accessoires","Half Cast Iron Grid","128058",53.50,"Medium","halfcastirongrid_1080x1080px.af3742ef1f25.jpg"],
+["accessoires","Half Cast Iron Grid","120786",54.95,"Large","halfcastirongrid_1080x1080px.af3742ef1f25.jpg"],
+["accessoires","Half Cast Iron Grid","121233",79.95,"XLarge","halfcastirongrid_1080x1080px.af3742ef1f25.jpg"],
+["accessoires","Half Stainless Steel Grid","128065",36.95,"Medium","halfstainlesssteelgrid_1080x1080px.04fd0298cf85.jpg"],
+["accessoires","Half Stainless Steel Grid","120731",39.95,"Large","halfstainlesssteelgrid_1080x1080px.04fd0298cf85.jpg"],
+["accessoires","Half Stainless Steel Grid","121202",65.00,"XLarge","halfstainlesssteelgrid_1080x1080px.04fd0298cf85.jpg"],
+["accessoires","Half convEGGtor Stone","127273",55.75,"Medium","halfconveggtorstone_1080x1080px.6462759d2316.jpg"],
+["accessoires","Half convEGGtor Stone","121035",64.50,"Large","halfconveggtorstone_1080x1080px.6462759d2316.jpg"],
+["accessoires","Half convEGGtor Stone","121820",85.00,"XLarge","halfconveggtorstone_1080x1080px.6462759d2316.jpg"],
+["accessoires","Half convEGGtor Stone","120960",162.00,"2XL","halfconveggtorstone_1080x1080px.6462759d2316.jpg"],
+["accessoires","Half Cast Iron Plancha","122988",89.50,"Large","halfcastironplancha_1080x1080px.287e395cfeb3.jpg"],
+["accessoires","Half Cast Iron Plancha","122995",136.95,"XLarge","halfcastironplancha_1080x1080px.287e395cfeb3.jpg"],
+["accessoires","Half Perforated Grid","120717",44.00,"Large","halfperforatedgrid_1080x1080px.063aa2261571.jpg"],
+["accessoires","Half Perforated Grid","121240",49.50,"XLarge","halfperforatedgrid_1080x1080px.063aa2261571.jpg"],
+["accessoires","Cast Iron Skillet O27cm","127839",80.95,"MiniMax/Medium","castironskillet_1080x1080px.717796463a4d.jpg"],
+["accessoires","Cast Iron Skillet O36cm","127846",145.00,"Large/XL/2XL","castironskillet_1080x1080px.717796463a4d.jpg"],
+["accessoires","Cast Iron Grill Press","127648",51.00,"","castirongrillpress_1080x1080px.c157e13b1413.jpg"],
+["accessoires","Cast Iron Plancha O26cm","127853",119.00,"MiniMax/Medium","castironplancha_1080x1080px.5cbb594d6334.jpg"],
+["accessoires","Cast Iron Plancha O35cm","127860",128.00,"Large/XL/2XL","castironplancha_1080x1080px.5cbb594d6334.jpg"],
+["accessoires","Cast Iron Satay Grill","700485",195.00,"Large/XLarge","castironsataygrill_1080x1080px.b9bce4f26a3b.jpg"],
+["accessoires","Green Dutch Oven Rond 3,8L","117045",153.50,"Large/XL/2XL","greendutchoven_round_oval_1080x1080px.be07a3075598.jpg"],
+["accessoires","Green Dutch Oven Ovaal 4,2L","117670",238.50,"Large/XL/2XL","greendutchoven_round_oval_1080x1080px.be07a3075598.jpg"],
+["accessoires","Cast Iron Dutch Oven 5,2L","127877",143.00,"Medium-2XL","castirondutchoven_1080x1080px.4f10db7f8f72.jpg"],
+["accessoires","Carbon Steel Grill Wok O40cm","120779",99.50,"Large/XLarge","carbonsteelgrillwok_1080x1080px.1af89f224683.jpg"],
+["accessoires","Rotisserie max 17kg","128546",349.00,"Large","rotisserie_1080x1080px.1a0ae16d3cef.jpg"],
+["accessoires","Rotisserie max 17kg","128553",425.00,"XLarge","rotisserie_1080x1080px.1a0ae16d3cef.jpg"],
+["tools","Cast Iron Grid Lifter","127341",38.00,"","castirongridlifter_1080x1080px.9873427f9e81.jpg"],
+["tools","Silicone Grilling Mitt","117083",28.50,"One size","siliconegrillingmitt_1080x1080px.b845411311e8.jpg"],
+["tools","EGGmitt","117090",36.95,"One size","eggmitt_1080x1080px.81b7da5ab49c.jpg"],
+["tools","Silicone Tipped Tongs 30cm","116857",27.50,"","siliconeslippedtongs_1080x1080px.64667827f67d.jpg"],
+["tools","Silicone Tipped Tongs 40cm","116864",36.00,"","siliconeslippedtongs_1080x1080px.64667827f67d.jpg"],
+["tools","Stainless Steel Tool Set","127655",107.95,"","stainlesssteeltoolset_1080x1080px.fed51a9193ea.jpg"],
+["tools","Wide Spatula","127426",36.50,"","stainlesssteeltoolset_1080x1080px.fed51a9193ea.jpg"],
+["tools","Spatula","127662",35.50,"","stainlesssteeltoolset_1080x1080px.fed51a9193ea.jpg"],
+["tools","Brush","127679",27.95,"","stainlesssteeltoolset_1080x1080px.fed51a9193ea.jpg"],
+["tools","Brisket Knife","128805",44.95,"","brisketknife_1080x1080px.869a5a9f80e2.jpg"],
+["tools","Measuring Cups (4x)","119551",42.75,"","measuringcups_1080x1080px.2ceddbe80b4f.jpg"],
+["tools","Bamboo Skewers 25cm (25x)","117465",4.75,"","bambooskewers_1080x1080px.19a2a8f1366a.jpg"],
+["tools","Kitchen Shears","120106",20.95,"","kitchenshears_1080x1080px.402aa3822b27.jpg"],
+["tools","Cast Iron Sauce Pot + Brush O12cm","127822",64.00,"","castironsaucepot_1080x1080px.80ad66e3005a.jpg"],
+["tools","Butcher Paper","127471",26.50,"","butcherpaper_1080x1080px.795e3c568d3c.jpg"],
+["tools","EGG Genius","121059",336.00,"","egggenius_1080x1080px.17c02f66529e.jpg"],
+["tools","EGG Genius Extra meat probe","121363",46.95,"","egggenius_1080x1080px.17c02f66529e.jpg"],
+["tools","EGG Genius Extra pit probe","121370",46.95,"","egggenius_1080x1080px.17c02f66529e.jpg"],
+["tools","EGG Genius Extra Y-Cable","121387",20.75,"","egggenius_1080x1080px.17c02f66529e.jpg"],
+["tools","Instant Read Thermometer","119575",185.00,"","instandreadthermometer_1080x1080px.e3d622c43b4c.jpg"],
+["tools","Instant Read Thermometer + Bottle Opener","127150",57.95,"","thermometerbottleopener_1080x1080px.1cb18047c27a.jpg"],
+["tools","Quick-Read Thermometer","120793",46.95,"","quick-readthermometer_1080x1080px.32e8ac240157.jpg"],
+["tools","Grill Rings (3x)","002280",23.95,"","grillrings_1080x1080px.750031228f8c.jpg"],
+["tools","Meat Claws (set)","114099",33.00,"","meatclaws_1080x1080px.b76e57f8aa5b.jpg"],
+["tools","Pigtail Meat Flipper 48cm","201515",12.95,"","accessoires_1080x1080px_pigtailmeatflipper.e4a155aae902.jpg"],
+["tools","Flexible Grill Light","122940",36.30,"","flexiblegrilllight_1080x1080px.ff3b29934fc2.jpg"],
+["tools","Chef's Flavor Injector","119537",53.75,"","flavourinjector_1080x1080px.4e46107741d2.jpg"],
+["tools","Stainless Steel Pizza Peel","127761",64.00,"","pizzapeel_1080x1080px.6b219a999cb9.jpg"],
+["tools","Compact Pizza Cutter","118974",23.50,"","compactpizzacutter_1080x1080px.410eebd7e176.jpg"],
+["tools","Disposable Drip Pans 5x","120878",14.50,"MiniMax/Medium","disposable_drip_pans_1080x1080px.ae2ccc992645.jpg"],
+["tools","Disposable Drip Pans 5x","120892",29.00,"XLarge","disposable_drip_pans_1080x1080px.ae2ccc992645.jpg"],
+["tools","Ceramic Poultry Roaster Kip","119766",28.95,"","ceramicpoultryroaster_1080x1080px.b158268f87de.jpg"],
+["tools","Ceramic Poultry Roaster Kalkoen","119773",38.50,"","ceramicpoultryroaster_1080x1080px.b158268f87de.jpg"],
+["tools","Vertical Poultry Roaster Kip","117458",27.50,"","verticalpoultryroaster_1080x1080px.f9638ad6da30.jpg"],
+["tools","Vertical Poultry Roaster Kalkoen","117441",37.95,"","verticalpoultryroaster_1080x1080px.f9638ad6da30.jpg"],
+["tools","Beer Can Chicken Roaster","127754",16.75,"Medium-2XL","beercanchickenroaster_1080x1080px.2b215baba673.jpg"],
+["tools","Ribs and Roasting Rack","117557",44.95,"Medium","ribsandroastingrack_1080x1080px.7d60dbbcc3be.jpg"],
+["tools","Ribs and Roasting Rack","117564",56.50,"Large/XL/2XL","ribsandroastingrack_1080x1080px.7d60dbbcc3be.jpg"],
+["onderhoud","Ash Tool","119513",20.50,"MiniMax","ashtool_1080x1080px.bf4d1f87dc23.jpg"],
+["onderhoud","Ash Tool","119506",28.75,"Medium/Large","ashtool_1080x1080px.bf4d1f87dc23.jpg"],
+["onderhoud","Ash Tool","119490",43.00,"XLarge/2XL","ashtool_1080x1080px.bf4d1f87dc23.jpg"],
+["onderhoud","Ash Removal Pan","106049",46.00,"Medium-2XL","ashremovalpan_1080x1080px.b70149daccc7.jpg"],
+["onderhoud","Fire Bowl","122650",108.00,"MiniMax","firebowl_1080x1080px.9020e10a918d.jpg"],
+["onderhoud","Fire Bowl","122667",136.00,"Medium","firebowl_1080x1080px.9020e10a918d.jpg"],
+["onderhoud","Fire Bowl","122674",154.00,"Large","firebowl_1080x1080px.9020e10a918d.jpg"],
+["onderhoud","Fire Bowl","122681",313.00,"XLarge","firebowl_1080x1080px.9020e10a918d.jpg"],
+["onderhoud","Fire Bowl","122698",391.00,"2XL","firebowl_1080x1080px.9020e10a918d.jpg"],
+["onderhoud","Charcoal Storage Bag","128201",113.50,"","charcoalstoragebag_1080x1080px.35ecccce9e4d.jpg"],
+["onderhoud","Nylon Bristle Grid Scrubber","127310",23.00,"","nylonbristlegridscubber_1080x1080px.0ad615b2b007.jpg"],
+["onderhoud","SpeediClean Long Handle Scrubber","127129",33.50,"","longhandlescrubber_1080x1080px.753f724d73cf.jpg"],
+["onderhoud","SpeediClean Replacement Pads (2x)","127143",18.15,"","longhandlescrubber_1080x1080px.753f724d73cf.jpg"],
+["onderhoud","SpeediClean Dual Brush Scrubber","127136",30.25,"","dualbrushscrubber_1080x1080px.5755fedbc6b9.jpg"],
+["spareparts","Tel-Tru Temp. Gauge O5cm","117236",57.95,"","tel-trutemperaturegauge_1080x1080px.7cd06e24a2cb.jpg"],
+["spareparts","Tel-Tru Temp. Gauge O8cm","117250",103.50,"","tel-trutemperaturegauge_1080x1080px.7cd06e24a2cb.jpg"],
+["spareparts","Gasket Kit","113733",52.50,"MiniMax/Medium","gasketkit_1080x1080px.42ecdef991ed.jpg"],
+["spareparts","Gasket Kit","113726",54.95,"Large/XL/2XL","gasketkit_1080x1080px.42ecdef991ed.jpg"],
+["spareparts","Cast Iron Grate","103055",54.50,"MiniMax","castirongrate_1080x1080px.33a6ca4d8b04.jpg"],
+["spareparts","Cast Iron Grate","103062",38.75,"Medium","castirongrate_1080x1080px.33a6ca4d8b04.jpg"],
+["spareparts","Cast Iron Grate","103055",54.50,"Large","castirongrate_1080x1080px.33a6ca4d8b04.jpg"],
+["spareparts","Cast Iron Grate","112644",157.00,"XLarge","castirongrate_1080x1080px.33a6ca4d8b04.jpg"],
+["spareparts","Cast Iron Grate","114716",157.00,"2XL","castirongrate_1080x1080px.33a6ca4d8b04.jpg"],
+["spareparts","Dome","401144",283.00,"MiniMax","dome_1080x1080px.9564e21a6765.jpg"],
+["spareparts","Dome","401137",387.00,"Medium","dome_1080x1080px.9564e21a6765.jpg"],
+["spareparts","Dome","401120",441.00,"Large","dome_1080x1080px.9564e21a6765.jpg"],
+["spareparts","Dome","112668",920.00,"XLarge","dome_1080x1080px.9564e21a6765.jpg"],
+["spareparts","Dome","114433",1852.00,"2XL","dome_1080x1080px.9564e21a6765.jpg"],
+["spareparts","Fire Ring","115607",146.50,"MiniMax","firering_1080x1080px.7b7340c3e764.jpg"],
+["spareparts","Fire Ring","401243",195.00,"Medium","firering_1080x1080px.7b7340c3e764.jpg"],
+["spareparts","Fire Ring","401229",263.00,"Large","firering_1080x1080px.7b7340c3e764.jpg"],
+["spareparts","Fire Ring","401212",448.00,"XLarge","firering_1080x1080px.7b7340c3e764.jpg"],
+["spareparts","Fire Ring","120977",756.00,"2XL","firering_1080x1080px.7b7340c3e764.jpg"],
+["spareparts","Fire Box","115591",121.00,"MiniMax","firebox_1080x1080px.145c0580d8fd.jpg"],
+["spareparts","Fire Box","401182",295.00,"Medium","firebox_1080x1080px.145c0580d8fd.jpg"],
+["spareparts","Fire Box","401175",425.00,"Large","firebox_1080x1080px.145c0580d8fd.jpg"],
+["spareparts","Fire Box","112637",611.50,"XLarge","firebox_1080x1080px.145c0580d8fd.jpg"],
+["spareparts","Fire Box","120984",1180.00,"2XL","firebox_1080x1080px.145c0580d8fd.jpg"],
+["spareparts","Base","115577",437.50,"MiniMax","base_1080x1080px.13e744164963.jpg"],
+["spareparts","Base","401083",731.00,"Medium","base_1080x1080px.13e744164963.jpg"],
+["spareparts","Base","401076",920.00,"Large","base_1080x1080px.13e744164963.jpg"],
+["spareparts","Base","112620",1374.00,"XLarge","base_1080x1080px.13e744164963.jpg"],
+["spareparts","Base","120946",2355.00,"2XL","base_1080x1080px.13e744164963.jpg"],
+["spareparts","rEGGulator","117854",104.50,"MiniMax","reggulator_1080x1080px.2214dc429a0d.jpg"],
+["spareparts","rEGGulator","117847",111.50,"Medium-2XL","reggulator_1080x1080px.2214dc429a0d.jpg"],
+["spareparts","Rain Cap","121042",44.50,"MiniMax","raincap_1080x1080px.c4d26f975339.jpg"],
+["spareparts","Rain Cap","120748",47.50,"Medium-2XL","raincap_1080x1080px.c4d26f975339.jpg"],
+["spareparts","Band Assembly Kit","126870",211.00,"MiniMax","bandassemblykit_1080x1080px.27ade48be178.jpg"],
+["spareparts","Band Assembly Kit","120021",263.00,"Medium","bandassemblykit_1080x1080px.27ade48be178.jpg"],
+["spareparts","Band Assembly Kit","117984",282.50,"Large","bandassemblykit_1080x1080px.27ade48be178.jpg"],
+["spareparts","Band Assembly Kit","117908",344.00,"XLarge","bandassemblykit_1080x1080px.27ade48be178.jpg"],
+["spareparts","Band Assembly Kit","121271",429.00,"2XL","bandassemblykit_1080x1080px.27ade48be178.jpg"],
+["boeken","Big Green Egg Modus Operandi (904 pag.)","525957",195.00,"","modusoperandi_1080x1080px.a25c366da9a6.jpg"],
+["boeken","Evergreens from around Europe","367323",375.00,"","evergreensfromaroundeurope_1080x1080px.9379d8b0f65c.jpg"],
+["boeken","Koken op de Big Green Egg","818054",29.95,"","kokenopdebiggreenegg_1080x1080px.aa3842d86ae4.jpg"],
 ];
 
 const LABELS={modellen:"1. Modellen",pakketten:"2. It's a Big Deal — pakketten",nests:"3. Nests, Tables & EGG Mates",workspace:"4. Modular EGG Workspace",charcoal:"5. Charcoal & Smoking",eggspander:"6. EGGspander System",accessoires:"7. Accessoires",tools:"8. Tools",onderhoud:"9. Onderhoud",spareparts:"11. Spare Parts",boeken:"12. Boeken"};
 const HI=["modellen","pakketten"];
 const cart={};
 
-function uid(p){return p[0]+"_"+p[2]+"_"+p[1].replace(/\s/g,"");}
+function uid(p){return p[0]+"_"+p[2]+"_"+p[1].replace(/\W/g,"");}
 function fmt(n){return"€ "+n.toFixed(2).replace(".",",").replace(/\B(?=(\d{3})+(?!\d))/g,".");}
 function getP(id){return PRODUCTS.find(p=>uid(p)===id);}
+function img(p){return BASE+p[5]+"?ext=webp&w=120";}
 
 function buildList(){
   const c=document.getElementById("sections-container");
@@ -394,8 +388,9 @@ function buildList(){
     ps.forEach(p=>{
       const id=uid(p);
       const hl=HI.includes(p[0]);
-      const sz=p[4]?`<span style="font-size:10px;background:#f0ede6;border-radius:3px;padding:1px 5px;color:#9b9b96;margin-right:3px">${p[4]}</span>`:"";
+      const sz=p[4]?`<span class="sz">${p[4]}</span>`:"";
       h+=`<div class="item" data-uid="${id}" onclick="toggle('${id}')">
+        <img class="item-thumb" src="${img(p)}" alt="" loading="lazy" onerror="this.style.display='none'">
         <div class="item-check"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1"/></svg></div>
         <div class="item-info">
           <div class="item-name">${p[1]}</div>
@@ -435,19 +430,17 @@ function clearCart(){
     delete cart[id];
     const el=document.querySelector(`.item[data-uid="${id}"]`);
     if(el)el.classList.remove("selected");
-    const qc=document.getElementById("qc_"+id);
-    if(qc)qc.style.display="none";
-    const qn=document.getElementById("qn_"+id);
-    if(qn)qn.textContent="1";
+    const qc=document.getElementById("qc_"+id);if(qc)qc.style.display="none";
+    const qn=document.getElementById("qn_"+id);if(qn)qn.textContent="1";
   });
   renderCart();
 }
 
 function renderCart(){
   const ids=Object.keys(cart);
-  const total=ids.reduce((s,id)=>{const p=getP(id);return p?s+p[3]*cart[id]:s;},0);
   const totalQty=ids.reduce((s,id)=>s+cart[id],0);
   document.getElementById("cart-badge").textContent=totalQty;
+  const total=ids.reduce((s,id)=>{const p=getP(id);return p?s+p[3]*cart[id]:s;},0);
   document.getElementById("drawer-total").textContent=fmt(total);
   document.getElementById("btn-mail").disabled=ids.length===0;
   const di=document.getElementById("drawer-items");
@@ -455,8 +448,9 @@ function renderCart(){
   di.innerHTML=ids.map(id=>{
     const p=getP(id);if(!p)return"";
     const qty=cart[id];const sub=p[3]*qty;
-    const sz=p[4]?` — ${p[4]}`:"";
+    const sz=p[4]?" — "+p[4]:"";
     return`<div class="ci">
+      <img class="ci-thumb" src="${img(p)}" alt="" loading="lazy" onerror="this.style.display='none'">
       <div class="ci-info"><div class="ci-name">${p[1]}${sz}</div><div class="ci-code">Art. ${p[2]}</div></div>
       <div class="ci-right"><div class="ci-price">${fmt(sub)}</div>${qty>1?`<div class="ci-qp">${qty} x ${fmt(p[3])}</div>`:""}</div>
       <button class="ci-rm" onclick="toggle('${id}')">×</button>
@@ -470,55 +464,36 @@ function filter(cat,btn){
   document.querySelectorAll(".section").forEach(s=>s.style.display=(cat==="all"||s.dataset.cat===cat)?"block":"none");
 }
 
-function openDrawer(){
-  document.getElementById("drawer").classList.add("open");
-  document.getElementById("drawer-overlay").classList.add("open");
-  document.body.style.overflow="hidden";
-}
-function closeDrawer(){
-  document.getElementById("drawer").classList.remove("open");
-  document.getElementById("drawer-overlay").classList.remove("open");
-  document.body.style.overflow="";
-}
-
+function openDrawer(){document.getElementById("drawer").classList.add("open");document.getElementById("drawer-overlay").classList.add("open");document.body.style.overflow="hidden";}
+function closeDrawer(){document.getElementById("drawer").classList.remove("open");document.getElementById("drawer-overlay").classList.remove("open");document.body.style.overflow="";}
 function openMailModal(){document.getElementById("mail-modal").classList.add("open");}
 function closeMailModal(){document.getElementById("mail-modal").classList.remove("open");}
 
-function buildMailBody(){
+function sendMail(){
   const ids=Object.keys(cart);
   const now=new Date().toLocaleDateString("nl-NL",{day:"2-digit",month:"long",year:"numeric"});
   const name=document.getElementById("mail-from-name").value.trim();
   const note=document.getElementById("mail-note").value.trim();
+  const to=document.getElementById("mail-to").value.trim();
   let body="Big Green Egg — Mijn selectie\n";
   body+="Prijslijst 2026 | "+now+"\n";
   if(name)body+="Samengesteld door: "+name+"\n";
   if(note)body+="\nOpmerking: "+note+"\n";
   body+="\n";
-  body+="PRODUCT                          ART.NR.    AANTAL    PRIJS\n";
-  body+="------------------------------------------------------------\n";
+  body+="PRODUCT                               ART.NR.   AANTAL      PRIJS\n";
+  body+="------------------------------------------------------------------\n";
   let total=0;
   ids.forEach(id=>{
     const p=getP(id);if(!p)return;
     const qty=cart[id];const sub=p[3]*qty;total+=sub;
     const sz=p[4]?" ("+p[4]+")":"";
-    const nm=(p[1]+sz).substring(0,32).padEnd(32);
-    const cd=p[2].padEnd(10);
-    const qt=String(qty).padStart(6);
-    const pr=fmt(sub).padStart(12);
-    body+=nm+" "+cd+qt+pr+"\n";
+    const nm=(p[1]+sz).substring(0,36).padEnd(36);
+    body+=nm+" "+p[2].padEnd(9)+String(qty).padStart(6)+"  "+fmt(sub).padStart(12)+"\n";
   });
-  body+="------------------------------------------------------------\n";
-  body+="TOTAAL INCL. BTW".padEnd(51)+fmt(ids.reduce((s,id)=>{const p=getP(id);return p?s+p[3]*cart[id]:s;},0)).padStart(12)+"\n";
+  body+="------------------------------------------------------------------\n";
+  body+="TOTAAL INCL. BTW".padEnd(55)+fmt(total).padStart(12)+"\n";
   body+="\nPrijzen onder voorbehoud | biggreenegg.eu";
-  return body;
-}
-
-function sendMail(){
-  const to=document.getElementById("mail-to").value.trim();
-  const subject=encodeURIComponent("Big Green Egg — Mijn selectie 2026");
-  const body=encodeURIComponent(buildMailBody());
-  const mailto=`mailto:${encodeURIComponent(to)}?subject=${subject}&body=${body}`;
-  window.location.href=mailto;
+  window.location.href=`mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent("Big Green Egg — Mijn selectie 2026")}&body=${encodeURIComponent(body)}`;
   closeMailModal();
 }
 
