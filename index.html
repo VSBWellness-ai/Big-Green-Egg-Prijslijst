@@ -53,9 +53,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 .item-price{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;}
 .item-price.hl{color:var(--green);font-size:14px;}
 .qty-ctrl{display:flex;align-items:center;gap:5px;}
-.qty-btn{width:36px;height:36px;border-radius:9px;background:#f0ede6;border:none;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text);font-family:inherit;}
+.qty-btn{width:40px;height:40px;border-radius:10px;background:#f0ede6;border:none;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text);font-family:inherit;}
 .qty-btn:active{background:var(--border);}
-.qty-num{font-size:15px;font-weight:700;min-width:22px;text-align:center;}
+.qty-num{font-size:16px;font-weight:700;min-width:24px;text-align:center;}
 .spec-btn{background:none;border:1px solid var(--border);border-radius:6px;padding:2px 7px;font-size:10px;color:var(--muted);cursor:pointer;font-family:inherit;white-space:nowrap;}
 .item-sel-info{font-size:10px;font-weight:600;color:var(--green);margin-top:2px;line-height:1.3;}
 .spec-btn:hover{background:var(--green-light);color:var(--green);border-color:var(--green);}
@@ -615,11 +615,18 @@ function buildList(){
       h += '<div class="item-right">';
       h += '<div class="item-price'+(hl?' hl':'')+'" id="ip_'+idx+'">'+priceStr+'</div>';
       h += '<div class="item-sel-info" id="isi_'+idx+'" style="display:none"></div>';
-      h += '<div class="qty-ctrl" id="qc_'+idx+'" style="display:none" onclick="event.stopPropagation()">';
-      h += '<button class="qty-btn" data-idx="'+idx+'" data-d="-1">\u2212</button>';
-      h += '<span class="qty-num" id="qn_'+idx+'">1</span>';
-      h += '<button class="qty-btn" data-idx="'+idx+'" data-d="1">+</button>';
-      h += '</div>';
+      if(p.sizes){
+        // Multi-size: qc_ shows selected count, tap to open spec
+        h += '<div class="qty-ctrl qty-sel" id="qc_'+idx+'" style="display:none" onclick="event.stopPropagation();openSpec('+idx+')">';
+        h += '<span class="qty-sel-label" id="qn_'+idx+'">Wijzig ▾</span>';
+        h += '</div>';
+      } else {
+        h += '<div class="qty-ctrl" id="qc_'+idx+'" style="display:none" onclick="event.stopPropagation()">';
+        h += '<button class="qty-btn" data-idx="'+idx+'" data-d="-1">\u2212</button>';
+        h += '<span class="qty-num" id="qn_'+idx+'">1</span>';
+        h += '<button class="qty-btn" data-idx="'+idx+'" data-d="1">+</button>';
+        h += '</div>';
+      }
       h += '<button class="spec-btn" onclick="event.stopPropagation();openSpec('+idx+')">Details &#8250;</button>';
       h += '</div></div>';
     });
@@ -693,15 +700,20 @@ function updateItemRow(idx){
   var p=PRODUCTS[idx];
   var el=document.querySelector('.item[data-idx="'+idx+'"]');
   if(!el) return;
-  // Check if any size of this product is in cart
+  var qc=document.getElementById("qc_"+idx);
   var hasAny=false;
   if(p.sizes){
     p.sizes.forEach(function(sz,si){ if(cart[idx+"_"+si]) hasAny=true; });
   } else {
     if(cart[""+idx]) hasAny=true;
   }
-  if(hasAny) el.classList.add("selected");
-  else el.classList.remove("selected");
+  if(hasAny){
+    el.classList.add("selected");
+    if(qc) qc.style.display="flex";
+  } else {
+    el.classList.remove("selected");
+    if(qc) qc.style.display="none";
+  }
 }
 
 function clearCart(){
@@ -1054,23 +1066,20 @@ function updateItemPrice(idx){
     if(cart[idx+"_"+si]) selected.push({sz:sz, qty:cart[idx+"_"+si]||1});
   });
 
+  var labelEl = document.getElementById("qn_"+idx);
   if(selected.length === 0){
-    // Reset to default "v.a." price
     priceEl.textContent = "v.a. "+fmt(p.sizes[0].price);
     if(infoEl){ infoEl.style.display="none"; infoEl.textContent=""; }
+    if(labelEl) labelEl.textContent = "Wijzig ▾";
   } else if(selected.length === 1){
     priceEl.textContent = fmt(selected[0].sz.price);
-    if(infoEl){
-      infoEl.textContent = selected[0].sz.s;
-      infoEl.style.display = "block";
-    }
+    if(infoEl){ infoEl.textContent = selected[0].sz.s; infoEl.style.display="block"; }
+    if(labelEl) labelEl.textContent = "1 maat ▾";
   } else {
     var tot = selected.reduce(function(s,it){ return s + it.sz.price * it.qty; }, 0);
     priceEl.textContent = fmt(tot);
-    if(infoEl){
-      infoEl.textContent = selected.length+" maten — totaal";
-      infoEl.style.display = "block";
-    }
+    if(infoEl){ infoEl.textContent = selected.length+" maten — totaal"; infoEl.style.display="block"; }
+    if(labelEl) labelEl.textContent = selected.length+" maten ▾";
   }
 }
 
