@@ -683,6 +683,7 @@ function chSizeQty(idx, si, d){
   cart[key]=Math.max(1,cart[key]+d);
   var el=document.getElementById("sizeqty_"+idx+"_"+si);
   if(el) el.textContent=cart[key];
+  updateItemPrice(idx);
   rc();
 }
 
@@ -716,6 +717,7 @@ function clearCart(){
       var qn=document.getElementById("qn_"+idx); if(qn) qn.textContent="1";
     }
     updateItemRow(idx);
+    updateItemPrice(idx);
   });
   rc();
 }
@@ -787,6 +789,7 @@ function rc(){
       if(btn){btn.classList.remove("selected-size");btn.textContent="+";}
     }
     updateItemRow(idx);
+    updateItemPrice(idx);
     updateSpecBtn(idx);
     rc();
   },{once:true});
