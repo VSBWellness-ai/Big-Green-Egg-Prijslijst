@@ -3,99 +3,160 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>BGE Prijslijst 2026</title>
+<title>Big Green Egg — Prijslijst 2026</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f4f0;color:#1a1a18;-webkit-text-size-adjust:100%;}
-.topbar{background:#2d6a3f;color:white;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
-.topbar-left{display:flex;align-items:center;gap:10px;}
-.egg-logo{width:34px;height:34px;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.egg-logo svg{width:20px;height:20px;fill:white;}
-.tbtitle{font-size:15px;font-weight:700;}
-.tbsub{font-size:11px;opacity:0.75;}
-.cart-btn{background:rgba(255,255,255,0.2);border:none;border-radius:10px;color:white;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;white-space:nowrap;font-family:inherit;}
-.cart-btn svg{width:18px;height:18px;stroke:white;fill:none;stroke-width:2;}
-.badge{background:white;color:#2d6a3f;border-radius:999px;font-size:11px;font-weight:700;padding:1px 7px;min-width:20px;text-align:center;}
-.filter-wrap{background:white;border-bottom:1px solid #e8e6df;overflow-x:auto;-webkit-overflow-scrolling:touch;white-space:nowrap;padding:10px 12px;}
-.filter-btn{display:inline-block;background:transparent;border:1px solid #dddbd2;border-radius:999px;padding:6px 13px;font-size:12px;cursor:pointer;color:#6b6b66;margin-right:6px;font-family:inherit;white-space:nowrap;}
-.filter-btn.active{background:#2d6a3f;color:white;border-color:#2d6a3f;}
-.main{padding:12px 12px 120px;}
-.section{margin-bottom:14px;background:white;border-radius:12px;border:1px solid #e8e6df;overflow:hidden;}
-.section-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:#6b6b66;padding:10px 14px;background:#faf9f6;border-bottom:1px solid #e8e6df;}
-.item{display:flex;align-items:center;gap:10px;padding:9px 14px;border-bottom:1px solid #f0ede6;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background 0.1s;}
+:root{
+  --green:#2d6a3f;--green-dark:#1e4d2c;--green-light:#e8f4ee;
+  --bg:#f7f5f0;--white:#ffffff;--text:#1a1a16;--muted:#7a7a6e;
+  --border:#e0ddd5;--shadow:0 4px 24px rgba(0,0,0,0.08);
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-webkit-text-size-adjust:100%;}
+
+/* ── TOP BAR ── */
+.topbar{background:var(--green);color:white;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;box-shadow:0 2px 16px rgba(0,0,0,0.2);}
+.topbar-brand{display:flex;align-items:center;gap:12px;}
+.egg-icon{width:36px;height:36px;background:rgba(255,255,255,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.egg-icon svg{width:22px;height:22px;fill:white;}
+.brand-name{font-family:'DM Serif Display',serif;font-size:16px;line-height:1.2;}
+.brand-sub{font-size:11px;opacity:0.7;font-weight:300;}
+.cart-btn{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:10px;color:white;padding:8px 14px;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:7px;font-family:inherit;}
+.cart-btn svg{width:17px;height:17px;stroke:white;fill:none;stroke-width:2;}
+.badge{background:white;color:var(--green);border-radius:999px;font-size:11px;font-weight:700;padding:1px 7px;min-width:20px;text-align:center;}
+
+/* ── FILTER ── */
+.filter-wrap{background:white;border-bottom:1px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch;white-space:nowrap;padding:10px 14px;scrollbar-width:none;}
+.filter-wrap::-webkit-scrollbar{display:none;}
+.filter-btn{display:inline-block;background:transparent;border:1px solid var(--border);border-radius:999px;padding:6px 14px;font-size:12px;font-weight:500;cursor:pointer;color:var(--muted);margin-right:7px;font-family:inherit;transition:all 0.15s;}
+.filter-btn.active{background:var(--green);color:white;border-color:var(--green);}
+
+/* ── MAIN ── */
+.main{padding:14px 12px 120px;}
+.section{margin-bottom:16px;background:white;border-radius:14px;border:1px solid var(--border);overflow:hidden;box-shadow:var(--shadow);}
+.section-title{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);padding:10px 16px;background:#faf9f6;border-bottom:1px solid var(--border);}
+
+/* ── ITEM ROW ── */
+.item{display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid #f5f3ee;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background 0.12s;position:relative;}
 .item:last-child{border-bottom:none;}
-.item.selected{background:#f0f7f2;}
-.item-thumb{width:44px;height:44px;border-radius:8px;object-fit:cover;flex-shrink:0;background:#f5f4f0;}
-.item-check{width:22px;height:22px;border-radius:6px;border:1.5px solid #dddbd2;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.15s;}
-.item.selected .item-check{background:#2d6a3f;border-color:#2d6a3f;}
-.item-check svg{width:13px;height:13px;stroke:white;fill:none;stroke-width:3;display:none;}
+.item:hover{background:#faf9f6;}
+.item.selected{background:var(--green-light);}
+.item-thumb{width:48px;height:48px;object-fit:cover;border-radius:8px;flex-shrink:0;background:#f0ede6;cursor:zoom-in;}
+.item-check{width:22px;height:22px;border-radius:6px;border:1.5px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.15s;}
+.item.selected .item-check{background:var(--green);border-color:var(--green);}
+.item-check svg{width:12px;height:12px;stroke:white;fill:none;stroke-width:3;display:none;}
 .item.selected .item-check svg{display:block;}
 .item-info{flex:1;min-width:0;}
-.item-name{font-size:13px;font-weight:500;color:#1a1a18;line-height:1.3;}
-.item-sub{font-size:11px;color:#9b9b96;margin-top:2px;}
-.item-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0;}
-.item-price{font-size:13px;font-weight:700;color:#1a1a18;white-space:nowrap;}
-.item-price.hl{color:#2d6a3f;}
-.qty-ctrl{display:flex;align-items:center;gap:6px;}
-.qty-btn{width:26px;height:26px;border-radius:6px;background:#f0ede6;border:none;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#1a1a18;font-family:inherit;line-height:1;}
-.qty-btn:active{background:#dddbd2;}
-.qty-num{font-size:13px;font-weight:600;min-width:18px;text-align:center;}
-.sz{display:inline-block;background:#f0ede6;border-radius:3px;padding:1px 5px;font-size:10px;color:#9b9b96;margin-right:3px;}
-/* DRAWER */
-.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:200;display:none;opacity:0;transition:opacity 0.25s;}
-.drawer-overlay.open{display:block;opacity:1;}
-.drawer{position:fixed;bottom:0;left:0;right:0;background:white;border-radius:18px 18px 0 0;z-index:201;transform:translateY(100%);transition:transform 0.3s cubic-bezier(0.32,0.72,0,1);max-height:90vh;display:flex;flex-direction:column;}
+.item-name{font-size:13px;font-weight:500;color:var(--text);line-height:1.3;}
+.item-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+.item-right{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0;}
+.item-price{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;}
+.item-price.hl{color:var(--green);font-size:14px;}
+.qty-ctrl{display:flex;align-items:center;gap:5px;}
+.qty-btn{width:24px;height:24px;border-radius:5px;background:#f0ede6;border:none;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text);font-family:inherit;}
+.qty-btn:active{background:var(--border);}
+.qty-num{font-size:12px;font-weight:600;min-width:16px;text-align:center;}
+.spec-btn{background:none;border:1px solid var(--border);border-radius:6px;padding:2px 7px;font-size:10px;color:var(--muted);cursor:pointer;font-family:inherit;white-space:nowrap;}
+.spec-btn:hover{background:var(--green-light);color:var(--green);border-color:var(--green);}
+
+/* ── LIGHTBOX ── */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:200;display:none;align-items:center;justify-content:center;padding:20px;}
+.lightbox.open{display:flex;}
+.lightbox img{max-width:90vw;max-height:85vh;object-fit:contain;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
+.lightbox-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.15);border:none;color:white;font-size:24px;width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;}
+
+/* ── SPEC SHEET ── */
+.specsheet{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:210;display:none;align-items:flex-end;}
+.specsheet.open{display:flex;}
+.spec-panel{background:white;border-radius:20px 20px 0 0;width:100%;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 -8px 40px rgba(0,0,0,0.2);}
+.spec-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:12px auto 0;}
+.spec-head{padding:14px 18px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;}
+.spec-head-img{width:56px;height:56px;object-fit:cover;border-radius:10px;background:#f0ede6;flex-shrink:0;cursor:zoom-in;}
+.spec-head-info{flex:1;}
+.spec-head-name{font-family:'DM Serif Display',serif;font-size:18px;line-height:1.2;}
+.spec-head-code{font-size:12px;color:var(--muted);margin-top:3px;}
+.spec-head-price{font-size:18px;font-weight:600;color:var(--green);}
+.spec-close{background:none;border:none;font-size:24px;color:var(--muted);cursor:pointer;line-height:1;padding:0 4px;}
+.spec-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 18px;}
+.spec-section{margin-bottom:18px;}
+.spec-section-title{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.spec-item{background:#faf9f6;border-radius:8px;padding:10px 12px;}
+.spec-item-label{font-size:10px;color:var(--muted);margin-bottom:3px;font-weight:500;}
+.spec-item-value{font-size:13px;font-weight:600;color:var(--text);}
+.spec-desc{font-size:13px;line-height:1.6;color:var(--muted);}
+.spec-sizes{display:flex;flex-direction:column;gap:6px;}
+.spec-size-row{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:#faf9f6;border-radius:8px;}
+.spec-size-label{font-size:12px;font-weight:500;}
+.spec-size-price{font-size:13px;font-weight:600;color:var(--green);}
+.spec-size-code{font-size:11px;color:var(--muted);}
+.spec-compatible{font-size:12px;color:var(--muted);background:#faf9f6;border-radius:8px;padding:10px 12px;line-height:1.6;}
+.spec-foot{padding:14px 18px;border-top:1px solid var(--border);}
+.add-btn{width:100%;background:var(--green);color:white;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;}
+.add-btn.added{background:var(--green-light);color:var(--green);border:1.5px solid var(--green);}
+
+/* ── CART DRAWER ── */
+.drawer-ov{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:220;display:none;}
+.drawer-ov.open{display:block;}
+.drawer{position:fixed;bottom:0;left:0;right:0;background:white;border-radius:20px 20px 0 0;z-index:221;transform:translateY(100%);transition:transform 0.3s cubic-bezier(0.32,0.72,0,1);max-height:90vh;display:flex;flex-direction:column;}
 .drawer.open{transform:translateY(0);}
-.drawer-handle{width:36px;height:4px;background:#dddbd2;border-radius:2px;margin:10px auto 0;}
-.drawer-head{padding:14px 18px 10px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #f0ede6;}
-.drawer-head h2{font-size:17px;font-weight:700;}
-.drawer-close{background:none;border:none;font-size:22px;color:#9b9b96;cursor:pointer;padding:0 4px;line-height:1;}
+.drawer-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:12px auto 0;}
+.drawer-head{padding:14px 18px 10px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);}
+.drawer-head h2{font-family:'DM Serif Display',serif;font-size:18px;}
+.drawer-close{background:none;border:none;font-size:24px;color:var(--muted);cursor:pointer;line-height:1;}
 .drawer-clear{font-size:13px;color:#cc3333;background:none;border:none;cursor:pointer;font-family:inherit;}
 .drawer-items{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;}
-.drawer-empty{padding:40px 20px;text-align:center;color:#b8b5ac;font-size:14px;line-height:1.7;}
-.ci{display:flex;align-items:center;gap:10px;padding:10px 18px;border-bottom:1px solid #f5f4f0;}
+.drawer-empty{padding:40px 20px;text-align:center;color:var(--muted);font-size:14px;line-height:1.8;}
+.ci{display:flex;align-items:center;gap:10px;padding:10px 18px;border-bottom:1px solid #f5f3ee;}
 .ci:last-child{border-bottom:none;}
-.ci-thumb{width:38px;height:38px;border-radius:6px;object-fit:cover;flex-shrink:0;background:#f5f4f0;}
+.ci-img{width:44px;height:44px;border-radius:8px;object-fit:cover;background:#f0ede6;flex-shrink:0;}
 .ci-info{flex:1;min-width:0;}
-.ci-name{font-size:13px;font-weight:500;color:#1a1a18;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.ci-code{font-size:11px;color:#9b9b96;margin-top:2px;}
+.ci-name{font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.ci-code{font-size:11px;color:var(--muted);margin-top:2px;}
 .ci-right{text-align:right;flex-shrink:0;}
-.ci-price{font-size:13px;font-weight:700;color:#1a1a18;}
-.ci-qp{font-size:11px;color:#9b9b96;margin-top:2px;}
-.ci-rm{background:none;border:none;color:#dddbd2;font-size:20px;line-height:1;cursor:pointer;padding:0 2px;flex-shrink:0;}
-.ci-rm:active{color:#cc3333;}
-.drawer-foot{border-top:1px solid #e8e6df;padding:14px 18px;}
+.ci-price{font-size:13px;font-weight:600;}
+.ci-qp{font-size:11px;color:var(--muted);margin-top:1px;}
+.ci-rm{background:none;border:none;color:var(--border);font-size:20px;cursor:pointer;padding:0 2px;flex-shrink:0;line-height:1;}
+.drawer-foot{border-top:1px solid var(--border);padding:14px 18px;}
 .total-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;}
-.total-label{font-size:15px;font-weight:600;}
-.total-val{font-size:22px;font-weight:700;color:#2d6a3f;}
-.btn-mail{width:100%;background:#2d6a3f;color:white;border:none;border-radius:12px;padding:15px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;}
-.btn-mail:disabled{background:#dddbd2;cursor:default;}
-.btn-mail svg{width:20px;height:20px;stroke:white;fill:none;stroke-width:2;}
-/* MAIL MODAL */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:300;display:none;align-items:flex-end;justify-content:center;}
-.modal-overlay.open{display:flex;}
-.modal{background:white;border-radius:18px 18px 0 0;width:100%;padding:20px 18px 34px;max-height:85vh;overflow-y:auto;}
-.modal h3{font-size:17px;font-weight:700;margin-bottom:14px;}
-.field{margin-bottom:12px;}
-.field label{display:block;font-size:12px;font-weight:600;color:#6b6b66;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.05em;}
-.field input,.field textarea{width:100%;border:1.5px solid #dddbd2;border-radius:10px;padding:11px 12px;font-size:15px;font-family:inherit;color:#1a1a18;background:white;outline:none;-webkit-appearance:none;}
-.field input:focus,.field textarea:focus{border-color:#2d6a3f;}
+.total-label{font-size:15px;font-weight:500;}
+.total-val{font-family:'DM Serif Display',serif;font-size:24px;color:var(--green);}
+.mail-btn{width:100%;background:var(--green);color:white;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;}
+.mail-btn:disabled{background:var(--border);cursor:default;}
+.mail-btn svg{width:18px;height:18px;stroke:white;fill:none;stroke-width:2;}
+.vsb-logo{height:36px;width:auto;object-fit:contain;filter:brightness(0) invert(1);}
+.topbar-divider{width:1px;height:28px;background:rgba(255,255,255,0.3);margin:0 4px;}
+
+/* ── MAIL MODAL ── */
+.mail-ov{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:300;display:none;align-items:flex-end;}
+.mail-ov.open{display:flex;}
+.mail-panel{background:white;border-radius:20px 20px 0 0;width:100%;padding:22px 18px 36px;max-height:85vh;overflow-y:auto;}
+.mail-panel h3{font-family:'DM Serif Display',serif;font-size:20px;margin-bottom:16px;}
+.field{margin-bottom:13px;}
+.field label{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.06em;}
+.field input,.field textarea{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:11px 12px;font-size:15px;font-family:inherit;color:var(--text);background:white;outline:none;-webkit-appearance:none;}
+.field input:focus,.field textarea:focus{border-color:var(--green);}
 .field textarea{height:90px;resize:none;}
-.modal-btns{display:flex;gap:10px;margin-top:16px;}
-.btn-cancel{flex:1;background:#f0ede6;color:#1a1a18;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;}
-.btn-send{flex:2;background:#2d6a3f;color:white;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;}
+.mail-btns{display:flex;gap:10px;margin-top:16px;}
+.btn-cancel{flex:1;background:#f0ede6;color:var(--text);border:none;border-radius:12px;padding:13px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;}
+.btn-send{flex:2;background:var(--green);color:white;border:none;border-radius:12px;padding:13px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;}
+.pdf-btn{flex:0 0 auto;background:white;color:var(--green);border:1.5px solid var(--green);border-radius:12px;padding:14px 16px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;}
+.pdf-btn:disabled{border-color:var(--border);color:var(--muted);cursor:default;}
 </style>
 </head>
 <body>
 
+<!-- TOP BAR -->
 <div class="topbar">
-  <div class="topbar-left">
-    <div class="egg-logo">
+  <div class="topbar-brand">
+    <img src="data:image/png;base64,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" alt="VSB Wellness" class="vsb-logo">
+    <div class="topbar-divider"></div>
+    <div class="egg-icon">
       <svg viewBox="0 0 24 24"><ellipse cx="12" cy="13" rx="7" ry="9"/><rect x="9" y="3" width="6" height="3" rx="1.5"/></svg>
     </div>
     <div>
-      <div class="tbtitle">BGE Prijslijst 2026</div>
-      <div class="tbsub">Tik op een product om te selecteren</div>
+      <div class="brand-name">Big Green Egg</div>
+      <div class="brand-sub">Prijslijst 2026</div>
     </div>
   </div>
   <button class="cart-btn" onclick="openDrawer()">
@@ -104,6 +165,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </button>
 </div>
 
+<!-- FILTER -->
 <div class="filter-wrap">
   <button class="filter-btn active" onclick="filter('all',this)">Alles</button>
   <button class="filter-btn" onclick="filter('modellen',this)">Modellen</button>
@@ -121,383 +183,670 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 <div class="main" id="sections-container"></div>
 
-<div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close">&#215;</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<!-- SPEC SHEET -->
+<div class="specsheet" id="specsheet" onclick="if(event.target===this)closeSpec()">
+  <div class="spec-panel">
+    <div class="spec-handle"></div>
+    <div class="spec-head">
+      <img class="spec-head-img" id="spec-img" src="" alt="" onclick="openLightbox(this.src)">
+      <div class="spec-head-info">
+        <div class="spec-head-name" id="spec-name"></div>
+        <div class="spec-head-code" id="spec-code"></div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+        <div class="spec-head-price" id="spec-price"></div>
+        <button class="spec-close" onclick="closeSpec()">&#215;</button>
+      </div>
+    </div>
+    <div class="spec-body" id="spec-body"></div>
+    <div class="spec-foot">
+      <button class="add-btn" id="spec-add-btn" onclick="toggleFromSpec()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        <span id="spec-add-label">Toevoegen aan selectie</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- CART DRAWER -->
+<div class="drawer-ov" id="drawer-ov" onclick="closeDrawer()"></div>
 <div class="drawer" id="drawer">
   <div class="drawer-handle"></div>
   <div class="drawer-head">
     <h2>Mijn selectie</h2>
-    <div style="display:flex;align-items:center;gap:12px;">
+    <div style="display:flex;align-items:center;gap:12px">
       <button class="drawer-clear" onclick="clearCart()">Wis alles</button>
-      <button class="drawer-close" onclick="closeDrawer()">×</button>
+      <button class="drawer-close" onclick="closeDrawer()">&#215;</button>
     </div>
   </div>
   <div class="drawer-items" id="drawer-items"></div>
   <div class="drawer-foot">
     <div class="total-row">
       <span class="total-label">Totaal incl. btw</span>
-      <span class="total-val" id="drawer-total">€ 0,00</span>
+      <span class="total-val" id="drawer-total">&#8364; 0</span>
     </div>
-    <button class="btn-mail" id="btn-mail" onclick="openMailModal()" disabled>
-      <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      Mailen
-    </button>
+    <div style="display:flex;gap:10px">
+      <button class="mail-btn" id="mail-btn" onclick="openMail()" disabled>
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Mailen
+      </button>
+      <button class="pdf-btn" id="pdf-btn" onclick="openPdf()" disabled>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+        PDF
+      </button>
+    </div>
   </div>
 </div>
 
-<div class="modal-overlay" id="mail-modal">
-  <div class="modal">
+<!-- MAIL MODAL -->
+<div class="mail-ov" id="mail-ov">
+  <div class="mail-panel">
     <h3>Selectie mailen</h3>
     <div class="field"><label>Aan (e-mailadres)</label><input type="email" id="mail-to" placeholder="naam@voorbeeld.nl" inputmode="email"></div>
-    <div class="field"><label>Naam afzender (optioneel)</label><input type="text" id="mail-from-name" placeholder="Je naam"></div>
+    <div class="field"><label>Naam (optioneel)</label><input type="text" id="mail-name" placeholder="Je naam"></div>
     <div class="field"><label>Opmerking (optioneel)</label><textarea id="mail-note" placeholder="Bijv. offerte aanvraag..."></textarea></div>
-    <div class="modal-btns">
-      <button class="btn-cancel" onclick="closeMailModal()">Annuleren</button>
-      <button class="btn-send" onclick="sendMail()">Openen in Mail →</button>
+    <div class="mail-btns">
+      <button class="btn-cancel" onclick="closeMail()">Annuleren</button>
+      <button class="btn-send" onclick="doMail()">Openen in Mail &#8594;</button>
     </div>
   </div>
 </div>
 
 <script>
-const BASE="https://assets.foleon.com/eu-central-1/de-uploads-7e3kk3/103417/";
-const PRODUCTS=[
-["modellen","MiniMax + convEGGtor®","990100",1295.00,"","minimax_nl_1080x1080px_vrijstaand.1d0f30f55728.jpg"],
-["modellen","Medium","117625",1495.00,"","medium_1080x1080px.3cf9b93901ae.jpg"],
-["modellen","Large","117632",1995.00,"","large_1080x1080px.89119ec165c5.jpg"],
-["modellen","XLarge","117649",2995.00,"","xlarge_1080x1080px.a94878f85c6f.jpg"],
-["modellen","2XL","120939",4995.00,"","2xl_1080x1080px.e0f976681976.jpg"],
-["pakketten","MiniMax Plus","990100",1295.00,"","pakket_1_-_minimax_thumbnail.9eec5a826aec.png"],
-["pakketten","Medium Start Collection","990200",1599.00,"","990200_-_pakket_1_-_medium_thumbnail.410758815721.png"],
-["pakketten","Medium Master Set","990201",1899.00,"","990201_-_pakket_2_-_medium__integgrated_nest_thumbnail.327ff49496e7.png"],
-["pakketten","Medium Outdoor Kitchen","990202",3249.00,"","pakketten_nordics_productmagazine2026-v2_thumbnail_mediumoutdoor.7c774897dfa9.png"],
-["pakketten","Large Start Collection","990300",2199.00,"","990300_-_pakket_4_-_large_thumbnail.de4e022a7ba3.png"],
-["pakketten","Large Master Set","990301",2599.00,"","990301_-_pakket_5_-_large_integgrated_nest_thumbnail.d58dfbe098c1.png"],
-["pakketten","Large Outdoor Kitchen","990302",3649.00,"","pakketten_nordics_productmagazine2026-v2_thumbnail_largeoutdoork.89eef539a1b9.png"],
-["pakketten","XLarge Start Collection","990400",3299.00,"","990400_-_pakket_7_-_xlarge_thumbnail.57ea520c3b96.png"],
-["pakketten","XLarge Master Set","990401",3699.00,"","990401_-_pakket_8_-_xlarge_integgrated_nest_thumbnail.3aba1dedbcf7.png"],
-["pakketten","XLarge Outdoor Kitchen","990402",4899.00,"","990402_-_pakket_9_-_xlarge_modulairsysteem_thumbnail.d79b0616bc85.png"],
-["nests","Portable Nest","120649",221.00,"MiniMax","portablenest_1080x1080px.ff07ffcb1147.jpg"],
-["nests","IntEGGrated Nest+Handler","122285",427.00,"Medium","integgratednest_1080x1080px.34d26bbdc8cb.jpg"],
-["nests","IntEGGrated Nest+Handler","120175",476.00,"Large","integgratednest_1080x1080px.34d26bbdc8cb.jpg"],
-["nests","IntEGGrated Nest+Handler","121158",497.00,"XLarge","integgratednest_1080x1080px.34d26bbdc8cb.jpg"],
-["nests","IntEGGrated Nest+Handler","121011",560.00,"2XL","integgratednest_1080x1080px.34d26bbdc8cb.jpg"],
-["nests","Nest","302007",261.00,"Medium","nest_1080x1080px.52bda69dcb9f.jpg"],
-["nests","Nest","301000",288.00,"Large","nest_1080x1080px.52bda69dcb9f.jpg"],
-["nests","Nest","301079",336.00,"XLarge","nest_1080x1080px.52bda69dcb9f.jpg"],
-["nests","Table Nest","113221",50.75,"Medium","tablenest_1080x1080px.36551c9e0135.jpg"],
-["nests","Table Nest","113214",58.25,"Large","tablenest_1080x1080px.36551c9e0135.jpg"],
-["nests","Table Nest","113238",84.75,"XLarge","tablenest_1080x1080px.36551c9e0135.jpg"],
-["nests","Table Nest","115638",140.00,"2XL","tablenest_1080x1080px.36551c9e0135.jpg"],
-["nests","Acacia Wood EGG Mates","121844",137.50,"MiniMax","eggmates_1080x1080px.d8b5400a6f3c.jpg"],
-["nests","Acacia Wood EGG Mates","120670",260.00,"Medium","eggmates_1080x1080px.d8b5400a6f3c.jpg"],
-["nests","Acacia Wood EGG Mates","121127",289.00,"Large","eggmates_1080x1080px.d8b5400a6f3c.jpg"],
-["nests","Acacia Wood EGG Mates","121134",305.00,"XLarge","eggmates_1080x1080px.d8b5400a6f3c.jpg"],
-["nests","Eucalyptus Wood Table 150x60x80cm","127624",1015.00,"Large","eucalyptuswoodtable_1080x1080px.6ad2c1db81e3.jpg"],
-["nests","Eucalyptus Wood Table 160x80x80cm","127631",1075.00,"XLarge","eucalyptuswoodtable_1080x1080px.6ad2c1db81e3.jpg"],
-["nests","Caster Kit (2 stuks)","120410",79.50,"","casterkit_1080x1080px.efdb8e0517c9.jpg"],
-["workspace","EGG Frame","122193",617.50,"Medium","eggframelarge_1080x1080px.f8134b86a929.jpg"],
-["workspace","EGG Frame","120212",617.50,"Large","eggframelarge_1080x1080px.f8134b86a929.jpg"],
-["workspace","EGG Frame 76x88x77cm","120229",617.50,"XLarge","eggframelarge_1080x1080px.f8134b86a929.jpg"],
-["workspace","EGG Frame","121837",858.00,"2XL","eggframelarge_1080x1080px.f8134b86a929.jpg"],
-["workspace","Expansion Frame 76x76x77cm","120236",442.00,"","expansionframe_1080x1080px.7e42e95af935.jpg"],
-["workspace","Expansion Cabinet 76x76x77cm","122247",1409.00,"","expansioncabinet_1080x1080px.41685478fbaa.jpg"],
-["workspace","Corner EGG Frame","128775",699.00,"Large","cornereggframe_1080x1080px.96d2e7106129.jpg"],
-["workspace","Corner EGG Frame","128782",699.00,"XLarge","cornereggframe_1080x1080px.96d2e7106129.jpg"],
-["workspace","Stainless Steel Grid Insert","120243",198.00,"","stainlesssteelgridinsert_1080x1080px.98bd8cdd4abf.jpg"],
-["workspace","Acacia Wood Insert","120250",131.00,"","acaciawoodinsert_1080x1080px.21390c70d080.jpg"],
-["workspace","Stainless Steel Insert","127365",424.00,"","stainlesssteelinsert_1080x1080px.3180f6783263.jpg"],
-["workspace","Distressed Acacia Wood Insert","120267",143.00,"","distressedwoodinsert_1080x1080px.0eba4cccb826.jpg"],
-["workspace","3-Piece Accessory Pack","126948",199.75,"","3-pieceaccessorypack_1080x1080px.2937e9dc1da7.jpg"],
-["workspace","Caster Kit (2 stuks)","120410",79.50,"","casterkit_1080x1080px.efdb8e0517c9.jpg"],
-["workspace","Tool Hooks 25cm","120281",38.00,"","toolhooks_1080x1080px.5dc2b4eaac3b.jpg"],
-["workspace","Modular EGG Workspace Mate","128799",282.00,"","modulareggworkspacemate_1080x1080px.3e00efd2584b.jpg"],
-["charcoal","SpeediLight Sticks (20 stuks)","136473",18.00,"","speedilightsticks_1080x1080px.c43c598841e7.jpg"],
-["charcoal","Charcoal Starters (24 stuks)","120922",18.00,"","charcoalstarters_1080x1080px.6b31118bfb4b.jpg"],
-["charcoal","Charcoal EGGniter","120915",126.50,"","charcoaleggniter_1080x1080px.adc8e5c763ed.jpg"],
-["charcoal","Pure Charcoal 9kg","818924",37.50,"","purecharcoal_1080x1080px.b22e9790b9c7.jpg"],
-["charcoal","100% Natural Charcoal 4,5kg","666373",18.50,"","accessoires_1080x1080px_naturalcharcoal_nl.3b348ac62131.png"],
-["charcoal","100% Natural Charcoal 9kg","666281",30.95,"","accessoires_1080x1080px_naturalcharcoal_nl.3b348ac62131.png"],
-["charcoal","Wood Chips Hickory 2,9L","113986",11.75,"","woodchips_1080x1080px.74783a3c9ce1.jpg"],
-["charcoal","Wood Chips Pecan 2,9L","113993",11.75,"","woodchips_1080x1080px.74783a3c9ce1.jpg"],
-["charcoal","Wood Chips Apple 2,9L","113962",12.00,"","woodchips_1080x1080px.74783a3c9ce1.jpg"],
-["charcoal","Wood Chips Cherry 2,9L","113979",11.75,"","woodchips_1080x1080px.74783a3c9ce1.jpg"],
-["charcoal","Wood Chips Oak 2,9L","127372",11.75,"","woodchips_1080x1080px.74783a3c9ce1.jpg"],
-["charcoal","Wood Chunks Hickory 9L","114624",27.00,"","woodchunks_1080x1080px.922637bb5855.jpg"],
-["charcoal","Wood Chunks Apple 9L","114617",35.00,"","woodchunks_1080x1080px.922637bb5855.jpg"],
-["charcoal","Wood Chunks Oak 9L","127389",27.25,"","woodchunks_1080x1080px.922637bb5855.jpg"],
-["charcoal","Wood Chunks Mesquite 9L","114631",28.50,"","woodchunks_1080x1080px.922637bb5855.jpg"],
-["charcoal","Grilling Planks Ceder 28cm (2x)","116307",20.50,"","woodengrillingplanls_1080x1080px.c4c5fb9ef73b.jpg"],
-["charcoal","Grilling Planks Els 28cm (2x)","116291",18.50,"","woodengrillingplanls_1080x1080px.c4c5fb9ef73b.jpg"],
-["eggspander","5-Piece EGGspander Kit","120762",318.00,"Large","5-pieceeggspanderkit_1080x1080px.a065e58fd8d2.jpg"],
-["eggspander","5-Piece EGGspander Kit","121226",429.50,"XLarge","5-pieceeggspanderkit_1080x1080px.a065e58fd8d2.jpg"],
-["eggspander","1-Piece convEGGtor Basket","127242",100.50,"Medium","1-piececonveggtorbasket_1080x1080px.43dba712dc67.jpg"],
-["eggspander","1-Piece convEGGtor Basket","120724",123.50,"Large","1-piececonveggtorbasket_1080x1080px.43dba712dc67.jpg"],
-["eggspander","1-Piece convEGGtor Basket","121196",163.00,"XLarge","1-piececonveggtorbasket_1080x1080px.43dba712dc67.jpg"],
-["eggspander","1-Piece convEGGtor Basket","119735",161.00,"2XL","1-piececonveggtorbasket_1080x1080px.43dba712dc67.jpg"],
-["eggspander","2-Piece Multi Level Rack","120755",185.00,"Large","2-piecemultilevelrack_1080x1080px.a3308f13a7e7.jpg"],
-["eggspander","2-Piece Multi Level Rack","121219",231.00,"XLarge","2-piecemultilevelrack_1080x1080px.a3308f13a7e7.jpg"],
-["eggspander","Half Stainless Steel Grid","128065",36.95,"Medium","halfstainlesssteelgrid_1080x1080px.d71af8c4edbb.jpg"],
-["eggspander","Half Stainless Steel Grid","120731",39.95,"Large","halfstainlesssteelgrid_1080x1080px.d71af8c4edbb.jpg"],
-["eggspander","Half Stainless Steel Grid","121202",65.00,"XLarge","halfstainlesssteelgrid_1080x1080px.d71af8c4edbb.jpg"],
-["accessoires","convEGGtor","116604",110.00,"MiniMax","conveggtor_1080x1080px.d47cd0552639.jpg"],
-["accessoires","convEGGtor","401038",142.00,"Medium","conveggtor_1080x1080px.d47cd0552639.jpg"],
-["accessoires","convEGGtor","401021",145.50,"Large","conveggtor_1080x1080px.d47cd0552639.jpg"],
-["accessoires","convEGGtor","401052",255.00,"XLarge","conveggtor_1080x1080px.d47cd0552639.jpg"],
-["accessoires","Baking Stone","401007",94.50,"MiniMax/Medium","bakingstone_1080x1080px.cf6d62004c89.jpg"],
-["accessoires","Baking Stone","401014",116.00,"Large","bakingstone_1080x1080px.cf6d62004c89.jpg"],
-["accessoires","Baking Stone","131539",169.50,"XLarge","bakingstone_1080x1080px.cf6d62004c89.jpg"],
-["accessoires","Cast Iron Grid","122971",79.95,"MiniMax","castirongrid_1080x1080px.717905c9dc76.jpg"],
-["accessoires","Cast Iron Grid","126405",88.00,"Medium","castirongrid_1080x1080px.717905c9dc76.jpg"],
-["accessoires","Cast Iron Grid","122957",101.50,"Large","castirongrid_1080x1080px.717905c9dc76.jpg"],
-["accessoires","Half Cast Iron Grid","128058",53.50,"Medium","halfcastirongrid_1080x1080px.af3742ef1f25.jpg"],
-["accessoires","Half Cast Iron Grid","120786",54.95,"Large","halfcastirongrid_1080x1080px.af3742ef1f25.jpg"],
-["accessoires","Half Cast Iron Grid","121233",79.95,"XLarge","halfcastirongrid_1080x1080px.af3742ef1f25.jpg"],
-["accessoires","Half Stainless Steel Grid","128065",36.95,"Medium","halfstainlesssteelgrid_1080x1080px.04fd0298cf85.jpg"],
-["accessoires","Half Stainless Steel Grid","120731",39.95,"Large","halfstainlesssteelgrid_1080x1080px.04fd0298cf85.jpg"],
-["accessoires","Half Stainless Steel Grid","121202",65.00,"XLarge","halfstainlesssteelgrid_1080x1080px.04fd0298cf85.jpg"],
-["accessoires","Half convEGGtor Stone","127273",55.75,"Medium","halfconveggtorstone_1080x1080px.6462759d2316.jpg"],
-["accessoires","Half convEGGtor Stone","121035",64.50,"Large","halfconveggtorstone_1080x1080px.6462759d2316.jpg"],
-["accessoires","Half convEGGtor Stone","121820",85.00,"XLarge","halfconveggtorstone_1080x1080px.6462759d2316.jpg"],
-["accessoires","Half convEGGtor Stone","120960",162.00,"2XL","halfconveggtorstone_1080x1080px.6462759d2316.jpg"],
-["accessoires","Half Cast Iron Plancha","122988",89.50,"Large","halfcastironplancha_1080x1080px.287e395cfeb3.jpg"],
-["accessoires","Half Cast Iron Plancha","122995",136.95,"XLarge","halfcastironplancha_1080x1080px.287e395cfeb3.jpg"],
-["accessoires","Half Perforated Grid","120717",44.00,"Large","halfperforatedgrid_1080x1080px.063aa2261571.jpg"],
-["accessoires","Half Perforated Grid","121240",49.50,"XLarge","halfperforatedgrid_1080x1080px.063aa2261571.jpg"],
-["accessoires","Cast Iron Skillet O27cm","127839",80.95,"MiniMax/Medium","castironskillet_1080x1080px.717796463a4d.jpg"],
-["accessoires","Cast Iron Skillet O36cm","127846",145.00,"Large/XL/2XL","castironskillet_1080x1080px.717796463a4d.jpg"],
-["accessoires","Cast Iron Grill Press","127648",51.00,"","castirongrillpress_1080x1080px.c157e13b1413.jpg"],
-["accessoires","Cast Iron Plancha O26cm","127853",119.00,"MiniMax/Medium","castironplancha_1080x1080px.5cbb594d6334.jpg"],
-["accessoires","Cast Iron Plancha O35cm","127860",128.00,"Large/XL/2XL","castironplancha_1080x1080px.5cbb594d6334.jpg"],
-["accessoires","Cast Iron Satay Grill","700485",195.00,"Large/XLarge","castironsataygrill_1080x1080px.b9bce4f26a3b.jpg"],
-["accessoires","Green Dutch Oven Rond 3,8L","117045",153.50,"Large/XL/2XL","greendutchoven_round_oval_1080x1080px.be07a3075598.jpg"],
-["accessoires","Green Dutch Oven Ovaal 4,2L","117670",238.50,"Large/XL/2XL","greendutchoven_round_oval_1080x1080px.be07a3075598.jpg"],
-["accessoires","Cast Iron Dutch Oven 5,2L","127877",143.00,"Medium-2XL","castirondutchoven_1080x1080px.4f10db7f8f72.jpg"],
-["accessoires","Carbon Steel Grill Wok O40cm","120779",99.50,"Large/XLarge","carbonsteelgrillwok_1080x1080px.1af89f224683.jpg"],
-["accessoires","Rotisserie max 17kg","128546",349.00,"Large","rotisserie_1080x1080px.1a0ae16d3cef.jpg"],
-["accessoires","Rotisserie max 17kg","128553",425.00,"XLarge","rotisserie_1080x1080px.1a0ae16d3cef.jpg"],
-["tools","Cast Iron Grid Lifter","127341",38.00,"","castirongridlifter_1080x1080px.9873427f9e81.jpg"],
-["tools","Silicone Grilling Mitt","117083",28.50,"One size","siliconegrillingmitt_1080x1080px.b845411311e8.jpg"],
-["tools","EGGmitt","117090",36.95,"One size","eggmitt_1080x1080px.81b7da5ab49c.jpg"],
-["tools","Silicone Tipped Tongs 30cm","116857",27.50,"","siliconeslippedtongs_1080x1080px.64667827f67d.jpg"],
-["tools","Silicone Tipped Tongs 40cm","116864",36.00,"","siliconeslippedtongs_1080x1080px.64667827f67d.jpg"],
-["tools","Stainless Steel Tool Set","127655",107.95,"","stainlesssteeltoolset_1080x1080px.fed51a9193ea.jpg"],
-["tools","Wide Spatula","127426",36.50,"","stainlesssteeltoolset_1080x1080px.fed51a9193ea.jpg"],
-["tools","Spatula","127662",35.50,"","stainlesssteeltoolset_1080x1080px.fed51a9193ea.jpg"],
-["tools","Brush","127679",27.95,"","stainlesssteeltoolset_1080x1080px.fed51a9193ea.jpg"],
-["tools","Brisket Knife","128805",44.95,"","brisketknife_1080x1080px.869a5a9f80e2.jpg"],
-["tools","Measuring Cups (4x)","119551",42.75,"","measuringcups_1080x1080px.2ceddbe80b4f.jpg"],
-["tools","Bamboo Skewers 25cm (25x)","117465",4.75,"","bambooskewers_1080x1080px.19a2a8f1366a.jpg"],
-["tools","Kitchen Shears","120106",20.95,"","kitchenshears_1080x1080px.402aa3822b27.jpg"],
-["tools","Cast Iron Sauce Pot + Brush O12cm","127822",64.00,"","castironsaucepot_1080x1080px.80ad66e3005a.jpg"],
-["tools","Butcher Paper","127471",26.50,"","butcherpaper_1080x1080px.795e3c568d3c.jpg"],
-["tools","EGG Genius","121059",336.00,"","egggenius_1080x1080px.17c02f66529e.jpg"],
-["tools","EGG Genius Extra meat probe","121363",46.95,"","egggenius_1080x1080px.17c02f66529e.jpg"],
-["tools","EGG Genius Extra pit probe","121370",46.95,"","egggenius_1080x1080px.17c02f66529e.jpg"],
-["tools","EGG Genius Extra Y-Cable","121387",20.75,"","egggenius_1080x1080px.17c02f66529e.jpg"],
-["tools","Instant Read Thermometer","119575",185.00,"","instandreadthermometer_1080x1080px.e3d622c43b4c.jpg"],
-["tools","Instant Read Thermometer + Bottle Opener","127150",57.95,"","thermometerbottleopener_1080x1080px.1cb18047c27a.jpg"],
-["tools","Quick-Read Thermometer","120793",46.95,"","quick-readthermometer_1080x1080px.32e8ac240157.jpg"],
-["tools","Grill Rings (3x)","002280",23.95,"","grillrings_1080x1080px.750031228f8c.jpg"],
-["tools","Meat Claws (set)","114099",33.00,"","meatclaws_1080x1080px.b76e57f8aa5b.jpg"],
-["tools","Pigtail Meat Flipper 48cm","201515",12.95,"","accessoires_1080x1080px_pigtailmeatflipper.e4a155aae902.jpg"],
-["tools","Flexible Grill Light","122940",36.30,"","flexiblegrilllight_1080x1080px.ff3b29934fc2.jpg"],
-["tools","Chef's Flavor Injector","119537",53.75,"","flavourinjector_1080x1080px.4e46107741d2.jpg"],
-["tools","Stainless Steel Pizza Peel","127761",64.00,"","pizzapeel_1080x1080px.6b219a999cb9.jpg"],
-["tools","Compact Pizza Cutter","118974",23.50,"","compactpizzacutter_1080x1080px.410eebd7e176.jpg"],
-["tools","Disposable Drip Pans 5x","120878",14.50,"MiniMax/Medium","disposable_drip_pans_1080x1080px.ae2ccc992645.jpg"],
-["tools","Disposable Drip Pans 5x","120892",29.00,"XLarge","disposable_drip_pans_1080x1080px.ae2ccc992645.jpg"],
-["tools","Ceramic Poultry Roaster Kip","119766",28.95,"","ceramicpoultryroaster_1080x1080px.b158268f87de.jpg"],
-["tools","Ceramic Poultry Roaster Kalkoen","119773",38.50,"","ceramicpoultryroaster_1080x1080px.b158268f87de.jpg"],
-["tools","Vertical Poultry Roaster Kip","117458",27.50,"","verticalpoultryroaster_1080x1080px.f9638ad6da30.jpg"],
-["tools","Vertical Poultry Roaster Kalkoen","117441",37.95,"","verticalpoultryroaster_1080x1080px.f9638ad6da30.jpg"],
-["tools","Beer Can Chicken Roaster","127754",16.75,"Medium-2XL","beercanchickenroaster_1080x1080px.2b215baba673.jpg"],
-["tools","Ribs and Roasting Rack","117557",44.95,"Medium","ribsandroastingrack_1080x1080px.7d60dbbcc3be.jpg"],
-["tools","Ribs and Roasting Rack","117564",56.50,"Large/XL/2XL","ribsandroastingrack_1080x1080px.7d60dbbcc3be.jpg"],
-["onderhoud","Ash Tool","119513",20.50,"MiniMax","ashtool_1080x1080px.bf4d1f87dc23.jpg"],
-["onderhoud","Ash Tool","119506",28.75,"Medium/Large","ashtool_1080x1080px.bf4d1f87dc23.jpg"],
-["onderhoud","Ash Tool","119490",43.00,"XLarge/2XL","ashtool_1080x1080px.bf4d1f87dc23.jpg"],
-["onderhoud","Ash Removal Pan","106049",46.00,"Medium-2XL","ashremovalpan_1080x1080px.b70149daccc7.jpg"],
-["onderhoud","Fire Bowl","122650",108.00,"MiniMax","firebowl_1080x1080px.9020e10a918d.jpg"],
-["onderhoud","Fire Bowl","122667",136.00,"Medium","firebowl_1080x1080px.9020e10a918d.jpg"],
-["onderhoud","Fire Bowl","122674",154.00,"Large","firebowl_1080x1080px.9020e10a918d.jpg"],
-["onderhoud","Fire Bowl","122681",313.00,"XLarge","firebowl_1080x1080px.9020e10a918d.jpg"],
-["onderhoud","Fire Bowl","122698",391.00,"2XL","firebowl_1080x1080px.9020e10a918d.jpg"],
-["onderhoud","Charcoal Storage Bag","128201",113.50,"","charcoalstoragebag_1080x1080px.35ecccce9e4d.jpg"],
-["onderhoud","Nylon Bristle Grid Scrubber","127310",23.00,"","nylonbristlegridscubber_1080x1080px.0ad615b2b007.jpg"],
-["onderhoud","SpeediClean Long Handle Scrubber","127129",33.50,"","longhandlescrubber_1080x1080px.753f724d73cf.jpg"],
-["onderhoud","SpeediClean Replacement Pads (2x)","127143",18.15,"","longhandlescrubber_1080x1080px.753f724d73cf.jpg"],
-["onderhoud","SpeediClean Dual Brush Scrubber","127136",30.25,"","dualbrushscrubber_1080x1080px.5755fedbc6b9.jpg"],
-["spareparts","Tel-Tru Temp. Gauge O5cm","117236",57.95,"","tel-trutemperaturegauge_1080x1080px.7cd06e24a2cb.jpg"],
-["spareparts","Tel-Tru Temp. Gauge O8cm","117250",103.50,"","tel-trutemperaturegauge_1080x1080px.7cd06e24a2cb.jpg"],
-["spareparts","Gasket Kit","113733",52.50,"MiniMax/Medium","gasketkit_1080x1080px.42ecdef991ed.jpg"],
-["spareparts","Gasket Kit","113726",54.95,"Large/XL/2XL","gasketkit_1080x1080px.42ecdef991ed.jpg"],
-["spareparts","Cast Iron Grate","103055",54.50,"MiniMax","castirongrate_1080x1080px.33a6ca4d8b04.jpg"],
-["spareparts","Cast Iron Grate","103062",38.75,"Medium","castirongrate_1080x1080px.33a6ca4d8b04.jpg"],
-["spareparts","Cast Iron Grate","103055",54.50,"Large","castirongrate_1080x1080px.33a6ca4d8b04.jpg"],
-["spareparts","Cast Iron Grate","112644",157.00,"XLarge","castirongrate_1080x1080px.33a6ca4d8b04.jpg"],
-["spareparts","Cast Iron Grate","114716",157.00,"2XL","castirongrate_1080x1080px.33a6ca4d8b04.jpg"],
-["spareparts","Dome","401144",283.00,"MiniMax","dome_1080x1080px.9564e21a6765.jpg"],
-["spareparts","Dome","401137",387.00,"Medium","dome_1080x1080px.9564e21a6765.jpg"],
-["spareparts","Dome","401120",441.00,"Large","dome_1080x1080px.9564e21a6765.jpg"],
-["spareparts","Dome","112668",920.00,"XLarge","dome_1080x1080px.9564e21a6765.jpg"],
-["spareparts","Dome","114433",1852.00,"2XL","dome_1080x1080px.9564e21a6765.jpg"],
-["spareparts","Fire Ring","115607",146.50,"MiniMax","firering_1080x1080px.7b7340c3e764.jpg"],
-["spareparts","Fire Ring","401243",195.00,"Medium","firering_1080x1080px.7b7340c3e764.jpg"],
-["spareparts","Fire Ring","401229",263.00,"Large","firering_1080x1080px.7b7340c3e764.jpg"],
-["spareparts","Fire Ring","401212",448.00,"XLarge","firering_1080x1080px.7b7340c3e764.jpg"],
-["spareparts","Fire Ring","120977",756.00,"2XL","firering_1080x1080px.7b7340c3e764.jpg"],
-["spareparts","Fire Box","115591",121.00,"MiniMax","firebox_1080x1080px.145c0580d8fd.jpg"],
-["spareparts","Fire Box","401182",295.00,"Medium","firebox_1080x1080px.145c0580d8fd.jpg"],
-["spareparts","Fire Box","401175",425.00,"Large","firebox_1080x1080px.145c0580d8fd.jpg"],
-["spareparts","Fire Box","112637",611.50,"XLarge","firebox_1080x1080px.145c0580d8fd.jpg"],
-["spareparts","Fire Box","120984",1180.00,"2XL","firebox_1080x1080px.145c0580d8fd.jpg"],
-["spareparts","Base","115577",437.50,"MiniMax","base_1080x1080px.13e744164963.jpg"],
-["spareparts","Base","401083",731.00,"Medium","base_1080x1080px.13e744164963.jpg"],
-["spareparts","Base","401076",920.00,"Large","base_1080x1080px.13e744164963.jpg"],
-["spareparts","Base","112620",1374.00,"XLarge","base_1080x1080px.13e744164963.jpg"],
-["spareparts","Base","120946",2355.00,"2XL","base_1080x1080px.13e744164963.jpg"],
-["spareparts","rEGGulator","117854",104.50,"MiniMax","reggulator_1080x1080px.2214dc429a0d.jpg"],
-["spareparts","rEGGulator","117847",111.50,"Medium-2XL","reggulator_1080x1080px.2214dc429a0d.jpg"],
-["spareparts","Rain Cap","121042",44.50,"MiniMax","raincap_1080x1080px.c4d26f975339.jpg"],
-["spareparts","Rain Cap","120748",47.50,"Medium-2XL","raincap_1080x1080px.c4d26f975339.jpg"],
-["spareparts","Band Assembly Kit","126870",211.00,"MiniMax","bandassemblykit_1080x1080px.27ade48be178.jpg"],
-["spareparts","Band Assembly Kit","120021",263.00,"Medium","bandassemblykit_1080x1080px.27ade48be178.jpg"],
-["spareparts","Band Assembly Kit","117984",282.50,"Large","bandassemblykit_1080x1080px.27ade48be178.jpg"],
-["spareparts","Band Assembly Kit","117908",344.00,"XLarge","bandassemblykit_1080x1080px.27ade48be178.jpg"],
-["spareparts","Band Assembly Kit","121271",429.00,"2XL","bandassemblykit_1080x1080px.27ade48be178.jpg"],
-["boeken","Big Green Egg Modus Operandi (904 pag.)","525957",195.00,"","modusoperandi_1080x1080px.a25c366da9a6.jpg"],
-["boeken","Evergreens from around Europe","367323",375.00,"","evergreensfromaroundeurope_1080x1080px.9379d8b0f65c.jpg"],
-["boeken","Koken op de Big Green Egg","818054",29.95,"","kokenopdebiggreenegg_1080x1080px.aa3842d86ae4.jpg"],
+const BASE = "https://assets.foleon.com/eu-central-1/de-uploads-7e3kk3/103417/";
+
+// ── PRODUCT DATA ──────────────────────────────────────────────────────────────
+// [cat, name, code, price, img, isHighlight, sizes, specs, desc]
+// sizes: [{size, code, price}] or null
+// specs: {key:value} or null
+const PRODUCTS = [
+// MODELLEN
+{cat:"modellen",name:"MiniMax",code:"990100",price:1295,img:"minimax_nl_1080x1080px_vrijstaand.1d0f30f55728.jpg",hl:true,
+  desc:"Klein maar verrassend krachtig. Perfect voor 4 personen, ideaal tafelmodel én portable door de meegeleverde EGG Carrier.",
+  specs:{Roosterdiameter:"Ø 33 cm",Kookoppervlak:"855 cm²",Gewicht:"35 kg",Hoogte:"50 cm",Personen:"4 – 6",Uitvoering:"Groen keramiek"},
+  sizes:null},
+{cat:"modellen",name:"Medium",code:"117625",price:1495,img:"medium_1080x1080px.3cf9b93901ae.jpg",hl:true,
+  desc:"Compact genoeg voor een balkon, groot genoeg voor 6 personen. Een van de populairste modellen dankzij de veelzijdigheid.",
+  specs:{Roosterdiameter:"Ø 40 cm",Kookoppervlak:"1.140 cm²",Gewicht:"51 kg",Hoogte:"72 cm",Personen:"4 – 6",Uitvoering:"Groen keramiek"},
+  sizes:null},
+{cat:"modellen",name:"Large",code:"117632",price:1995,img:"large_1080x1080px.89119ec165c5.jpg",hl:true,
+  desc:"Het model waarmee het meer dan 50 jaar geleden begon. De allrounder bij uitstek — ideaal voor families en enthousiaste gastronomen.",
+  specs:{Roosterdiameter:"Ø 46 cm",Kookoppervlak:"1.688 cm²",Gewicht:"73 kg",Hoogte:"84 cm",Personen:"6 – 8",Uitvoering:"Groen keramiek"},
+  sizes:null},
+{cat:"modellen",name:"XLarge",code:"117649",price:2995,img:"xlarge_1080x1080px.a94878f85c6f.jpg",hl:true,
+  desc:"Dankzij een roosterdiameter van 61 cm zijn grote stukken vlees of meerdere pizza's tegelijkertijd geen fantasie maar realiteit.",
+  specs:{Roosterdiameter:"Ø 61 cm",Kookoppervlak:"2.919 cm²",Gewicht:"99 kg",Hoogte:"78 cm",Personen:"8 – 12",Uitvoering:"Groen keramiek"},
+  sizes:null},
+{cat:"modellen",name:"2XL",code:"120939",price:4995,img:"2xl_1080x1080px.e0f976681976.jpg",hl:true,
+  desc:"De grootste kamado op de markt. Indrukwekkend formaat, slim scharniermechanisme, én dankzij IntEGGrated Nest+Handler toch verplaatsbaar.",
+  specs:{Roosterdiameter:"Ø 73 cm",Kookoppervlak:"4.185 cm²",Gewicht:"170 kg",Hoogte:"90 cm",Personen:"12+",Uitvoering:"Groen keramiek"},
+  sizes:null},
+
+// PAKKETTEN
+{cat:"pakketten",name:"MiniMax Plus",code:"990100",price:1295,img:"pakket_1_-_minimax_thumbnail.9eec5a826aec.png",hl:true,
+  desc:"MiniMax inclusief convEGGtor® — direct klaar voor indirect garen en bakken.",
+  specs:{"Bevat":"MiniMax + convEGGtor®","Geschikt voor":"4 – 6 personen"},sizes:null},
+{cat:"pakketten",name:"Medium Start Collection",code:"990200",price:1599,img:"990200_-_pakket_1_-_medium_thumbnail.410758815721.png",hl:true,
+  desc:"Medium EGG met alles om direct te starten.",specs:{"Bevat":"Medium EGG + convEGGtor® + Baking Stone + Ash Tool","Geschikt voor":"4 – 6 personen"},sizes:null},
+{cat:"pakketten",name:"Medium Master Set",code:"990201",price:1899,img:"990201_-_pakket_2_-_medium__integgrated_nest_thumbnail.327ff49496e7.png",hl:true,
+  desc:"Medium EGG met IntEGGrated Nest+Handler en uitgebreide accessoires.",specs:{"Bevat":"Medium + IntEGGrated Nest + convEGGtor® + meer","Geschikt voor":"4 – 6 personen"},sizes:null},
+{cat:"pakketten",name:"Medium Outdoor Kitchen",code:"990202",price:3249,img:"pakketten_nordics_productmagazine2026-v2_thumbnail_mediumoutdoor.7c774897dfa9.png",hl:true,
+  desc:"Complete buitenkeuken opstelling met Medium EGG.",specs:{"Bevat":"Medium + Modular Workspace + accessoires","Geschikt voor":"4 – 6 personen"},sizes:null},
+{cat:"pakketten",name:"Large Start Collection",code:"990300",price:2199,img:"990300_-_pakket_4_-_large_thumbnail.de4e022a7ba3.png",hl:true,
+  desc:"Large EGG met alles om direct te starten.",specs:{"Bevat":"Large + convEGGtor® + Baking Stone + Ash Tool","Geschikt voor":"6 – 8 personen"},sizes:null},
+{cat:"pakketten",name:"Large Master Set",code:"990301",price:2599,img:"990301_-_pakket_5_-_large_integgrated_nest_thumbnail.d58dfbe098c1.png",hl:true,
+  desc:"Large EGG met IntEGGrated Nest+Handler.",specs:{"Bevat":"Large + IntEGGrated Nest + convEGGtor® + meer","Geschikt voor":"6 – 8 personen"},sizes:null},
+{cat:"pakketten",name:"Large Outdoor Kitchen",code:"990302",price:3649,img:"pakketten_nordics_productmagazine2026-v2_thumbnail_largeoutdoork.89eef539a1b9.png",hl:true,
+  desc:"Complete buitenkeuken met Large EGG.",specs:{"Bevat":"Large + Modular Workspace + accessoires","Geschikt voor":"6 – 8 personen"},sizes:null},
+{cat:"pakketten",name:"XLarge Start Collection",code:"990400",price:3299,img:"990400_-_pakket_7_-_xlarge_thumbnail.57ea520c3b96.png",hl:true,
+  desc:"XLarge EGG startpakket.",specs:{"Bevat":"XLarge + convEGGtor® + Baking Stone + Ash Tool","Geschikt voor":"8 – 12 personen"},sizes:null},
+{cat:"pakketten",name:"XLarge Master Set",code:"990401",price:3699,img:"990401_-_pakket_8_-_xlarge_integgrated_nest_thumbnail.3aba1dedbcf7.png",hl:true,
+  desc:"XLarge met IntEGGrated Nest+Handler.",specs:{"Bevat":"XLarge + IntEGGrated Nest + convEGGtor® + meer","Geschikt voor":"8 – 12 personen"},sizes:null},
+{cat:"pakketten",name:"XLarge Outdoor Kitchen",code:"990402",price:4899,img:"990402_-_pakket_9_-_xlarge_modulairsysteem_thumbnail.d79b0616bc85.png",hl:true,
+  desc:"Complete buitenkeuken met XLarge EGG.",specs:{"Bevat":"XLarge + Modular Workspace + accessoires","Geschikt voor":"8 – 12 personen"},sizes:null},
+
+// NESTS & TAFELS
+{cat:"nests",name:"Portable Nest",code:"120649",price:221,img:"portablenest_1080x1080px.ff07ffcb1147.jpg",hl:false,
+  desc:"Draagbaar nest speciaal voor de MiniMax. Inclusief handgrepen voor eenvoudig transport.",
+  specs:{Compatibel:"MiniMax",Materiaal:"Staal"},sizes:null},
+{cat:"nests",name:"IntEGGrated Nest+Handler",code:"",price:0,img:"integgratednest_1080x1080px.34d26bbdc8cb.jpg",hl:false,
+  desc:"Alles-in-één onderstel met geïntegreerde handler voor eenvoudige verplaatsing van de EGG.",
+  specs:{Materiaal:"Staal",Functie:"Onderstel + verplaatsingshandler"},
+  sizes:[{s:"Medium",code:"122285",price:427},{s:"Large",code:"120175",price:476},{s:"XLarge",code:"121158",price:497},{s:"2XL",code:"121011",price:560}]},
+{cat:"nests",name:"Nest",code:"",price:0,img:"nest_1080x1080px.52bda69dcb9f.jpg",hl:false,
+  desc:"Stalen onderstel voor de EGG. Stabiel en robuust.",specs:{Materiaal:"Staal"},
+  sizes:[{s:"Medium",code:"302007",price:261},{s:"Large",code:"301000",price:288},{s:"XLarge",code:"301079",price:336}]},
+{cat:"nests",name:"Table Nest",code:"",price:0,img:"tablenest_1080x1080px.36551c9e0135.jpg",hl:false,
+  desc:"Speciaal nest om de EGG in een tafel te plaatsen.",specs:{Materiaal:"Staal"},
+  sizes:[{s:"Medium",code:"113221",price:50.75},{s:"Large",code:"113214",price:58.25},{s:"XLarge",code:"113238",price:84.75},{s:"2XL",code:"115638",price:140}]},
+{cat:"nests",name:"Acacia Wood EGG Mates",code:"",price:0,img:"eggmates_1080x1080px.d8b5400a6f3c.jpg",hl:false,
+  desc:"Acaciahouten zijplanken voor extra werkruimte naast de EGG.",specs:{Materiaal:"Acaciahout"},
+  sizes:[{s:"MiniMax",code:"121844",price:137.50},{s:"Medium",code:"120670",price:260},{s:"Large",code:"121127",price:289},{s:"XLarge",code:"121134",price:305}]},
+{cat:"nests",name:"Eucalyptus Wood Table",code:"",price:0,img:"eucalyptuswoodtable_1080x1080px.6ad2c1db81e3.jpg",hl:false,
+  desc:"Massief eucalyptushouten tafel met geïntegreerde ruimte voor de EGG.",specs:{Materiaal:"Eucalyptushout",Hoogte:"80 cm"},
+  sizes:[{s:"Large · 150×60×80 cm",code:"127624",price:1015},{s:"XLarge · 160×80×80 cm",code:"127631",price:1075}]},
+{cat:"nests",name:"Caster Kit",code:"120410",price:79.50,img:"casterkit_1080x1080px.efdb8e0517c9.jpg",hl:false,
+  desc:"Set van 2 wielen (10 cm) voor eenvoudige verplaatsing van het Modular EGG Workspace systeem.",
+  specs:{Inhoud:"2 wielen",Diameter:"10 cm"},sizes:null},
+
+// WORKSPACE
+{cat:"workspace",name:"EGG Frame",code:"",price:0,img:"eggframelarge_1080x1080px.f8134b86a929.jpg",hl:false,
+  desc:"Modulair stalen frame als basis voor het EGG Workspace systeem. Uitbreidbaar met Expansion Frames en Cabinets.",
+  specs:{Materiaal:"Staal",Hoogte:"77 cm"},
+  sizes:[{s:"Medium",code:"122193",price:617.50},{s:"Large",code:"120212",price:617.50},{s:"XLarge · 76×88×77 cm",code:"120229",price:617.50},{s:"2XL",code:"121837",price:858}]},
+{cat:"workspace",name:"Expansion Frame",code:"120236",price:442,img:"expansionframe_1080x1080px.7e42e95af935.jpg",hl:false,
+  desc:"Uitbreidingsframe voor het Modular EGG Workspace systeem.",specs:{Afmeting:"76×76×77 cm",Materiaal:"Staal"},sizes:null},
+{cat:"workspace",name:"Expansion Cabinet",code:"122247",price:1409,img:"expansioncabinet_1080x1080px.41685478fbaa.jpg",hl:false,
+  desc:"Uitbreidingskabinet met opbergruimte. Exclusief Acacia Wood Insert.",specs:{Afmeting:"76×76×77 cm",Materiaal:"Staal",Opmerking:"Excl. Acacia Wood Insert"},sizes:null},
+{cat:"workspace",name:"Corner EGG Frame",code:"",price:0,img:"cornereggframe_1080x1080px.96d2e7106129.jpg",hl:false,
+  desc:"Hoekframe voor het creëren van een hoekopstelling met het Workspace systeem.",specs:{Materiaal:"Staal"},
+  sizes:[{s:"Large",code:"128775",price:699},{s:"XLarge",code:"128782",price:699}]},
+{cat:"workspace",name:"Stainless Steel Grid Insert",code:"120243",price:198,img:"stainlesssteelgridinsert_1080x1080px.98bd8cdd4abf.jpg",hl:false,
+  desc:"Roestvrij stalen grid insert voor het Workspace frame.",specs:{Materiaal:"Roestvrij staal"},sizes:null},
+{cat:"workspace",name:"Acacia Wood Insert",code:"120250",price:131,img:"acaciawoodinsert_1080x1080px.21390c70d080.jpg",hl:false,
+  desc:"Acaciahouten insert voor het Workspace frame. Warmhoudfunctie voor gerechten.",specs:{Materiaal:"Acaciahout"},sizes:null},
+{cat:"workspace",name:"Stainless Steel Insert",code:"127365",price:424,img:"stainlesssteelinsert_1080x1080px.3180f6783263.jpg",hl:false,
+  desc:"Volledig roestvrij stalen insert voor het Workspace frame.",specs:{Materiaal:"Roestvrij staal"},sizes:null},
+{cat:"workspace",name:"Distressed Acacia Wood Insert",code:"120267",price:143,img:"distressedwoodinsert_1080x1080px.0eba4cccb826.jpg",hl:false,
+  desc:"Verweerd acaciahout insert voor een rustieke uitstraling.",specs:{Materiaal:"Verweerd acaciahout"},sizes:null},
+{cat:"workspace",name:"3-Piece Accessory Pack",code:"126948",price:199.75,img:"3-pieceaccessorypack_1080x1080px.2937e9dc1da7.jpg",hl:false,
+  desc:"Set van 3 accessoires voor het Modular EGG Workspace systeem.",specs:{Inhoud:"3-delige set"},sizes:null},
+{cat:"workspace",name:"Tool Hooks",code:"120281",price:38,img:"toolhooks_1080x1080px.5dc2b4eaac3b.jpg",hl:false,
+  desc:"Haken voor het ophangen van BBQ-tools aan het Workspace frame.",specs:{Lengte:"25 cm"},sizes:null},
+{cat:"workspace",name:"Modular EGG Workspace Mate",code:"128799",price:282,img:"modulareggworkspacemate_1080x1080px.3e00efd2584b.jpg",hl:false,
+  desc:"Extra werkoppervlak dat past op het (Corner) EGG Frame.",specs:{Compatibel:"121837 · 120229 · 120212 · 122193 · 128782 · 128775"},sizes:null},
+
+// CHARCOAL
+{cat:"charcoal",name:"SpeediLight Sticks",code:"136473",price:18,img:"speedilightsticks_1080x1080px.c43c598841e7.jpg",hl:false,
+  desc:"Snelle en effectieve aanmaakblokjes voor de BGE.",specs:{Inhoud:"20 stuks"},sizes:null},
+{cat:"charcoal",name:"Charcoal Starters",code:"120922",price:18,img:"charcoalstarters_1080x1080px.6b31118bfb4b.jpg",hl:false,
+  desc:"Aanmaakblokjes van houtskool voor betrouwbaar aansteken.",specs:{Inhoud:"24 stuks"},sizes:null},
+{cat:"charcoal",name:"Charcoal EGGniter",code:"120915",price:126.50,img:"charcoaleggniter_1080x1080px.adc8e5c763ed.jpg",hl:false,
+  desc:"Elektrische aansteker speciaal ontworpen voor de Big Green Egg.",specs:{Type:"Elektrisch"},sizes:null},
+{cat:"charcoal",name:"Pure Charcoal",code:"818924",price:37.50,img:"purecharcoal_1080x1080px.b22e9790b9c7.jpg",hl:false,
+  desc:"Premium houtskool speciaal samengesteld voor de Big Green Egg.",specs:{Gewicht:"9 kg",Type:"Premium houtskool"},sizes:null},
+{cat:"charcoal",name:"100% Natural Charcoal",code:"",price:0,img:"accessoires_1080x1080px_naturalcharcoal_nl.3b348ac62131.png",hl:false,
+  desc:"100% natuurlijke houtskool zonder toevoegingen.",specs:{Type:"100% natuurlijk"},
+  sizes:[{s:"4,5 kg",code:"666373",price:18.50},{s:"9 kg",code:"666281",price:30.95}]},
+{cat:"charcoal",name:"Wood Chips",code:"",price:0,img:"woodchips_1080x1080px.74783a3c9ce1.jpg",hl:false,
+  desc:"Rooksnippers voor extra rooksmaak. Inhoud 2,9 L per verpakking.",specs:{Inhoud:"2,9 L per verpakking"},
+  sizes:[{s:"Hickory",code:"113986",price:11.75},{s:"Pecan",code:"113993",price:11.75},{s:"Apple",code:"113962",price:12},{s:"Cherry",code:"113979",price:11.75},{s:"Oak",code:"127372",price:11.75}]},
+{cat:"charcoal",name:"Wood Chunks",code:"",price:0,img:"woodchunks_1080x1080px.922637bb5855.jpg",hl:false,
+  desc:"Grote rookstukken voor langdurige rooksessies. Inhoud 9 L per verpakking.",specs:{Inhoud:"9 L per verpakking"},
+  sizes:[{s:"Hickory",code:"114624",price:27},{s:"Apple",code:"114617",price:35},{s:"Oak",code:"127389",price:27.25},{s:"Mesquite",code:"114631",price:28.50}]},
+{cat:"charcoal",name:"Wooden Grilling Planks",code:"",price:0,img:"woodengrillingplanls_1080x1080px.c4c5fb9ef73b.jpg",hl:false,
+  desc:"Houten rookplanken voor het bereiden van vis, vlees en groenten. Per 2 stuks, 28 cm.",specs:{Lengte:"28 cm",Inhoud:"2 stuks"},
+  sizes:[{s:"Ceder",code:"116307",price:20.50},{s:"Els",code:"116291",price:18.50}]},
+
+// EGGSPANDER
+{cat:"eggspander",name:"5-Piece EGGspander Kit",code:"",price:0,img:"5-pieceeggspanderkit_1080x1080px.a065e58fd8d2.jpg",hl:false,
+  desc:"Complete set van 5 onderdelen voor meerdere kookzones tegelijk. Inclusief convEGGtor Basket, Multi Level Rack en meer.",
+  specs:{Inhoud:"5-delige set",Functie:"Multi-level koken"},
+  sizes:[{s:"Large",code:"120762",price:318},{s:"XLarge",code:"121226",price:429.50}]},
+{cat:"eggspander",name:"1-Piece convEGGtor Basket",code:"",price:0,img:"1-piececonveggtorbasket_1080x1080px.43dba712dc67.jpg",hl:false,
+  desc:"Losse convEGGtor mand voor indirect garen. Past in het EGGspander systeem.",specs:{Functie:"Indirect garen"},
+  sizes:[{s:"Medium",code:"127242",price:100.50},{s:"Large",code:"120724",price:123.50},{s:"XLarge",code:"121196",price:163},{s:"2XL",code:"119735",price:161}]},
+{cat:"eggspander",name:"2-Piece Multi Level Rack",code:"",price:0,img:"2-piecemultilevelrack_1080x1080px.a3308f13a7e7.jpg",hl:false,
+  desc:"Twee-delig rek voor koken op meerdere niveaus tegelijk.",specs:{Inhoud:"2-delig"},
+  sizes:[{s:"Large",code:"120755",price:185},{s:"XLarge",code:"121219",price:231}]},
+{cat:"eggspander",name:"Half Stainless Steel Grid",code:"",price:0,img:"halfstainlesssteelgrid_1080x1080px.d71af8c4edbb.jpg",hl:false,
+  desc:"Halfrond roestvrij stalen rooster voor het EGGspander systeem.",specs:{Materiaal:"Roestvrij staal",Vorm:"Halfmaan"},
+  sizes:[{s:"Medium",code:"128065",price:36.95},{s:"Large",code:"120731",price:39.95},{s:"XLarge",code:"121202",price:65}]},
+
+// ACCESSOIRES
+{cat:"accessoires",name:"convEGGtor®",code:"",price:0,img:"conveggtor_1080x1080px.d47cd0552639.jpg",hl:false,
+  desc:"De convEGGtor maakt indirect garen mogelijk en verandert de EGG in een oven. Onmisbaar voor slow cooking en bakken.",
+  specs:{Materiaal:"Keramiek",Functie:"Indirect garen / ovenfunctie"},
+  sizes:[{s:"MiniMax",code:"116604",price:110},{s:"Medium",code:"401038",price:142},{s:"Large",code:"401021",price:145.50},{s:"XLarge",code:"401052",price:255}]},
+{cat:"accessoires",name:"Baking Stone",code:"",price:0,img:"bakingstone_1080x1080px.cf6d62004c89.jpg",hl:false,
+  desc:"Keramische baksteen voor het bakken van pizza, brood en meer. Zorgt voor een knapperige bodem.",
+  specs:{Materiaal:"Keramiek",Gebruik:"Pizza · brood · gebak"},
+  sizes:[{s:"MiniMax / Medium",code:"401007",price:94.50},{s:"Large",code:"401014",price:116},{s:"XLarge",code:"131539",price:169.50}]},
+{cat:"accessoires",name:"Cast Iron Grid",code:"",price:0,img:"castirongrid_1080x1080px.717905c9dc76.jpg",hl:false,
+  desc:"Gietijzeren rooster voor perfecte grillstrepen en optimale warmtegeleiding.",specs:{Materiaal:"Gietijzer"},
+  sizes:[{s:"MiniMax",code:"122971",price:79.95},{s:"Medium",code:"126405",price:88},{s:"Large",code:"122957",price:101.50}]},
+{cat:"accessoires",name:"Half Cast Iron Grid",code:"",price:0,img:"halfcastirongrid_1080x1080px.af3742ef1f25.jpg",hl:false,
+  desc:"Halfmaan gietijzeren rooster voor gecombineerde directe/indirecte zones.",specs:{Materiaal:"Gietijzer",Vorm:"Halfmaan"},
+  sizes:[{s:"Medium",code:"128058",price:53.50},{s:"Large",code:"120786",price:54.95},{s:"XLarge",code:"121233",price:79.95}]},
+{cat:"accessoires",name:"Half convEGGtor® Stone",code:"",price:0,img:"halfconveggtorstone_1080x1080px.6462759d2316.jpg",hl:false,
+  desc:"Halfmaan keramische steen voor gecombineerd direct en indirect koken.",specs:{Materiaal:"Keramiek",Vorm:"Halfmaan"},
+  sizes:[{s:"Medium",code:"127273",price:55.75},{s:"Large",code:"121035",price:64.50},{s:"XLarge",code:"121820",price:85},{s:"2XL",code:"120960",price:162}]},
+{cat:"accessoires",name:"Half Cast Iron Plancha",code:"",price:0,img:"halfcastironplancha_1080x1080px.287e395cfeb3.jpg",hl:false,
+  desc:"Halfmaan gietijzeren plancha voor het bakken van groenten, vis en vlees.",specs:{Materiaal:"Gietijzer",Vorm:"Halfmaan"},
+  sizes:[{s:"Large",code:"122988",price:89.50},{s:"XLarge",code:"122995",price:136.95}]},
+{cat:"accessoires",name:"Half Perforated Grid",code:"",price:0,img:"halfperforatedgrid_1080x1080px.063aa2261571.jpg",hl:false,
+  desc:"Halfmaan geperforeerd rooster voor groenten en kleinere ingrediënten.",specs:{Vorm:"Halfmaan",Materiaal:"Staal"},
+  sizes:[{s:"Large",code:"120717",price:44},{s:"XLarge",code:"121240",price:49.50}]},
+{cat:"accessoires",name:"Cast Iron Skillet",code:"",price:0,img:"castironskillet_1080x1080px.717796463a4d.jpg",hl:false,
+  desc:"Gietijzeren koekenpan voor het bereiden van diverse gerechten direct op de EGG.",specs:{Materiaal:"Gietijzer"},
+  sizes:[{s:"Ø 27 cm · MiniMax/Medium",code:"127839",price:80.95},{s:"Ø 36 cm · Large/XLarge/2XL",code:"127846",price:145}]},
+{cat:"accessoires",name:"Cast Iron Grill Press",code:"127648",price:51,img:"castirongrillpress_1080x1080px.c157e13b1413.jpg",hl:false,
+  desc:"Gietijzeren grilpress voor perfecte korst op hamburgers, bacon en sandwiches.",specs:{Materiaal:"Gietijzer"},sizes:null},
+{cat:"accessoires",name:"Cast Iron Plancha",code:"",price:0,img:"castironplancha_1080x1080px.5cbb594d6334.jpg",hl:false,
+  desc:"Gietijzeren plaat voor het bakken van groenten, vis en vlees op hoge temperatuur.",specs:{Materiaal:"Gietijzer"},
+  sizes:[{s:"Ø 26 cm · MiniMax/Medium",code:"127853",price:119},{s:"Ø 35 cm · Large/XLarge/2XL",code:"127860",price:128}]},
+{cat:"accessoires",name:"Cast Iron Satay Grill",code:"700485",price:195,img:"castironsataygrill_1080x1080px.b9bce4f26a3b.jpg",hl:false,
+  desc:"Gietijzeren satérooster voor Large en XLarge. Perfect voor satés en kleine spiesjes.",
+  specs:{Materiaal:"Gietijzer",Compatibel:"Large · XLarge"},sizes:null},
+{cat:"accessoires",name:"Green Dutch Oven",code:"",price:0,img:"greendutchoven_round_oval_1080x1080px.be07a3075598.jpg",hl:false,
+  desc:"Geëmailleerde gietijzeren braadpan in iconisch BGE-groen. Ideaal voor stoofgerechten.",specs:{Materiaal:"Geëmailleerd gietijzer",Kleur:"BGE groen"},
+  sizes:[{s:"Rond 3,8 L · Ø 23 cm",code:"117045",price:153.50},{s:"Ovaal 4,2 L · Ø 35 cm",code:"117670",price:238.50}]},
+{cat:"accessoires",name:"Cast Iron Dutch Oven",code:"127877",price:143,img:"castirondutchoven_1080x1080px.4f10db7f8f72.jpg",hl:false,
+  desc:"Gietijzeren braadpan voor stoofgerechten op de EGG.",specs:{Inhoud:"5,2 L",Diameter:"Ø 27 cm",Compatibel:"Medium · Large · XLarge · 2XL"},sizes:null},
+{cat:"accessoires",name:"Carbon Steel Grill Wok",code:"120779",price:99.50,img:"carbonsteelgrillwok_1080x1080px.1af89f224683.jpg",hl:false,
+  desc:"Koolstofstalen wok voor roerbakken en groenten op de EGG.",specs:{Materiaal:"Koolstofstaal",Diameter:"Ø 40 cm",Compatibel:"Large · XLarge"},sizes:null},
+{cat:"accessoires",name:"Rotisserie",code:"",price:0,img:"rotisserie_1080x1080px.1a0ae16d3cef.jpg",hl:false,
+  desc:"Rotisserie set voor het gelijkmatig roosteren van hele kippen en rollades. Max. draagkracht 17 kg.",
+  specs:{Max_gewicht:"17 kg",Functie:"Draaispit"},
+  sizes:[{s:"Large",code:"128546",price:349},{s:"XLarge",code:"128553",price:425}]},
+
+// TOOLS
+{cat:"tools",name:"Cast Iron Grid Lifter",code:"127341",price:38,img:"castirongridlifter_1080x1080px.9873427f9e81.jpg",hl:false,
+  desc:"Speciaal gereedschap voor het veilig tillen van het gietijzeren rooster.",specs:{Materiaal:"Staal"},sizes:null},
+{cat:"tools",name:"Silicone Grilling Mitt",code:"117083",price:28.50,img:"siliconegrillingmitt_1080x1080px.b845411311e8.jpg",hl:false,
+  desc:"Hittebestendige siliconen ovenhandschoen. Één maat.",specs:{Maat:"One size",Materiaal:"Siliconen"},sizes:null},
+{cat:"tools",name:"EGGmitt",code:"117090",price:36.95,img:"eggmitt_1080x1080px.81b7da5ab49c.jpg",hl:false,
+  desc:"Speciale BGE ovenhandschoen voor extra grip en hittebescherming.",specs:{Maat:"One size"},sizes:null},
+{cat:"tools",name:"Silicone Tipped Tongs",code:"",price:0,img:"siliconeslippedtongs_1080x1080px.64667827f67d.jpg",hl:false,
+  desc:"Roestvrij stalen tang met siliconen tip voor optimale grip zonder het vlees te beschadigen.",specs:{Materiaal:"RVS + siliconen tip"},
+  sizes:[{s:"30 cm",code:"116857",price:27.50},{s:"40 cm",code:"116864",price:36}]},
+{cat:"tools",name:"Stainless Steel Tool Set",code:"127655",price:107.95,img:"stainlesssteeltoolset_1080x1080px.fed51a9193ea.jpg",hl:false,
+  desc:"Complete set van 3 RVS BBQ-tools: wide spatula, spatula en brush. Ook los verkrijgbaar.",
+  specs:{Inhoud:"Wide Spatula + Spatula + Brush",Materiaal:"Roestvrij staal"},sizes:null},
+{cat:"tools",name:"Brisket Knife",code:"128805",price:44.95,img:"brisketknife_1080x1080px.869a5a9f80e2.jpg",hl:false,
+  desc:"Lang mes speciaal voor het snijden van brisket en andere grote stukken vlees.",specs:{Type:"Brisket mes"},sizes:null},
+{cat:"tools",name:"EGG Genius",code:"121059",price:336,img:"egggenius_1080x1080px.17c02f66529e.jpg",hl:false,
+  desc:"Slimme temperatuurcontroller die via WiFi verbinding maakt. Bewaakt de temperatuur van de EGG en het vlees vanaf je smartphone.",
+  specs:{Connectiviteit:"WiFi",App:"iOS + Android",Probes:"1 pit + 1 meat probe inbegrepen"},sizes:null},
+{cat:"tools",name:"Instant Read Thermometer",code:"119575",price:185,img:"instandreadthermometer_1080x1080px.e3d622c43b4c.jpg",hl:false,
+  desc:"Professionele digitale kernthermometer voor directe, accurate temperatuurmeting.",specs:{Type:"Direct afleesbaar",Nauwkeurigheid:"±1°C"},sizes:null},
+{cat:"tools",name:"Quick-Read Thermometer",code:"120793",price:46.95,img:"quick-readthermometer_1080x1080px.32e8ac240157.jpg",hl:false,
+  desc:"Snelle analoge thermometer voor kerntemperatuurmeting.",specs:{Type:"Analoog"},sizes:null},
+{cat:"tools",name:"Stainless Steel Pizza Peel",code:"127761",price:64,img:"pizzapeel_1080x1080px.6b219a999cb9.jpg",hl:false,
+  desc:"RVS pizzaschep voor het schuiven en keren van pizza's in de EGG.",specs:{Materiaal:"Roestvrij staal"},sizes:null},
+{cat:"tools",name:"Ceramic Poultry Roaster",code:"",price:0,img:"ceramicpoultryroaster_1080x1080px.b158268f87de.jpg",hl:false,
+  desc:"Keramische staander voor het verticaal roosteren van kip of kalkoen.",specs:{Materiaal:"Keramiek"},
+  sizes:[{s:"Kip",code:"119766",price:28.95},{s:"Kalkoen",code:"119773",price:38.50}]},
+{cat:"tools",name:"Ribs and Roasting Rack",code:"",price:0,img:"ribsandroastingrack_1080x1080px.7d60dbbcc3be.jpg",hl:false,
+  desc:"RVS rek voor het bereiden van spareribs, rosbief en andere grote stukken vlees.",specs:{Materiaal:"Roestvrij staal"},
+  sizes:[{s:"Medium",code:"117557",price:44.95},{s:"Large · XLarge · 2XL",code:"117564",price:56.50}]},
+
+// ONDERHOUD
+{cat:"onderhoud",name:"Ash Tool",code:"",price:0,img:"ashtool_1080x1080px.bf4d1f87dc23.jpg",hl:false,
+  desc:"Speciaal gereedschap voor het verwijderen van as uit de EGG na gebruik.",specs:{Functie:"As verwijderen"},
+  sizes:[{s:"MiniMax",code:"119513",price:20.50},{s:"Medium / Large",code:"119506",price:28.75},{s:"XLarge / 2XL",code:"119490",price:43}]},
+{cat:"onderhoud",name:"Ash Removal Pan",code:"106049",price:46,img:"ashremovalpan_1080x1080px.b70149daccc7.jpg",hl:false,
+  desc:"Pan voor het opvangen en verwijderen van as. Past onder de firebox.",
+  specs:{Compatibel:"Medium · Large · XLarge · 2XL"},sizes:null},
+{cat:"onderhoud",name:"Fire Bowl",code:"",price:0,img:"firebowl_1080x1080px.9020e10a918d.jpg",hl:false,
+  desc:"Vervangbare vuurschaal (Fire Bowl) als onderdeel van het keramische binnenwerk.",specs:{Materiaal:"Keramiek",Functie:"Houtskoolvuurschaal"},
+  sizes:[{s:"MiniMax",code:"122650",price:108},{s:"Medium",code:"122667",price:136},{s:"Large",code:"122674",price:154},{s:"XLarge",code:"122681",price:313},{s:"2XL",code:"122698",price:391}]},
+{cat:"onderhoud",name:"Charcoal Storage Bag",code:"128201",price:113.50,img:"charcoalstoragebag_1080x1080px.35ecccce9e4d.jpg",hl:false,
+  desc:"Stoffen opbergtas voor het bewaren van houtskool. Houdt houtskool droog en gemakkelijk bereikbaar.",specs:{Materiaal:"Stof"},sizes:null},
+{cat:"onderhoud",name:"SpeediClean Long Handle Scrubber",code:"127129",price:33.50,img:"longhandlescrubber_1080x1080px.753f724d73cf.jpg",hl:false,
+  desc:"Reinigingsborstel met lange steel voor het schoonmaken van het rooster.",specs:{Steellengte:"Lang",Inclusief:"Replacement Scrubber Pads niet inbegrepen"},sizes:null},
+{cat:"onderhoud",name:"SpeediClean Dual Brush Scrubber",code:"127136",price:30.25,img:"dualbrushscrubber_1080x1080px.5755fedbc6b9.jpg",hl:false,
+  desc:"Dubbelzijdige reinigingsborstel voor effectief rooster schoonmaken.",specs:{Type:"Dubbelzijdig"},sizes:null},
+
+// SPARE PARTS
+{cat:"spareparts",name:"Tel-Tru Temperature Gauge",code:"",price:0,img:"tel-trutemperaturegauge_1080x1080px.7cd06e24a2cb.jpg",hl:false,
+  desc:"Vervangende analoge thermometer voor in het deksel van de EGG.",specs:{Type:"Analoog",Merk:"Tel-Tru"},
+  sizes:[{s:"Ø 5 cm",code:"117236",price:57.95},{s:"Ø 8 cm",code:"117250",price:103.50}]},
+{cat:"spareparts",name:"Gasket Kit",code:"",price:0,img:"gasketkit_1080x1080px.42ecdef991ed.jpg",hl:false,
+  desc:"Vervangende afdichtingsstrip voor de scharnierzone van de EGG. Let op: voor de 2XL zijn 2 kits nodig.",
+  specs:{Opmerking:"2XL vereist 2 Gasket Kits"},
+  sizes:[{s:"MiniMax / Medium",code:"113733",price:52.50},{s:"Large / XLarge / 2XL",code:"113726",price:54.95}]},
+{cat:"spareparts",name:"Cast Iron Grate",code:"",price:0,img:"castirongrate_1080x1080px.33a6ca4d8b04.jpg",hl:false,
+  desc:"Vervangende gietijzeren vuurrooster (onderin de EGG).",specs:{Materiaal:"Gietijzer"},
+  sizes:[{s:"MiniMax",code:"103055",price:54.50},{s:"Medium",code:"103062",price:38.75},{s:"Large",code:"103055",price:54.50},{s:"XLarge",code:"112644",price:157},{s:"2XL",code:"114716",price:157}]},
+{cat:"spareparts",name:"Dome",code:"",price:0,img:"dome_1080x1080px.9564e21a6765.jpg",hl:false,
+  desc:"Vervangende keramische koepel (deksel) van de EGG.",specs:{Materiaal:"Keramiek"},
+  sizes:[{s:"MiniMax",code:"401144",price:283},{s:"Medium",code:"401137",price:387},{s:"Large",code:"401120",price:441},{s:"XLarge",code:"112668",price:920},{s:"2XL",code:"114433",price:1852}]},
+{cat:"spareparts",name:"Fire Ring",code:"",price:0,img:"firering_1080x1080px.7b7340c3e764.jpg",hl:false,
+  desc:"Vervangende keramische vuurring — de ring die de firebox en het kookgedeelte verbindt.",specs:{Materiaal:"Keramiek"},
+  sizes:[{s:"MiniMax",code:"115607",price:146.50},{s:"Medium",code:"401243",price:195},{s:"Large",code:"401229",price:263},{s:"XLarge",code:"401212",price:448},{s:"2XL",code:"120977",price:756}]},
+{cat:"spareparts",name:"Fire Box",code:"",price:0,img:"firebox_1080x1080px.145c0580d8fd.jpg",hl:false,
+  desc:"Vervangende keramische vuurkast (onderin de EGG, boven de vuurrooster).",specs:{Materiaal:"Keramiek"},
+  sizes:[{s:"MiniMax",code:"115591",price:121},{s:"Medium",code:"401182",price:295},{s:"Large",code:"401175",price:425},{s:"XLarge",code:"112637",price:611.50},{s:"2XL",code:"120984",price:1180}]},
+{cat:"spareparts",name:"Base",code:"",price:0,img:"base_1080x1080px.13e744164963.jpg",hl:false,
+  desc:"Vervangende keramische basis (onderkant) van de EGG.",specs:{Materiaal:"Keramiek"},
+  sizes:[{s:"MiniMax",code:"115577",price:437.50},{s:"Medium",code:"401083",price:731},{s:"Large",code:"401076",price:920},{s:"XLarge",code:"112620",price:1374},{s:"2XL",code:"120946",price:2355}]},
+{cat:"spareparts",name:"rEGGulator",code:"",price:0,img:"reggulator_1080x1080px.2214dc429a0d.jpg",hl:false,
+  desc:"Vervangende luchtregulatiedop voor het deksel van de EGG.",specs:{Functie:"Luchtregulatie (bovenkant)"},
+  sizes:[{s:"MiniMax",code:"117854",price:104.50},{s:"Medium · Large · XLarge · 2XL",code:"117847",price:111.50}]},
+{cat:"spareparts",name:"Rain Cap",code:"",price:0,img:"raincap_1080x1080px.c4d26f975339.jpg",hl:false,
+  desc:"Regenkap voor de rEGGulator om de EGG droog te houden bij regen.",specs:{Functie:"Bescherming tegen regen"},
+  sizes:[{s:"MiniMax",code:"121042",price:44.50},{s:"Medium · Large · XLarge · 2XL",code:"120748",price:47.50}]},
+{cat:"spareparts",name:"Band Assembly Kit",code:"",price:0,img:"bandassemblykit_1080x1080px.27ade48be178.jpg",hl:false,
+  desc:"Vervangende scharnierset inclusief veer en spanband voor het deksel van de EGG.",specs:{Inhoud:"Band + scharnier + veer"},
+  sizes:[{s:"MiniMax",code:"126870",price:211},{s:"Medium",code:"120021",price:263},{s:"Large",code:"117984",price:282.50},{s:"XLarge",code:"117908",price:344},{s:"2XL",code:"121271",price:429}]},
+
+// BOEKEN
+{cat:"boeken",name:"Big Green Egg Modus Operandi",code:"525957",price:195,img:"modusoperandi_1080x1080px.a25c366da9a6.jpg",hl:false,
+  desc:"Het ultieme Big Green Egg kookboek met meer dan 900 pagina's recepten, technieken en inspiratie.",
+  specs:{Paginas:"904",Taal:"Nederlands/Engels"},sizes:null},
+{cat:"boeken",name:"Evergreens from around Europe",code:"367323",price:375,img:"evergreensfromaroundeurope_1080x1080px.9379d8b0f65c.jpg",hl:false,
+  desc:"Een culinaire reis door Europa met tijdloze recepten voor de Big Green Egg.",specs:{Taal:"Engels"},sizes:null},
+{cat:"boeken",name:"Koken op de Big Green Egg",code:"818054",price:29.95,img:"kokenopdebiggreenegg_1080x1080px.aa3842d86ae4.jpg",hl:false,
+  desc:"Nederlandstalig kookboek voor de beginning en gevorderde BGE-gebruiker.",specs:{Taal:"Nederlands"},sizes:null},
 ];
 
-const LABELS={modellen:"1. Modellen",pakketten:"2. It's a Big Deal — pakketten",nests:"3. Nests, Tables & EGG Mates",workspace:"4. Modular EGG Workspace",charcoal:"5. Charcoal & Smoking",eggspander:"6. EGGspander System",accessoires:"7. Accessoires",tools:"8. Tools",onderhoud:"9. Onderhoud",spareparts:"11. Spare Parts",boeken:"12. Boeken"};
-const HI=["modellen","pakketten"];
-const cart={};
+const LABELS = {
+  modellen:"1. Modellen",pakketten:"2. It's a Big Deal — pakketten",
+  nests:"3. Nests, Tables & EGG Mates",workspace:"4. Modular EGG Workspace",
+  charcoal:"5. Charcoal & Smoking",eggspander:"6. EGGspander System",
+  accessoires:"7. Accessoires",tools:"8. Tools",
+  onderhoud:"9. Onderhoud",spareparts:"11. Spare Parts",boeken:"12. Boeken"
+};
 
-function uid(p){return p[0]+"_"+p[2]+"_"+p[1].replace(/\W/g,"");}
-function fmt(n){return"€ "+n.toFixed(2).replace(".",",").replace(/\B(?=(\d{3})+(?!\d))/g,".");}
-function getP(id){return PRODUCTS.find(p=>uid(p)===id);}
-function img(p){return BASE+p[5]+"?ext=webp&w=120";}
+const HL_CATS = ["modellen","pakketten"];
+const cart = {};
+let currentSpecIdx = null;
 
+// ── HELPERS ──────────────────────────────────────────────────────────────────
+function uid(p,i){ return "p"+i; }
+function fmt(n){ return "\u20ac\u00a0"+n.toLocaleString("nl-NL",{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function imgSrc(p){ return BASE+p.img+"?ext=webp&w=200"; }
+function imgLarge(p){ return BASE+p.img+"?ext=webp&w=900"; }
+function getFirstPrice(p){ return p.price || (p.sizes && p.sizes[0].price) || 0; }
+
+// ── BUILD LIST ────────────────────────────────────────────────────────────────
 function buildList(){
-  const c=document.getElementById("sections-container");
-  Object.keys(LABELS).forEach(cat=>{
-    const ps=PRODUCTS.filter(p=>p[0]===cat);
-    const sec=document.createElement("div");
-    sec.className="section";sec.dataset.cat=cat;
-    let h=`<div class="section-title">${LABELS[cat]}</div>`;
-    ps.forEach(p=>{
-      const id=uid(p);
-      const hl=HI.includes(p[0]);
-      const sz=p[4]?`<span class="sz">${p[4]}</span>`:"";
-      h+=`<div class="item" data-uid="${id}" onclick="toggle('${id}')">
-        <img class="item-thumb" src="${img(p)}" alt="" loading="lazy" onerror="this.style.display='none'">
-        <div class="item-check"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1"/></svg></div>
-        <div class="item-info">
-          <div class="item-name">${p[1]}</div>
-          <div class="item-sub">${sz}Art. ${p[2]}</div>
-        </div>
-        <div class="item-right">
-          <div class="item-price${hl?" hl":""}">${fmt(p[3])}</div>
-          <div class="qty-ctrl" id="qc_${id}" style="display:none" onclick="event.stopPropagation()">
-            <button class="qty-btn" onclick="chQty('${id}',-1)">−</button>
-            <span class="qty-num" id="qn_${id}">1</span>
-            <button class="qty-btn" onclick="chQty('${id}',1)">+</button>
-          </div>
-        </div>
-      </div>`;
+  const c = document.getElementById("sections-container");
+  Object.keys(LABELS).forEach(function(cat){
+    const ps = PRODUCTS.filter(function(p){ return p.cat===cat; });
+    const sec = document.createElement("div");
+    sec.className="section"; sec.dataset.cat=cat;
+    let h = '<div class="section-title">'+LABELS[cat]+'</div>';
+    ps.forEach(function(p,i){
+      const idx = PRODUCTS.indexOf(p);
+      const hl = HL_CATS.includes(cat);
+      const fp = getFirstPrice(p);
+      const priceStr = p.sizes ? "v.a. "+fmt(p.sizes[0].price) : fmt(p.price);
+      const codeStr = p.code || (p.sizes ? p.sizes[0].code : "");
+      h += '<div class="item" data-idx="'+idx+'">';
+      h += '<img class="item-thumb" src="'+imgSrc(p)+'" alt="'+p.name+'" loading="lazy" onclick="event.stopPropagation();openLightbox(\''+imgLarge(p)+'\')" onerror="this.style.display=\'none\'">';
+      h += '<div class="item-check"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1"/></svg></div>';
+      h += '<div class="item-info">';
+      h += '<div class="item-name">'+p.name+'</div>';
+      h += '<div class="item-sub">Art. '+codeStr+'</div>';
+      h += '</div>';
+      h += '<div class="item-right">';
+      h += '<div class="item-price'+(hl?' hl':'')+'">'+priceStr+'</div>';
+      h += '<div class="qty-ctrl" id="qc_'+idx+'" style="display:none" onclick="event.stopPropagation()">';
+      h += '<button class="qty-btn" data-idx="'+idx+'" data-d="-1">\u2212</button>';
+      h += '<span class="qty-num" id="qn_'+idx+'">1</span>';
+      h += '<button class="qty-btn" data-idx="'+idx+'" data-d="1">+</button>';
+      h += '</div>';
+      h += '<button class="spec-btn" onclick="event.stopPropagation();openSpec('+idx+')">Details &#8250;</button>';
+      h += '</div></div>';
     });
-    sec.innerHTML=h;c.appendChild(sec);
+    sec.innerHTML=h;
+    c.appendChild(sec);
+  });
+
+  // event delegation
+  c.addEventListener("click", function(e){
+    var qbtn = e.target.closest(".qty-btn");
+    if(qbtn){ chQty(parseInt(qbtn.dataset.idx), parseInt(qbtn.dataset.d)); return; }
+    var item = e.target.closest(".item");
+    if(item){ tog(parseInt(item.dataset.idx)); }
   });
 }
 
-function toggle(id){
-  const el=document.querySelector(`.item[data-uid="${id}"]`);
-  const qc=document.getElementById("qc_"+id);
-  if(cart[id]){delete cart[id];el.classList.remove("selected");qc.style.display="none";}
-  else{cart[id]=1;el.classList.add("selected");qc.style.display="";}
-  renderCart();
+// ── TOGGLE ───────────────────────────────────────────────────────────────────
+function tog(idx){
+  var el = document.querySelector('.item[data-idx="'+idx+'"]');
+  var qc = document.getElementById("qc_"+idx);
+  if(cart[idx]){ delete cart[idx]; el.classList.remove("selected"); qc.style.display="none"; }
+  else{ cart[idx]=1; el.classList.add("selected"); qc.style.display="flex"; }
+  updateSpecBtn(idx);
+  rc();
 }
 
-function chQty(id,d){
-  if(!cart[id])return;
-  cart[id]=Math.max(1,cart[id]+d);
-  document.getElementById("qn_"+id).textContent=cart[id];
-  renderCart();
+function chQty(idx,d){
+  if(!cart[idx]) return;
+  cart[idx]=Math.max(1,cart[idx]+d);
+  document.getElementById("qn_"+idx).textContent=cart[idx];
+  rc();
 }
 
 function clearCart(){
-  Object.keys(cart).forEach(id=>{
-    delete cart[id];
-    const el=document.querySelector(`.item[data-uid="${id}"]`);
-    if(el)el.classList.remove("selected");
-    const qc=document.getElementById("qc_"+id);if(qc)qc.style.display="none";
-    const qn=document.getElementById("qn_"+id);if(qn)qn.textContent="1";
+  Object.keys(cart).forEach(function(idx){
+    delete cart[idx];
+    var el=document.querySelector('.item[data-idx="'+idx+'"]'); if(el) el.classList.remove("selected");
+    var qc=document.getElementById("qc_"+idx); if(qc) qc.style.display="none";
+    var qn=document.getElementById("qn_"+idx); if(qn) qn.textContent="1";
   });
-  renderCart();
+  rc();
 }
 
-function renderCart(){
-  const ids=Object.keys(cart);
-  const totalQty=ids.reduce((s,id)=>s+cart[id],0);
-  document.getElementById("cart-badge").textContent=totalQty;
-  const total=ids.reduce((s,id)=>{const p=getP(id);return p?s+p[3]*cart[id]:s;},0);
-  document.getElementById("drawer-total").textContent=fmt(total);
-  document.getElementById("btn-mail").disabled=ids.length===0;
-  const di=document.getElementById("drawer-items");
-  if(!ids.length){di.innerHTML=`<div class="drawer-empty">Nog geen producten geselecteerd.<br>Tik op een product in de lijst.</div>`;return;}
-  di.innerHTML=ids.map(id=>{
-    const p=getP(id);if(!p)return"";
-    const qty=cart[id];const sub=p[3]*qty;
-    const sz=p[4]?" — "+p[4]:"";
-    return`<div class="ci">
-      <img class="ci-thumb" src="${img(p)}" alt="" loading="lazy" onerror="this.style.display='none'">
-      <div class="ci-info"><div class="ci-name">${p[1]}${sz}</div><div class="ci-code">Art. ${p[2]}</div></div>
-      <div class="ci-right"><div class="ci-price">${fmt(sub)}</div>${qty>1?`<div class="ci-qp">${qty} x ${fmt(p[3])}</div>`:""}</div>
-      <button class="ci-rm" onclick="toggle('${id}')">×</button>
-    </div>`;
+// ── RENDER CART ───────────────────────────────────────────────────────────────
+function rc(){
+  var ids=Object.keys(cart);
+  var tq=ids.reduce(function(s,i){return s+(cart[i]||0);},0);
+  document.getElementById("cart-badge").textContent=tq;
+  var tot=ids.reduce(function(s,i){
+    var p=PRODUCTS[parseInt(i)];
+    var fp=getFirstPrice(p);
+    return s+fp*(cart[i]||0);
+  },0);
+  document.getElementById("drawer-total").textContent=fmt(tot);
+  document.getElementById("mail-btn").disabled=!ids.length;
+  document.getElementById("pdf-btn").disabled=!ids.length;
+  var di=document.getElementById("drawer-items");
+  if(!ids.length){di.innerHTML='<div class="drawer-empty">Nog geen producten geselecteerd.<br>Tik op een product of klik op Details.</div>';return;}
+  di.innerHTML=ids.map(function(i){
+    var p=PRODUCTS[parseInt(i)];
+    var qty=cart[i];
+    var fp=getFirstPrice(p);
+    var sub=fp*qty;
+    return '<div class="ci">'+
+      '<img class="ci-img" src="'+imgSrc(p)+'" alt="" onerror="this.style.display=\'none\'">'+
+      '<div class="ci-info"><div class="ci-name">'+p.name+'</div><div class="ci-code">Art. '+(p.code||"")+' \u00b7 '+LABELS[p.cat]+'</div></div>'+
+      '<div class="ci-right"><div class="ci-price">'+fmt(sub)+'</div>'+(qty>1?'<div class="ci-qp">'+qty+' \u00d7 '+fmt(fp)+'</div>':'')+' </div>'+
+      '<button class="ci-rm" data-idx="'+i+'">&#215;</button>'+
+    '</div>';
   }).join("");
+  di.addEventListener("click",function(e){
+    var rm=e.target.closest(".ci-rm"); if(rm) tog(parseInt(rm.dataset.idx));
+  },{once:true});
 }
 
+// ── SPEC SHEET ────────────────────────────────────────────────────────────────
+function openSpec(idx){
+  currentSpecIdx = idx;
+  var p = PRODUCTS[idx];
+  document.getElementById("spec-img").src = imgSrc(p);
+  document.getElementById("spec-img").setAttribute("data-large", imgLarge(p));
+  document.getElementById("spec-name").textContent = p.name;
+  document.getElementById("spec-code").textContent = "Art. "+(p.code||"—")+" \u00b7 "+LABELS[p.cat];
+  var fp = getFirstPrice(p);
+  document.getElementById("spec-price").textContent = p.sizes ? "v.a. "+fmt(p.sizes[0].price) : fmt(p.price);
+
+  var body = "";
+  if(p.desc){
+    body += '<div class="spec-section"><div class="spec-section-title">Omschrijving</div>';
+    body += '<p class="spec-desc">'+p.desc+'</p></div>';
+  }
+  if(p.specs && Object.keys(p.specs).length){
+    body += '<div class="spec-section"><div class="spec-section-title">Specificaties</div><div class="spec-grid">';
+    Object.keys(p.specs).forEach(function(k){
+      body += '<div class="spec-item"><div class="spec-item-label">'+k.replace(/_/g," ")+'</div><div class="spec-item-value">'+p.specs[k]+'</div></div>';
+    });
+    body += '</div></div>';
+  }
+  if(p.sizes){
+    body += '<div class="spec-section"><div class="spec-section-title">Maten &amp; prijzen</div><div class="spec-sizes">';
+    p.sizes.forEach(function(sz){
+      body += '<div class="spec-size-row">';
+      body += '<div><div class="spec-size-label">'+sz.s+'</div><div class="spec-size-code">Art. '+sz.code+'</div></div>';
+      body += '<div class="spec-size-price">'+fmt(sz.price)+'</div>';
+      body += '</div>';
+    });
+    body += '</div></div>';
+  }
+  document.getElementById("spec-body").innerHTML = body;
+  updateSpecBtn(idx);
+  document.getElementById("specsheet").classList.add("open");
+  document.body.style.overflow="hidden";
+}
+
+function updateSpecBtn(idx){
+  var btn = document.getElementById("spec-add-btn");
+  var lbl = document.getElementById("spec-add-label");
+  if(!btn) return;
+  if(cart[idx]){
+    btn.classList.add("added");
+    lbl.textContent="Verwijder uit selectie";
+  } else {
+    btn.classList.remove("added");
+    lbl.textContent="Toevoegen aan selectie";
+  }
+}
+
+function toggleFromSpec(){
+  if(currentSpecIdx !== null) tog(currentSpecIdx);
+  updateSpecBtn(currentSpecIdx);
+}
+
+function closeSpec(){
+  document.getElementById("specsheet").classList.remove("open");
+  document.body.style.overflow="";
+  currentSpecIdx=null;
+}
+
+// ── LIGHTBOX ──────────────────────────────────────────────────────────────────
+function openLightbox(src){
+  document.getElementById("lightbox-img").src=src;
+  document.getElementById("lightbox").classList.add("open");
+  document.body.style.overflow="hidden";
+}
+function closeLightbox(){
+  document.getElementById("lightbox").classList.remove("open");
+  document.body.style.overflow="";
+}
+
+// ── FILTER ───────────────────────────────────────────────────────────────────
 function filter(cat,btn){
-  document.querySelectorAll(".filter-btn").forEach(b=>b.classList.remove("active"));
+  document.querySelectorAll(".filter-btn").forEach(function(b){b.classList.remove("active");});
   btn.classList.add("active");
-  document.querySelectorAll(".section").forEach(s=>s.style.display=(cat==="all"||s.dataset.cat===cat)?"block":"none");
-}
-
-function openDrawer(){document.getElementById("drawer").classList.add("open");document.getElementById("drawer-overlay").classList.add("open");document.body.style.overflow="hidden";}
-function closeDrawer(){document.getElementById("drawer").classList.remove("open");document.getElementById("drawer-overlay").classList.remove("open");document.body.style.overflow="";}
-function openMailModal(){document.getElementById("mail-modal").classList.add("open");}
-function closeMailModal(){document.getElementById("mail-modal").classList.remove("open");}
-
-function sendMail(){
-  const ids=Object.keys(cart);
-  const now=new Date().toLocaleDateString("nl-NL",{day:"2-digit",month:"long",year:"numeric"});
-  const name=document.getElementById("mail-from-name").value.trim();
-  const note=document.getElementById("mail-note").value.trim();
-  const to=document.getElementById("mail-to").value.trim();
-  let body="Big Green Egg — Mijn selectie\n";
-  body+="Prijslijst 2026 | "+now+"\n";
-  if(name)body+="Samengesteld door: "+name+"\n";
-  if(note)body+="\nOpmerking: "+note+"\n";
-  body+="\n";
-  body+="PRODUCT                               ART.NR.   AANTAL      PRIJS\n";
-  body+="------------------------------------------------------------------\n";
-  let total=0;
-  ids.forEach(id=>{
-    const p=getP(id);if(!p)return;
-    const qty=cart[id];const sub=p[3]*qty;total+=sub;
-    const sz=p[4]?" ("+p[4]+")":"";
-    const nm=(p[1]+sz).substring(0,36).padEnd(36);
-    body+=nm+" "+p[2].padEnd(9)+String(qty).padStart(6)+"  "+fmt(sub).padStart(12)+"\n";
+  document.querySelectorAll(".section").forEach(function(s){
+    s.style.display=(cat==="all"||s.dataset.cat===cat)?"block":"none";
   });
-  body+="------------------------------------------------------------------\n";
-  body+="TOTAAL INCL. BTW".padEnd(55)+fmt(total).padStart(12)+"\n";
-  body+="\nPrijzen onder voorbehoud | biggreenegg.eu";
-  window.location.href=`mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent("Big Green Egg — Mijn selectie 2026")}&body=${encodeURIComponent(body)}`;
-  closeMailModal();
 }
 
-buildList();renderCart();
+// ── DRAWER ───────────────────────────────────────────────────────────────────
+function openDrawer(){document.getElementById("drawer").classList.add("open");document.getElementById("drawer-ov").classList.add("open");document.body.style.overflow="hidden";}
+function closeDrawer(){document.getElementById("drawer").classList.remove("open");document.getElementById("drawer-ov").classList.remove("open");document.body.style.overflow="";}
+
+// ── MAIL ─────────────────────────────────────────────────────────────────────
+function openMail(){document.getElementById("mail-ov").classList.add("open");}
+function closeMail(){document.getElementById("mail-ov").classList.remove("open");}
+function doMail(){
+  var ids=Object.keys(cart);
+  var now=new Date().toLocaleDateString("nl-NL",{day:"2-digit",month:"long",year:"numeric"});
+  var name=document.getElementById("mail-name").value.trim();
+  var note=document.getElementById("mail-note").value.trim();
+  var to=document.getElementById("mail-to").value.trim();
+  var body="Big Green Egg \u2014 Mijn selectie\nPrijslijst 2026 | "+now+"\n";
+  if(name) body+="Samengesteld door: "+name+"\n";
+  if(note) body+="\nOpmerking: "+note+"\n";
+  body+="\n";
+  var tot=0;
+  ids.forEach(function(i){
+    var p=PRODUCTS[parseInt(i)]; if(!p) return;
+    var qty=cart[i]; var fp=getFirstPrice(p); var sub=fp*qty; tot+=sub;
+    body+=p.name+" | Art. "+(p.code||"")+"\n  "+qty+"x "+fmt(fp)+" = "+fmt(sub)+"\n";
+  });
+  body+="\nTOTAAL INCL. BTW: "+fmt(tot)+"\n\nPrijzen onder voorbehoud | biggreenegg.eu";
+  window.location.href="mailto:"+encodeURIComponent(to)+"?subject="+encodeURIComponent("Big Green Egg \u2014 Mijn selectie 2026")+"&body="+encodeURIComponent(body);
+  closeMail();
+}
+
+
+
+// ── PDF GENERATIE ─────────────────────────────────────────────────────────────
+function openPdf(){
+  var ids=Object.keys(cart);
+  if(!ids.length) return;
+  var now=new Date().toLocaleDateString("nl-NL",{day:"2-digit",month:"long",year:"numeric"});
+  var tot=ids.reduce(function(s,i){var p=PRODUCTS[parseInt(i)];return s+getFirstPrice(p)*(cart[i]||0);},0);
+  var rows="";
+  ids.forEach(function(i){
+    var p=PRODUCTS[parseInt(i)]; if(!p) return;
+    var qty=cart[i]; var fp=getFirstPrice(p); var sub=fp*qty;
+    var priceStr=p.sizes?"v.a. "+fmt(p.sizes[0].price):fmt(p.price);
+    var codeStr=p.code||(p.sizes?p.sizes[0].code:"");
+    var imgUrl=BASE+p.img+"?ext=webp&w=300";
+    rows+="<tr>";
+    rows+='<td class=\"ic\"><img src=\"'+imgUrl+'\" alt=\"'+p.name+'\"></td>';
+    rows+='<td class=\"nc\"><div class=\"pn\">'+p.name+'</div><div class=\"pc\">'+LABELS[p.cat]+'</div>'+(codeStr?'<div class=\"cd\">Art. '+codeStr+'</div>':'')+(p.desc?'<div class=\"pd\">'+p.desc+'</div>':'')+'</td>';
+    rows+='<td class=\"qc\">'+qty+'</td>';
+    rows+='<td class=\"mc\">'+priceStr+'</td>';
+    rows+='<td class=\"sc\">'+fmt(sub)+'</td>';
+    rows+="</tr>";
+  });
+
+  var css="*{box-sizing:border-box;margin:0;padding:0;}"
+    +"body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;color:#1a1a16;background:white;}"
+    +"@page{size:A4 portrait;margin:15mm 15mm 20mm 15mm;}"
+    +"@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact;}.pb{display:none;}}"
+    +".page{max-width:210mm;margin:0 auto;padding:8mm;}"
+    +".hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:7mm;padding-bottom:5mm;border-bottom:2px solid #2d6a3f;}"
+    +".hl img{height:48px;width:auto;}"
+    +".hr{text-align:right;}"
+    +".dt{font-size:22px;font-weight:700;color:#2d6a3f;margin-bottom:3px;letter-spacing:-0.5px;}"
+    +".dd{font-size:11px;color:#7a7a6e;margin-top:4px;}"
+    +".dl{font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:#7a7a6e;margin-bottom:2px;}"
+    +"table{width:100%;border-collapse:collapse;margin-bottom:5mm;font-size:11px;}"
+    +"thead tr{background:#2d6a3f;color:white;}"
+    +"thead th{padding:6px 7px;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;text-align:left;}"
+    +"thead th.r{text-align:right;} thead th.c{text-align:center;}"
+    +"tbody tr{border-bottom:1px solid #e8e6df;page-break-inside:avoid;}"
+    +"tbody tr:nth-child(even){background:#faf9f6;}"
+    +"td{padding:6px 7px;vertical-align:top;}"
+    +".ic{width:54px;padding-right:5px;}"
+    +".ic img{width:48px;height:48px;object-fit:cover;border-radius:6px;display:block;}"
+    +".nc{}"
+    +".pn{font-size:11px;font-weight:600;color:#1a1a16;margin-bottom:2px;}"
+    +".pc{font-size:9px;color:#2d6a3f;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:2px;}"
+    +".cd{font-size:9px;color:#7a7a6e;margin-bottom:3px;}"
+    +".pd{font-size:9px;color:#7a7a6e;line-height:1.5;max-width:250px;}"
+    +".qc{width:40px;text-align:center;font-weight:500;}"
+    +".mc{width:72px;text-align:right;color:#7a7a6e;white-space:nowrap;}"
+    +".sc{width:78px;text-align:right;font-weight:700;color:#1a1a16;white-space:nowrap;}"
+    +".tot{margin-top:2mm;display:flex;justify-content:flex-end;}"
+    +".tb{min-width:190px;border:1px solid #e8e6df;border-radius:8px;overflow:hidden;}"
+    +".tr{display:flex;justify-content:space-between;padding:6px 10px;font-size:11px;border-bottom:1px solid #e8e6df;}"
+    +".tr:last-child{border-bottom:none;background:#2d6a3f;color:white;padding:8px 10px;}"
+    +".tr:last-child span:first-child{font-size:12px;font-weight:600;}"
+    +".tr:last-child span:last-child{font-size:15px;font-weight:700;}"
+    +".ft{margin-top:6mm;padding-top:4mm;border-top:1px solid #e8e6df;display:flex;justify-content:space-between;font-size:9px;color:#7a7a6e;line-height:1.6;}"
+    +".pb{position:fixed;bottom:20px;right:20px;background:#2d6a3f;color:white;border:none;border-radius:10px;padding:12px 22px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;box-shadow:0 4px 16px rgba(0,0,0,0.2);}";
+
+  var body="<div class=\"page\">"
+    +"<div class=\"hd\"><div class=\"hl\"><img src=\"data:image/png;base64,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\" alt=\"VSB Wellness\"></div>"
+    +"<div class=\"hr\"><div class=\"dl\">Productoverzicht</div><div class=\"dt\">Big Green Egg 2026</div><div class=\"dd\">Datum: "+now+"</div></div></div>"
+    +"<table><thead><tr><th colspan=\"2\">Product</th><th class=\"c\">Aantal</th><th class=\"r\">Stukprijs</th><th class=\"r\">Subtotaal</th></tr></thead><tbody>"+rows+"</tbody></table>"
+    +"<div class=\"tot\"><div class=\"tb\"><div class=\"tr\"><span>Subtotaal</span><span>"+fmt(tot)+"</span></div><div class=\"tr\"><span>Totaal incl. btw</span><span>"+fmt(tot)+"</span></div></div></div>"
+    +"<div class=\"ft\"><div>VSB Wellness NL • biggreenegg.eu • Prijzen onder voorbehoud</div><div>Alle prijzen inclusief BTW • Prijslijst 2026</div></div>"
+    +"</div>";
+
+  var win=window.open("","_blank");
+  win.document.write("<!DOCTYPE html><html lang=\"nl\"><head><meta charset=\"UTF-8\"><title>VSB Wellness — BGE Offerte</title><style>"+css+"</style></head><body>"+body+"<button class=\"pb\" onclick=\"window.print()\">Opslaan als PDF</button></body></html>");
+  win.document.close();
+}
+
+
+buildList();
+rc();
 </script>
 </body>
 </html>
