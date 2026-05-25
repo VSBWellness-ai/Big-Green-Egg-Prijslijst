@@ -37,7 +37,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 .section-title{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);padding:10px 16px;background:#faf9f6;border-bottom:1px solid var(--border);}
 
 /* ── ITEM ROW ── */
-.item{display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid #f5f3ee;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background 0.12s;position:relative;}
+.item{display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid #f5f3ee;cursor:pointer;-webkit-tap-highlight-color:rgba(0,0,0,0);transition:background 0.12s;position:relative;touch-action:manipulation;}
 .item:last-child{border-bottom:none;}
 .item:hover{background:#faf9f6;}
 .item.selected{background:var(--green-light);}
@@ -53,7 +53,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 .item-price{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;}
 .item-price.hl{color:var(--green);font-size:14px;}
 .qty-ctrl{display:flex;align-items:center;gap:5px;}
-.qty-btn{width:40px;height:40px;border-radius:10px;background:#f0ede6;border:none;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text);font-family:inherit;}
+.qty-btn{width:44px;height:44px;border-radius:10px;background:#f0ede6;border:none;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text);font-family:inherit;touch-action:manipulation;-webkit-tap-highlight-color:rgba(0,0,0,0);user-select:none;-webkit-user-select:none;}
 .qty-btn:active{background:var(--border);}
 .qty-num{font-size:16px;font-weight:700;min-width:24px;text-align:center;}
 .spec-btn{background:none;border:1px solid var(--border);border-radius:6px;padding:2px 7px;font-size:10px;color:var(--muted);cursor:pointer;font-family:inherit;white-space:nowrap;}
@@ -149,7 +149,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 .size-picker{background:#faf9f6;border-top:1px solid #e8e6df;}
 .item.open{background:#faf9f6;border-bottom:none;}
 .item.open .item-expand-hint{color:var(--green-dark);}
-.size-row{display:flex;align-items:center;justify-content:space-between;padding:11px 14px 11px 14px;border-bottom:1px solid #f0ede6;}
+.size-row{display:flex;align-items:center;justify-content:space-between;padding:11px 14px 11px 14px;border-bottom:1px solid #f0ede6;touch-action:manipulation;}
 .size-row:last-child{border-bottom:none;}
 .size-row.has-qty{background:var(--green-light);}
 .sr-info{flex:1;min-width:0;padding-left:60px;}
@@ -157,8 +157,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 .sr-code{font-size:11px;color:var(--muted);margin-top:1px;}
 .sr-right{display:flex;align-items:center;gap:14px;flex-shrink:0;}
 .sr-price{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;min-width:65px;text-align:right;}
-.sr-qty{display:flex;align-items:center;gap:14px;}
-.sq-btn{width:40px;height:40px;border-radius:10px;background:#e8e6df;border:none;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text);font-family:inherit;-webkit-tap-highlight-color:transparent;}
+.sr-qty{display:flex;align-items:center;gap:14px;touch-action:manipulation;}
+.sq-btn{width:44px;height:44px;border-radius:10px;background:#e8e6df;border:none;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text);font-family:inherit;-webkit-tap-highlight-color:rgba(0,0,0,0);touch-action:manipulation;user-select:none;-webkit-user-select:none;}
 .sq-btn:active{background:#d0cec7;}
 .sq-num{font-size:16px;font-weight:700;min-width:24px;text-align:center;color:var(--muted);}
 .sq-num.has-qty{color:var(--green);font-size:17px;}
@@ -643,10 +643,10 @@ function buildList(){
         h += '<div class="qty-ctrl" id="qc_'+idx+'" style="display:none" onclick="event.stopPropagation()">';
         h += '<button class="qty-btn" data-idx="'+idx+'" data-d="-1">−</button>';
         h += '<span class="qty-num" id="qn_'+idx+'">1</span>';
-        h += '<button class="qty-btn" data-idx="'+idx+'" data-d="1">+</button>';
+        h += '<button type="button" class="qty-btn" data-idx="'+idx+'" data-d="1">+</button>';
         h += '</div>';
       }
-      h += '<button class="spec-btn" onclick="event.stopPropagation();openSpec('+idx+')">Info &#8250;</button>';
+      h += '<button type="button" class="spec-btn" onclick="event.stopPropagation();openSpec('+idx+')">Info &#8250;</button>';
       h += '</div>';
       h += '</div>'; // end .item
 
@@ -662,9 +662,9 @@ function buildList(){
           h += '<div class="sr-right">';
           h += '<div class="sr-price">'+fmt(sz.price)+'</div>';
           h += '<div class="sr-qty">';
-          h += '<button class="sq-btn" data-idx="'+idx+'" data-si="'+si+'" data-d="-1">−</button>';
+          h += '<button type="button" class="sq-btn" data-idx="'+idx+'" data-si="'+si+'" data-d="-1">−</button>';
           h += '<span class="sq-num'+(cart[idx+"_"+si]?" has-qty":"")+'" id="sqn_'+idx+'_'+si+'">'+(cart[idx+"_"+si]||0)+'</span>';
-          h += '<button class="sq-btn" data-idx="'+idx+'" data-si="'+si+'" data-d="1">+</button>';
+          h += '<button type="button" class="sq-btn" data-idx="'+idx+'" data-si="'+si+'" data-d="1">+</button>';
           h += '</div>';
           h += '</div>';
           h += '</div>';
@@ -675,14 +675,22 @@ function buildList(){
     sec.innerHTML=h;
     c.appendChild(sec);
 
-    // Event delegation per section
-    sec.addEventListener("click", function(e){
+    // Event delegation — works on iOS/Android and desktop
+    function handleSecClick(e){
       var sqbtn = e.target.closest(".sq-btn");
-      if(sqbtn){ e.stopPropagation(); adjSize(parseInt(sqbtn.dataset.idx), parseInt(sqbtn.dataset.si), parseInt(sqbtn.dataset.d)); return; }
+      if(sqbtn){ e.preventDefault(); e.stopPropagation(); adjSize(parseInt(sqbtn.dataset.idx), parseInt(sqbtn.dataset.si), parseInt(sqbtn.dataset.d)); return; }
       var qbtn = e.target.closest(".qty-btn");
-      if(qbtn){ e.stopPropagation(); chQty(parseInt(qbtn.dataset.idx), parseInt(qbtn.dataset.d)); return; }
+      if(qbtn){ e.preventDefault(); e.stopPropagation(); chQty(parseInt(qbtn.dataset.idx), parseInt(qbtn.dataset.d)); return; }
+      var spbtn = e.target.closest(".spec-btn");
+      if(spbtn){ return; } // spec-btn has own onclick
       var item = e.target.closest(".item");
-      if(item){ tog(parseInt(item.dataset.idx)); }
+      if(item && !e.target.closest(".item-thumb")){ tog(parseInt(item.dataset.idx)); }
+    }
+    sec.addEventListener("click", handleSecClick);
+    sec.addEventListener("touchend", function(e){
+      var sqbtn = e.target.closest(".sq-btn");
+      var qbtn = e.target.closest(".qty-btn");
+      if(sqbtn || qbtn){ handleSecClick(e); }
     });
   });
 }
