@@ -143,6 +143,25 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-we
 .btn-send{flex:2;background:var(--green);color:white;border:none;border-radius:12px;padding:13px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;}
 .pdf-btn{flex:0 0 auto;background:white;color:var(--green);border:1.5px solid var(--green);border-radius:12px;padding:14px 16px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;}
 .pdf-btn:disabled{border-color:var(--border);color:var(--muted);cursor:default;}
+
+.item-expand-hint{color:var(--green);font-size:10px;font-weight:600;margin-top:2px;}
+.item.open .item-expand-hint{content:""}
+.size-picker{background:#faf9f6;border-top:1px solid #e8e6df;}
+.item.open{background:#faf9f6;border-bottom:none;}
+.item.open .item-expand-hint{color:var(--green-dark);}
+.size-row{display:flex;align-items:center;justify-content:space-between;padding:11px 14px 11px 14px;border-bottom:1px solid #f0ede6;}
+.size-row:last-child{border-bottom:none;}
+.size-row.has-qty{background:var(--green-light);}
+.sr-info{flex:1;min-width:0;padding-left:60px;}
+.sr-name{font-size:13px;font-weight:500;color:var(--text);}
+.sr-code{font-size:11px;color:var(--muted);margin-top:1px;}
+.sr-right{display:flex;align-items:center;gap:14px;flex-shrink:0;}
+.sr-price{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;min-width:65px;text-align:right;}
+.sr-qty{display:flex;align-items:center;gap:14px;}
+.sq-btn{width:40px;height:40px;border-radius:10px;background:#e8e6df;border:none;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text);font-family:inherit;-webkit-tap-highlight-color:transparent;}
+.sq-btn:active{background:#d0cec7;}
+.sq-num{font-size:16px;font-weight:700;min-width:24px;text-align:center;color:var(--muted);}
+.sq-num.has-qty{color:var(--green);font-size:17px;}
 </style>
 </head>
 <body>
@@ -599,64 +618,95 @@ function buildList(){
     const sec = document.createElement("div");
     sec.className="section"; sec.dataset.cat=cat;
     let h = '<div class="section-title">'+LABELS[cat]+'</div>';
-    ps.forEach(function(p,i){
+    ps.forEach(function(p){
       const idx = PRODUCTS.indexOf(p);
       const hl = HL_CATS.includes(cat);
-      const fp = getFirstPrice(p);
       const priceStr = p.sizes ? "v.a. "+fmt(p.sizes[0].price) : fmt(p.price);
-      const codeStr = p.code || (p.sizes ? p.sizes[0].code : "");
-      h += '<div class="item" data-idx="'+idx+'">';
-      h += '<img class="item-thumb" src="'+imgSrc(p)+'" alt="'+p.name+'" loading="lazy" onclick="event.stopPropagation();openLightbox(\''+imgLarge(p)+'\')" onerror="this.style.display=\'none\'">';
+      const codeStr = p.code || "";
+      const imgCls = (typeof ONYX_IMGS!=="undefined" && ONYX_IMGS[p.img]) ? (cat==="onyx"?"dark-bg":"") : "";
+
+      // Main item row — clicking toggles expansion for multi-size, or add/remove for single
+      h += '<div class="item'+(p.sizes?" item-multi":"")+(cat==="onyx"?" item-onyx":"")+'" data-idx="'+idx+'">';
+      h += '<img class="item-thumb '+imgCls+'" src="'+imgSrc(p)+'" alt="'+p.name+'" loading="lazy"';
+      h += ' onclick="event.stopPropagation();openLightbox(this.getAttribute(\'data-large\'))"';
+      h += ' data-large="'+imgLarge(p)+'" onerror="this.style.display=\'none\'">';
       h += '<div class="item-check"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1"/></svg></div>';
       h += '<div class="item-info">';
       h += '<div class="item-name">'+p.name+'</div>';
-      h += '<div class="item-sub">Art. '+codeStr+'</div>';
+      if(codeStr) h += '<div class="item-sub">Art. '+codeStr+'</div>';
+      if(p.sizes) h += '<div class="item-expand-hint" id="hint_'+idx+'">Tik om maat te kiezen &#9662;</div>';
       h += '</div>';
       h += '<div class="item-right">';
       h += '<div class="item-price'+(hl?' hl':'')+'" id="ip_'+idx+'">'+priceStr+'</div>';
-      h += '<div class="item-sel-info" id="isi_'+idx+'" style="display:none"></div>';
-      if(p.sizes){
-        // Multi-size: qc_ shows selected count, tap to open spec
-        h += '<div class="qty-ctrl qty-sel" id="qc_'+idx+'" style="display:none" onclick="event.stopPropagation();openSpec('+idx+')">';
-        h += '<span class="qty-sel-label" id="qn_'+idx+'">Wijzig ▾</span>';
-        h += '</div>';
-      } else {
+      if(!p.sizes){
+        // Single price: qty controls
         h += '<div class="qty-ctrl" id="qc_'+idx+'" style="display:none" onclick="event.stopPropagation()">';
-        h += '<button class="qty-btn" data-idx="'+idx+'" data-d="-1">\u2212</button>';
+        h += '<button class="qty-btn" data-idx="'+idx+'" data-d="-1">−</button>';
         h += '<span class="qty-num" id="qn_'+idx+'">1</span>';
         h += '<button class="qty-btn" data-idx="'+idx+'" data-d="1">+</button>';
         h += '</div>';
       }
-      h += '<button class="spec-btn" onclick="event.stopPropagation();openSpec('+idx+')">Details &#8250;</button>';
-      h += '</div></div>';
+      h += '<button class="spec-btn" onclick="event.stopPropagation();openSpec('+idx+')">Info &#8250;</button>';
+      h += '</div>';
+      h += '</div>'; // end .item
+
+      // Size picker rows — placed directly after item, same visual block
+      if(p.sizes){
+        h += '<div class="size-picker" id="sp_'+idx+'" style="display:none">';
+        p.sizes.forEach(function(sz, si){
+          h += '<div class="size-row'+(cart[idx+"_"+si]?" has-qty":"")+'" id="sr_'+idx+'_'+si+'">';
+          h += '<div class="sr-info">';
+          h += '<div class="sr-name">'+sz.s+'</div>';
+          h += '<div class="sr-code">Art. '+sz.code+'</div>';
+          h += '</div>';
+          h += '<div class="sr-right">';
+          h += '<div class="sr-price">'+fmt(sz.price)+'</div>';
+          h += '<div class="sr-qty">';
+          h += '<button class="sq-btn" data-idx="'+idx+'" data-si="'+si+'" data-d="-1">−</button>';
+          h += '<span class="sq-num'+(cart[idx+"_"+si]?" has-qty":"")+'" id="sqn_'+idx+'_'+si+'">'+(cart[idx+"_"+si]||0)+'</span>';
+          h += '<button class="sq-btn" data-idx="'+idx+'" data-si="'+si+'" data-d="1">+</button>';
+          h += '</div>';
+          h += '</div>';
+          h += '</div>';
+        });
+        h += '</div>';
+      }
     });
     sec.innerHTML=h;
     c.appendChild(sec);
-  });
 
-  // event delegation
-  c.addEventListener("click", function(e){
-    var qbtn = e.target.closest(".qty-btn");
-    if(qbtn){ chQty(parseInt(qbtn.dataset.idx), parseInt(qbtn.dataset.d)); return; }
-    var item = e.target.closest(".item");
-    if(item){ tog(parseInt(item.dataset.idx)); }
+    // Event delegation per section
+    sec.addEventListener("click", function(e){
+      var sqbtn = e.target.closest(".sq-btn");
+      if(sqbtn){ e.stopPropagation(); adjSize(parseInt(sqbtn.dataset.idx), parseInt(sqbtn.dataset.si), parseInt(sqbtn.dataset.d)); return; }
+      var qbtn = e.target.closest(".qty-btn");
+      if(qbtn){ e.stopPropagation(); chQty(parseInt(qbtn.dataset.idx), parseInt(qbtn.dataset.d)); return; }
+      var item = e.target.closest(".item");
+      if(item){ tog(parseInt(item.dataset.idx)); }
+    });
   });
 }
 
 // ── TOGGLE ───────────────────────────────────────────────────────────────────
 function tog(idx){
   var p = PRODUCTS[idx];
-  if(p.sizes && p.sizes.length > 0){
-    // Multi-size: open spec sheet for size selection
-    openSpec(idx);
+  if(p && p.sizes && p.sizes.length > 0){
+    var sp = document.getElementById("sp_"+idx);
+    var item = document.querySelector('.item[data-idx="'+idx+'"]');
+    if(!sp) return;
+    var isOpen = sp.style.display !== "none";
+    sp.style.display = isOpen ? "none" : "block";
+    if(item){
+      item.classList.toggle("open", !isOpen);
+    }
     return;
   }
-  // Single price: direct toggle
+  // Single price: direct add/remove
   var el = document.querySelector('.item[data-idx="'+idx+'"]');
   var qc = document.getElementById("qc_"+idx);
   var key = ""+idx;
-  if(cart[key]){ delete cart[key]; el.classList.remove("selected"); qc.style.display="none"; }
-  else{ cart[key]=1; el.classList.add("selected"); qc.style.display="flex"; }
+  if(cart[key]){ delete cart[key]; if(el) el.classList.remove("selected"); if(qc) qc.style.display="none"; }
+  else{ cart[key]=1; if(el) el.classList.add("selected"); if(qc) qc.style.display="flex"; }
   updateSpecBtn(idx);
   rc();
 }
@@ -700,31 +750,32 @@ function updateItemRow(idx){
   var p=PRODUCTS[idx];
   var el=document.querySelector('.item[data-idx="'+idx+'"]');
   if(!el) return;
-  var qc=document.getElementById("qc_"+idx);
   var hasAny=false;
   if(p.sizes){
     p.sizes.forEach(function(sz,si){ if(cart[idx+"_"+si]) hasAny=true; });
   } else {
     if(cart[""+idx]) hasAny=true;
   }
-  if(hasAny){
-    el.classList.add("selected");
-    if(qc) qc.style.display="flex";
-  } else {
-    el.classList.remove("selected");
-    if(qc) qc.style.display="none";
+  if(hasAny) el.classList.add("selected");
+  else el.classList.remove("selected");
+  // Single-price qty ctrl
+  if(!p.sizes){
+    var qc=document.getElementById("qc_"+idx);
+    if(qc) qc.style.display=hasAny?"flex":"none";
   }
 }
 
 function clearCart(){
   Object.keys(cart).forEach(function(k){
-    delete cart[k];
     var parts=k.split("_");
     var idx=parseInt(parts[0]);
     var si=parts.length>1?parseInt(parts[1]):null;
+    delete cart[k];
     if(si!==null){
-      var btn=document.getElementById("sizebtn_"+idx+"_"+si);
-      if(btn){btn.classList.remove("selected-size");btn.textContent="+";}
+      var numEl=document.getElementById("sqn_"+idx+"_"+si);
+      if(numEl){numEl.textContent="0";numEl.classList.remove("has-qty");}
+      var rowEl=document.getElementById("sr_"+idx+"_"+si);
+      if(rowEl) rowEl.classList.remove("has-qty");
     } else {
       var el=document.querySelector('.item[data-idx="'+idx+'"]'); if(el) el.classList.remove("selected");
       var qc=document.getElementById("qc_"+idx); if(qc) qc.style.display="none";
@@ -735,8 +786,6 @@ function clearCart(){
   });
   rc();
 }
-
-// ── RENDER CART ───────────────────────────────────────────────────────────────
 function rc(){
   var keys=Object.keys(cart);
   var tq=keys.reduce(function(s,k){return s+(cart[k]||0);},0);
@@ -799,12 +848,13 @@ function rc(){
     var si=parts.length>1?parseInt(parts[1]):null;
     delete cart[key];
     if(si!==null){
-      var btn=document.getElementById("sizebtn_"+idx+"_"+si);
-      if(btn){btn.classList.remove("selected-size");btn.textContent="+";}
+      var numEl=document.getElementById("sqn_"+idx+"_"+si);
+      if(numEl){numEl.textContent="0";numEl.classList.remove("has-qty");}
+      var rowEl=document.getElementById("sr_"+idx+"_"+si);
+      if(rowEl) rowEl.classList.remove("has-qty");
     }
     updateItemRow(idx);
     updateItemPrice(idx);
-    updateSpecBtn(idx);
     rc();
   },{once:true});
 }
@@ -1081,6 +1131,38 @@ function updateItemPrice(idx){
     if(infoEl){ infoEl.textContent = selected.length+" maten — totaal"; infoEl.style.display="block"; }
     if(labelEl) labelEl.textContent = selected.length+" maten ▾";
   }
+}
+
+
+// ── SIZE QUANTITY CONTROL ──────────────────────────────────────────────────
+function adjSize(idx, si, d){
+  var key=idx+"_"+si;
+  var cur=cart[key]||0;
+  var newVal=Math.max(0, cur+d);
+
+  if(newVal===0){
+    delete cart[key];
+  } else {
+    cart[key]=newVal;
+  }
+
+  // Update qty display
+  var numEl=document.getElementById("sqn_"+idx+"_"+si);
+  if(numEl){
+    numEl.textContent=newVal;
+    if(newVal>0) numEl.classList.add("has-qty");
+    else numEl.classList.remove("has-qty");
+  }
+  // Highlight size row
+  var rowEl=document.getElementById("sr_"+idx+"_"+si);
+  if(rowEl){
+    if(newVal>0) rowEl.classList.add("has-qty");
+    else rowEl.classList.remove("has-qty");
+  }
+
+  updateItemRow(idx);
+  updateItemPrice(idx);
+  rc();
 }
 
 buildList();
